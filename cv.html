@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Truong Truong Giang — CV</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f0;
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    .page {
+      width: 794px;
+      min-height: 1123px;
+      background: #fff;
+      display: flex;
+      box-shadow: 0 4px 32px rgba(0, 0, 0, 0.13);
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: 240px;
+      min-width: 240px;
+      background: #1C3829;
+      color: #fff;
+      padding: 28px 24px 28px 24px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .name-block {
+      margin-bottom: 18px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #2E5240;
+    }
+
+    .name-full {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+    }
+
+    .name-role {
+      font-size: 11px;
+      color: #6EA887;
+      margin-top: 8px;
+      letter-spacing: 0.06em;
+    }
+
+    .s-section {
+      margin-top: 16px;
+    }
+
+    .s-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: #6EA887;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-bottom: 1px solid #2E5240;
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+    }
+
+    .detail-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 9px;
+    }
+
+    .detail-text {
+      font-size: 11.5px;
+      color: #B8D4C4;
+      line-height: 1.4;
+    }
+
+    .detail-text a {
+      color: #8ABDA0;
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    .detail-text a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .skill-group-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #4A8C6A;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 12px;
+      margin-bottom: 4px;
+    }
+
+    .skill-item {
+      font-size: 11.5px;
+      color: #B8D4C4;
+      padding: 3px 0;
+      border-bottom: 1px solid #243F31;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .skill-item::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #4A8C6A;
+      flex-shrink: 0;
+    }
+
+    .link-item {
+      margin-bottom: 10px;
+    }
+
+    .link-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #4A8C6A;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    .link-item a {
+      font-size: 11.5px;
+      color: #8ABDA0;
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    .link-item a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    /* ── MAIN ── */
+    .main {
+      flex: 1;
+      padding: 28px 34px 28px 30px;
+      background: #fff;
+    }
+
+    .main-header {
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #E8EDE9;
+    }
+
+    .main-name {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1C3829;
+      letter-spacing: 0.01em;
+    }
+
+    .main-title {
+      font-size: 13px;
+      color: #6B8A75;
+      margin-top: 3px;
+      letter-spacing: 0.04em;
+    }
+
+    .m-section {
+      margin-top: 16px;
+    }
+
+    .m-section-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #1C3829;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-bottom: 1.5px solid #D5E3DA;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+    }
+
+    .summary-text {
+      font-size: 11.5px;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .goal-block {
+      margin-top: 8px;
+    }
+
+    .goal-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: #1C3829;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .goal-text {
+      font-size: 11.5px;
+      color: #444;
+      line-height: 1.55;
+      margin-bottom: 7px;
+      padding-left: 10px;
+      border-left: 2px solid #4A8C6A;
+    }
+
+    .exp-item {
+      margin-bottom: 13px;
+    }
+
+    .exp-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1C3829;
+      margin-bottom: 2px;
+    }
+
+    .exp-sub {
+      font-size: 11px;
+      color: #8A9E93;
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      padding: 0;
+    }
+
+    .exp-bullets li {
+      font-size: 11.5px;
+      color: #444;
+      line-height: 1.55;
+      padding: 2px 0 2px 14px;
+      position: relative;
+    }
+
+    .exp-bullets li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #4A8C6A;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .tech-stack {
+      margin-top: 5px;
+      font-size: 10.5px;
+      color: #6B8A75;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .tech-tag {
+      background: #EBF3EE;
+      color: #1C3829;
+      border-radius: 3px;
+      padding: 2px 7px;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .edu-item {
+      margin-bottom: 14px;
+    }
+
+    .edu-school {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1C3829;
+      margin-bottom: 2px;
+    }
+
+    .edu-place {
+      font-size: 11px;
+      color: #8A9E93;
+      font-style: italic;
+      margin-bottom: 4px;
+    }
+
+    .edu-meta {
+      font-size: 11px;
+      color: #5A7A68;
+      margin-bottom: 8px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .edu-meta span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    @media print {
+      body {
+        background: none;
+        padding: 0;
+      }
+
+      .page {
+        box-shadow: none;
+        width: 100%;
+        min-height: 100vh;
+      }
+    }
+
+    .detail-icon {
+      font-size: 14px;
+      color: #6EA887;
+      margin-top: 1px;
+      min-width: 18px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="name-block">
+        <div class="name-full">Truong Truong Giang</div>
+        <div class="name-role">IT &amp; AI AUTOMATION</div>
+      </div>
+
+      <div class="s-section">
+        <div class="s-label">Details</div>
+        <div class="detail-item">
+          <i class="ti ti-mail detail-icon"></i>
+          <span class="detail-text"><a href="mailto:giang12aa3@gmail.com">giang12aa3@gmail.com</a></span>
+        </div>
+        <div class="detail-item">
+          <i class="ti ti-phone detail-icon"></i>
+          <span class="detail-text">+84 971 288 502</span>
+        </div>
+        <div class="detail-item">
+          <i class="ti ti-map-pin detail-icon"></i>
+          <span class="detail-text">Ho Chi Minh City, Vietnam</span>
+        </div>
+        <div class="detail-item">
+          <i class="ti ti-world detail-icon"></i>
+          <span class="detail-text"><a href="https://truonggiang0111.github.io"
+              target="_blank">Portfolio</a></span>
+        </div>
+        <div class="detail-item">
+          <i class="ti ti-brand-github detail-icon"></i>
+          <span class="detail-text"><a href="https://github.com/truonggiang0111"
+              target="_blank">GitHub</a></span>
+        </div>
+      </div>
+
+      <div class="s-section">
+        <div class="s-label">Skills</div>
+
+        <div class="skill-group-label">Automation</div>
+        <div class="skill-item">n8n</div>
+        <div class="skill-item">Telegram Bot API</div>
+        <div class="skill-item">Webhook / HTTP Request</div>
+
+        <div class="skill-group-label">DevOps</div>
+        <div class="skill-item">Docker</div>
+        <div class="skill-item">Docker Compose</div>
+
+        <div class="skill-group-label">Programming</div>
+        <div class="skill-item">Python</div>
+        <div class="skill-item">JavaScript</div>
+        <div class="skill-item">Node.js</div>
+
+        <div class="skill-group-label">AI Tools</div>
+        <div class="skill-item">ChatGPT · Claude · Cursor</div>
+        <div class="skill-item">OpenClaw / CLIProxy</div>
+
+        <div class="skill-group-label">Media</div>
+        <div class="skill-item">ffmpeg</div>
+        <div class="skill-item">OpenCV</div>
+
+        <div class="skill-group-label">Other</div>
+        <div class="skill-item">Git / GitHub</div>
+        <div class="skill-item">REST API · JSON</div>
+      </div>
+
+
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+      <div class="main-header">
+        <div class="main-title"
+          style="font-size:15px; font-style:normal; color:#1C3829; font-weight:600; letter-spacing:0.03em;">IT &amp; AI
+          Automation Specialist</div>
+        <div class="main-title" style="margin-top:3px;">Ho Chi Minh City, Vietnam</div>
+      </div>
+
+      <!-- About -->
+      <div class="m-section">
+        <div class="m-section-title">About</div>
+        <p class="summary-text">
+          Information Technology student at HCMUE with hands-on experience building automation workflows, internal tools
+          and Docker-based pipelines. Skilled in Python, JavaScript, API integration, n8n, Telegram Bot API and AI
+          coding tools. Passionate about using software and AI automation to improve operations, reduce repetitive work
+          and build reliable systems.
+        </p>
+
+
+
+        <!-- Experience -->
+        <div class="m-section">
+          <div class="m-section-title">Experience</div>
+
+          <div class="exp-item">
+            <div class="exp-title">n8n &amp; AI Automation Project Builder</div>
+            <div class="exp-sub">Personal Project</div>
+            <ul class="exp-bullets">
+              <li>Built n8n workflows to receive Telegram commands, route requests, call child workflows and return job
+                reports</li>
+              <li>Connected n8n with Docker-based media pipelines through HTTP bridge services</li>
+              <li>Used OpenClaw/CLIProxy and AI tools to rewrite prompts, debug workflow errors and improve automation
+                reliability</li>
+              <li>Designed job_id, status JSON, logs and output folders so each automation job can be tracked and fixed
+                easily</li>
+            </ul>
+            <div class="tech-stack">
+              <span class="tech-tag">n8n</span>
+              <span class="tech-tag">Telegram Bot API</span>
+              <span class="tech-tag">Webhook</span>
+              <span class="tech-tag">Docker</span>
+              <span class="tech-tag">HTTP Request</span>
+              <span class="tech-tag">OpenClaw / CLIProxy</span>
+              <span class="tech-tag">JSON</span>
+            </div>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-title">Docker Media Automation Pipeline Developer</div>
+            <div class="exp-sub">Personal Project</div>
+            <ul class="exp-bullets">
+              <li>Built TikTok video automation pipelines using Docker, ffmpeg and OpenCV</li>
+              <li>Automated video download, 9:16 rendering, subtitle/voice processing and iCloud output sync</li>
+              <li>Integrated Telegram commands with n8n child workflows for repeatable media automation</li>
+              <li>Tested failures through logs and improved the pipeline step by step</li>
+            </ul>
+            <div class="tech-stack">
+              <span class="tech-tag">Docker</span>
+              <span class="tech-tag">Docker Compose</span>
+              <span class="tech-tag">ffmpeg</span>
+              <span class="tech-tag">OpenCV</span>
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">n8n</span>
+              <span class="tech-tag">Telegram Bot API</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="m-section">
+          <div class="m-section-title">Education</div>
+          <div class="edu-item">
+            <div class="edu-school">Ho Chi Minh City University of Education (HCMUE)</div>
+            <div class="edu-place">Ho Chi Minh City, Vietnam</div>
+            <div class="edu-meta">
+              <span>🎓 Bachelor's in Information Technology</span>
+              <span>📅 2023 – 2027 (In Progress)</span>
+              <span>⭐ GPA: 3.2</span>
+            </div>
+            <ul class="exp-bullets">
+              <li>Studying core IT subjects including programming, databases and software development</li>
+              <li>Built personal AI automation projects using n8n, Docker, Telegram Bot and AI coding tools</li>
+              <li>Interested in applying automation and AI tools to real-world business workflows</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+</body>
+
+</html>

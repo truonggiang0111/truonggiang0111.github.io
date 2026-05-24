@@ -162,16 +162,16 @@
 
     h1 {
       font-family: var(--display);
-      font-size: clamp(52px, 7vw, 96px);
+      font-size: clamp(46px, 6vw, 88px);
       font-weight: 800;
       line-height: 1.0;
       letter-spacing: 0.01em;
       margin-bottom: 28px;
-      color: var(--text);
+      color: var(--amber);
+      white-space: nowrap;
     }
 
-    /* Amber on the name accent */
-    h1 .accent { color: var(--amber); }
+    h1 .accent { color: inherit; }
 
     .lead {
       font-size: clamp(15px, 1.6vw, 18px);
@@ -708,7 +708,7 @@
     }
     @media (max-width: 640px) {
       nav { display: none; }
-      h1 { font-size: 48px; }
+      h1 { font-size: 40px; white-space: normal; }
       h2 { font-size: 32px; }
       section { padding: 64px clamp(20px, 5vw, 72px); }
       .proof-grid { grid-template-columns: 1fr; }
@@ -732,13 +732,14 @@
     <div class="hero-grid-bg"></div>
     <div class="hero-copy fade-up">
       <p class="eyebrow">IT Student · AI Automation Builder</p>
-      <h1>Truong<br>Truong<br><span class="accent">Giang.</span></h1>
+      <h1>Truong Truong Giang</h1>
       <p class="lead">
         I build practical automation workflows that connect Telegram, n8n,
         Docker pipelines, AI tools, and reporting systems into repeatable, observable operations.
       </p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="assets/Giang_Truong_CV_AI_Automation.pdf" download>↓ Download CV</a>
+        <a class="btn btn-primary" href="cv.html" target="_blank" rel="noreferrer">View CV →</a>
+        <a class="btn btn-secondary" href="assets/Giang_Truong_CV_AI_Automation.pdf" download>↓ Download CV</a>
         <a class="btn btn-secondary" href="#projects">View Projects →</a>
         <a class="btn btn-secondary" href="#proof">Watch Demo →</a>
       </div>
@@ -945,6 +946,13 @@
           <div class="contact-link-body">
             <div class="contact-link-label">Download</div>
             <div class="contact-link-value">CV / Resume PDF</div>
+          </div>
+        </a>
+        <a class="contact-link" href="cv.html" target="_blank" rel="noreferrer">
+          <div class="contact-link-icon">↗</div>
+          <div class="contact-link-body">
+            <div class="contact-link-label">View</div>
+            <div class="contact-link-value">CV / Resume HTML</div>
           </div>
         </a>
       </div>
