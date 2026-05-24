@@ -172,6 +172,36 @@
     }
 
     h1 .accent { color: inherit; }
+    .hero-name span {
+      display: inline-block;
+      color: var(--amber);
+      text-shadow: 0 0 0 rgba(245,166,35,0);
+      animation: name-shimmer 0.72s ease-out both;
+      animation-delay: calc(var(--i) * 0.08s + 0.18s);
+    }
+    @keyframes name-shimmer {
+      0% {
+        opacity: 0.58;
+        transform: translateY(10px);
+        color: var(--amber-dim);
+      }
+      48% {
+        opacity: 1;
+        transform: translateY(0);
+        color: #ffd778;
+        text-shadow: 0 0 28px rgba(245,166,35,0.5);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+        color: var(--amber);
+        text-shadow: 0 0 0 rgba(245,166,35,0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-name span { animation: none; }
+    }
 
     .lead {
       font-size: clamp(15px, 1.6vw, 18px);
@@ -732,7 +762,11 @@
     <div class="hero-grid-bg"></div>
     <div class="hero-copy fade-up">
       <p class="eyebrow">IT Student · AI Automation Builder</p>
-      <h1>Truong Truong Giang</h1>
+      <h1 class="hero-name" aria-label="Truong Truong Giang">
+        <span style="--i:0">Truong</span>
+        <span style="--i:1">Truong</span>
+        <span style="--i:2">Giang</span>
+      </h1>
       <p class="lead">
         I build practical automation workflows that connect Telegram, n8n,
         Docker pipelines, AI tools, and reporting systems into repeatable, observable operations.
