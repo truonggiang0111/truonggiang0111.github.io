@@ -17,11 +17,12 @@ Then visit `http://localhost:8080`.
 Use this repository name for a personal site:
 
 ```text
-ttyan0111.github.io
+truonggiang0111.github.io
 ```
 
 GitHub will publish it at:
 
 ```text
-https://ttyan0111.github.io
+https://truonggiang0111.github.io
 ```
+
