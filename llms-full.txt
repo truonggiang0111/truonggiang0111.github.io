@@ -1,27 +1,35 @@
-# b2b-ai-mcp-skills — Full AI Agent Ingestion Specification (`@ttyan0111` / `@truonggiang0111`)
+# Truong Truong Giang (@truonggiang0111 / @ttyan0111) — Full AI Agent Ingestion Specification (`@ttyan0111` / `@truonggiang0111`)
 
 > Single-file complete technical specification for LLMs, AI coding agents (Claude Code, Cursor, Codex, VS Code, Copilot, ChatGPT), MCP clients, and search indexers.
 > Updated: 2026-11-27 | Publisher: Truong Truong Giang (`https://truonggiang0111.github.io/mcp/`)
 
 ## Quick Invocation Summary
 
-1. **Streamable-HTTP Remote MCP (All 5 Live Tools):**
-   `https://mcp.apify.com?actors=ttyan0111/reed-uk-jobs-hiring-signals,ttyan0111/seek-au-nz-jobs-hiring-signals,ttyan0111/app-store-play-reviews-spy,ttyan0111/google-ads-transparency-spy,ttyan0111/google-news-ai-article-extractor`
+1. **Streamable-HTTP Remote MCP (All 10 Live Tools):**
+   `https://mcp.apify.com?actors=ttyan0111/reed-uk-jobs-hiring-signals,ttyan0111/seek-au-nz-jobs-hiring-signals,ttyan0111/app-store-play-reviews-spy,ttyan0111/google-ads-transparency-spy,ttyan0111/google-news-ai-article-extractor,ttyan0111/substack-newsletter-creator-leads,ttyan0111/chrome-web-store-extension-spy,ttyan0111/shopify-app-store-churn-spy,ttyan0111/podcast-host-email-sponsor-spy,ttyan0111/vscode-cursor-extension-spy`
 2. **CLI Skill Install (`skills.sh` — `15` Portable Skills):**
    `npx skills add truonggiang0111/b2b-ai-mcp-skills`
-3. **Standalone Open-Source Node.js 18+ CLI & ESM Helper:**
-   `https://github.com/truonggiang0111/google-news-url-decoder` (`v1.0.0`, zero-dependency `CBMi` / `AU_yqL` Google News URL decoder)
-4. **Technical Guides & Empirical Benchmarks (`HTTP 200`):**
+3. **Standalone Open-Source SDKs, CLIs & Sample Datasets:**
+   - Node STDIO MCP Server (`npx -y github:truonggiang0111/b2b-market-intel-mcp`): `https://github.com/truonggiang0111/b2b-market-intel-mcp` (`v1.0.0`)
+   - Python 3.10+ Zero-Dep SDK & CLI (`b2b-market-intel-python`): `https://github.com/truonggiang0111/b2b-market-intel-python` (`v1.0.0`)
+   - Google News URL Decoder CLI: `https://github.com/truonggiang0111/google-news-url-decoder` (`v1.0.0`)
+   - Sanitised B2B Sample Datasets (`6` CSV + `6` JSON): `https://github.com/truonggiang0111/b2b-sample-datasets-2026` (`v1.0.0`)
+4. **Technical Guides & Empirical Benchmarks (`7` Guides — `HTTP 200`):**
    - `https://truonggiang0111.github.io/mcp/google-news-rss-url-decoder/`
    - `https://truonggiang0111.github.io/mcp/shopify-app-store-1-star-churn-teardown/`
    - `https://truonggiang0111.github.io/mcp/direct-employer-hiring-leads-uk-au/`
-5. **Agensi.io Zero-Key MCP (`https://mcp.agensi.io/mcp/auth` — `12` Live Skills + `1` Bundle):**
+   - `https://truonggiang0111.github.io/mcp/uk-gov-contracts-finder-buyer-emails/`
+   - `https://truonggiang0111.github.io/mcp/clinicaltrials-gov-biotech-sponsor-leads/`
+   - `https://truonggiang0111.github.io/mcp/vscode-vs-openvsx-cursor-extension-metrics/`
+   - `https://truonggiang0111.github.io/mcp/substack-viral-notes-outlier-formula/`
+   - Dev.to Canonical Breakdown: `https://dev.to/truonggiang0111/why-google-news-rss-base64-decoding-broke-2024-2026-and-how-to-fix-it-for-ai-rag-mcp-26pi`
+5. **Agensi.io Zero-Key MCP (`https://mcp.agensi.io/mcp/auth` — `16` Live Skills + `3` Bundles):**
    - Storefront: `https://www.agensi.io/creators/giang-tr-ng-tr-ng`
    - Free Skills (`$0`):
      - `https://www.agensi.io/skills/google-news-real-url-decoder-for-ai-rag`
      - `https://www.agensi.io/skills/uk-direct-employer-hiring-signals-reed-uk`
      - `https://www.agensi.io/skills/competitor-app-bug-review-spy-ios-play`
-   - Paid Skills (`$5.00`), 5-in-1 Pack & Bundle:
+   - Paid Skills (`$5.00`), 5-in-1 Pack & `3` Bundles (`-20%` to `-35%`):
      - `https://www.agensi.io/skills/au-nz-direct-employer-hiring-signals-seek` (`$5.00`)
      - `https://www.agensi.io/skills/competitor-google-ads-transparency-funnel-spy` (`$5.00`)
      - `https://www.agensi.io/skills/shopify-app-store-1-star-churn-dev-email-spy` (`$5.00`)
@@ -30,8 +38,14 @@
      - `https://www.agensi.io/skills/podcast-host-direct-email-sponsor-finder` (`$5.00`)
      - `https://www.agensi.io/skills/chrome-web-store-extension-dev-email-spy` (`$5.00`)
      - `https://www.agensi.io/skills/substack-viral-notes-outlier-hook-ghostwriter` (`$5.00`)
+     - `https://www.agensi.io/skills/uk-gov-tenders-direct-buyer-emails` (`$5.00`)
+     - `https://www.agensi.io/skills/atlassian-marketplace-b2b-app-churn-spy` (`$5.00`)
+     - `https://www.agensi.io/skills/clinicaltrials-gov-biotech-pi-email-leads` (`$5.00`)
+     - `https://www.agensi.io/skills/wordpress-woocommerce-plugin-churn-spy` (`$5.00`)
      - `https://www.agensi.io/skills/b2b-market-hiring-intelligence-5-in-1-pack` (`$7.99`, `-20%` Launch Deal `$6.39`)
-     - `https://www.agensi.io/bundles/b2b-hiring-competitor-ad-spy-bundle` (`$7.99`, Save `20%`)
+     - Bundle #1: `https://www.agensi.io/bundles/b2b-hiring-competitor-ad-spy-bundle` (`$7.99`, Save `20%`)
+     - Bundle #2: `https://www.agensi.io/bundles/e-commerce-saas-churn-spy-bundle` (`$12.99`, Save `35%`)
+     - Bundle #3: `https://www.agensi.io/bundles/b2b-biotech-gov-tenders-creator-leads-bundle` (`$12.99`, Save `35%`)
 6. **Low-Token Agent Protocol (Critical):**
    After running any Actor, ALWAYS inspect Key-Value Store record `RUN_SUMMARY` (`application/json`) first before paging full dataset items, then query dataset items selecting compact projection fields including `agentSummary`.
 
@@ -214,12 +228,201 @@
 
 ---
 
-## `10` Staged Cloud Extensions (Rolling Out Across Daily Apify Store Slots)
-- `ttyan0111/substack-newsletter-creator-leads` (`0bA2Nc4ylXy6xgJSt`) — Substack direct creator emails, pricing tiers & engagement (`io.github.truonggiang0111/substack-creator-leads-mcp`)
-- `ttyan0111/chrome-web-store-extension-spy` (`gfQJdGY82XhWQfHi9`) — Chrome extension developer support emails, installs & negative reviews (`io.github.truonggiang0111/chrome-web-store-spy-mcp`)
-- `ttyan0111/shopify-app-store-churn-spy` (`CTYHbca6cOKRknDqV`) — Shopify App Store SSR `1★–2★` churn reviews, merchant store names, pricing plans & developer support emails (`io.github.truonggiang0111/shopify-app-store-churn-mcp`)
-- `ttyan0111/podcast-host-email-sponsor-spy` (`VRbovzx0V0yMGBA2Q`) — Apple Podcasts direct `<itunes:email>` from bounded 400 KB RSS XML streams, active show filters & sponsor domains (`io.github.truonggiang0111/podcast-host-email-mcp`)
-- `ttyan0111/vscode-cursor-extension-spy` (`tHlOKzyDNjIZ258tZ`) — VS Code Marketplace + Open-VSX (Cursor/Windsurf) combined installs, verified domains, GitHub repos & 1–3★ bug reviews (`io.github.truonggiang0111/vscode-cursor-extension-mcp`)
+## Tool 6: Substack Newsletter & Creator Email Leads
+- **Actor ID / Slug:** `0bA2Nc4ylXy6xgJSt` (`ttyan0111/substack-newsletter-creator-leads`)
+- **Official MCP Registry:** `io.github.truonggiang0111/substack-creator-leads-mcp` (`servers/substack-leads/server.json`)
+- **Glama Connector:** `https://glama.ai/mcp/connectors/io.github.truonggiang0111/substack-creator-leads-mcp`
+- **Direct MCP URL:** `https://mcp.apify.com?actors=ttyan0111/substack-newsletter-creator-leads`
+- **Sync REST URL:** `POST https://api.apify.com/v2/acts/ttyan0111~substack-newsletter-creator-leads/run-sync-get-dataset-items`
+- **Proxy Required:** None (`$0` proxy cost, 256 MB RAM)
+- **Pricing (Pay-per-Event):** `$0.006` start + `$2.00/1k` publications + `$1.50/1k` post enrichments
+- **Sample Input JSON:**
+  ```json
+  {
+    "queries": [
+      "b2b saas",
+      "artificial intelligence"
+    ],
+    "paidNewslettersOnly": true,
+    "withContactEmailOnly": true,
+    "includeLatestPosts": true,
+    "maxPostsPerPublication": 3,
+    "maxPublicationsPerQuery": 25
+  }
+  ```
+- **Recommended Output Projection:** `name,authorName,contactEmail,substackReplyEmail,publicationUrl,rankingDetail,freeSubscriberEstimate,isPaid,monthlyPriceUsd,latestPostsCount,totalReactionsRecent,latestPostDate,agentSummary`
+- **KV Store Summary Key:** RUN_SUMMARY (`totalPublications, withContactEmailCount, paidCount, totalReactionsRecent`)
+- **Published Use-Case Tasks (`10` `.md`):**
+  - `https://apify.com/ttyan0111/substack-newsletter-creator-leads/examples/ai-engineering-paid-substack-creator-emails.md`
+  - `https://apify.com/ttyan0111/substack-newsletter-creator-leads/examples/b2b-saas-founder-newsletter-sponsorship-leads.md`
+  - `https://apify.com/ttyan0111/substack-newsletter-creator-leads/examples/fintech-venture-capital-paid-newsletter-leads.md`
+  - `https://apify.com/ttyan0111/substack-newsletter-creator-leads/examples/finance-investing-substack-creator-contact-list.md`
+  - `https://apify.com/ttyan0111/substack-newsletter-creator-leads/examples/marketing-growth-creator-newsletter-outreach.md`
+  - `https://apify.com/ttyan0111/substack-newsletter-creator-leads/examples/cybersecurity-cloud-engineering-substack-leads.md`
+  - `https://apify.com/ttyan0111/substack-newsletter-creator-leads/examples/crypto-web3-research-substack-newsletter-emails.md`
+  - `https://apify.com/ttyan0111/substack-newsletter-creator-leads/examples/ecommerce-dtc-brand-operator-substack-leads.md`
+  - `https://apify.com/ttyan0111/substack-newsletter-creator-leads/examples/biotech-healthtech-substack-newsletter-research.md`
+  - `https://apify.com/ttyan0111/substack-newsletter-creator-leads/examples/top-tech-substack-publication-posts-engagement-audit.md`
+
+---
+
+## Tool 7: Chrome Web Store Extensions, Dev Emails & Reviews Spy
+- **Actor ID / Slug:** `gfQJdGY82XhWQfHi9` (`ttyan0111/chrome-web-store-extension-spy`)
+- **Official MCP Registry:** `io.github.truonggiang0111/chrome-web-store-spy-mcp` (`servers/chrome-store-spy/server.json`)
+- **Glama Connector:** `https://glama.ai/mcp/connectors/io.github.truonggiang0111/chrome-web-store-spy-mcp`
+- **Direct MCP URL:** `https://mcp.apify.com?actors=ttyan0111/chrome-web-store-extension-spy`
+- **Sync REST URL:** `POST https://api.apify.com/v2/acts/ttyan0111~chrome-web-store-extension-spy/run-sync-get-dataset-items`
+- **Proxy Required:** None (`$0` proxy cost, 256 MB RAM)
+- **Pricing (Pay-per-Event):** `$0.006` start + `$2.00/1k` extensions + `$1.20/1k` reviews
+- **Sample Input JSON:**
+  ```json
+  {
+    "queries": [
+      "notion",
+      "ai writing"
+    ],
+    "includeReviews": true,
+    "maxExtensionsPerQuery": 15,
+    "maxReviewsPerExtension": 10,
+    "onlyWithDeveloperEmail": true
+  }
+  ```
+- **Recommended Output Projection:** `name,extensionId,developerName,developerEmail,developerWebsite,rating,ratingCount,userCountText,userCountEstimate,category,version,lastUpdated,reviewsCount,storeUrl,agentSummary`
+- **KV Store Summary Key:** RUN_SUMMARY (`totalExtensions, withDeveloperEmailCount, totalReviews, painSignalCounts`)
+- **Published Use-Case Tasks (`10` `.md`):**
+  - `https://apify.com/ttyan0111/chrome-web-store-extension-spy/examples/ai-writing-chrome-extension-dev-emails-reviews.md`
+  - `https://apify.com/ttyan0111/chrome-web-store-extension-spy/examples/shopify-ecommerce-chrome-extension-b2b-leads.md`
+  - `https://apify.com/ttyan0111/chrome-web-store-extension-spy/examples/seo-marketing-chrome-extension-developer-spy.md`
+  - `https://apify.com/ttyan0111/chrome-web-store-extension-spy/examples/linkedin-b2b-sales-chrome-extension-churn-spy.md`
+  - `https://apify.com/ttyan0111/chrome-web-store-extension-spy/examples/notion-productivity-chrome-extension-bug-audit.md`
+  - `https://apify.com/ttyan0111/chrome-web-store-extension-spy/examples/developer-tools-devtools-chrome-extension-leads.md`
+  - `https://apify.com/ttyan0111/chrome-web-store-extension-spy/examples/youtube-video-creator-chrome-extension-spy.md`
+  - `https://apify.com/ttyan0111/chrome-web-store-extension-spy/examples/adblock-privacy-vpn-chrome-extension-reviews.md`
+  - `https://apify.com/ttyan0111/chrome-web-store-extension-spy/examples/recruiting-ats-hr-chrome-extension-dev-leads.md`
+  - `https://apify.com/ttyan0111/chrome-web-store-extension-spy/examples/chrome-extension-direct-id-reviews-pain-monitor.md`
+
+---
+
+## Tool 8: Shopify App Store 1-Star Churn & Dev Emails Spy
+- **Actor ID / Slug:** `CTYHbca6cOKRknDqV` (`ttyan0111/shopify-app-store-churn-spy`)
+- **Official MCP Registry:** `io.github.truonggiang0111/shopify-app-store-churn-mcp` (`servers/shopify-app-spy/server.json`)
+- **Glama Connector:** `https://glama.ai/mcp/connectors/io.github.truonggiang0111/shopify-app-store-churn-mcp`
+- **Direct MCP URL:** `https://mcp.apify.com?actors=ttyan0111/shopify-app-store-churn-spy`
+- **Sync REST URL:** `POST https://api.apify.com/v2/acts/ttyan0111~shopify-app-store-churn-spy/run-sync-get-dataset-items`
+- **Proxy Required:** None (`$0` proxy cost, 256 MB RAM, zero-proxy SSR)
+- **Pricing (Pay-per-Event):** `$0.006` start + `$2.00/1k` apps + `$1.20/1k` churn reviews
+- **Sample Input JSON:**
+  ```json
+  {
+    "queries": [
+      "klaviyo-email-marketing",
+      "upsell"
+    ],
+    "maxAppsPerQuery": 5,
+    "includeReviews": true,
+    "starRatings": [
+      "1",
+      "2"
+    ],
+    "sortBy": "newest",
+    "maxReviewsPerApp": 20,
+    "onlyWithDeveloperEmail": false
+  }
+  ```
+- **Recommended Output Projection:** `name,handle,rating,ratingCount,pricingSummary,developerName,developerEmail,developerWebsite,reviewsCount,mentionedDomains,painSignalSummary,appUrl,agentSummary`
+- **KV Store Summary Key:** RUN_SUMMARY (`totalAppsExported, appsWithDeveloperEmail, totalReviewsExtracted, painSignalTotals`)
+- **Published Use-Case Tasks (`10` `.md`):**
+  - `https://apify.com/ttyan0111/shopify-app-store-churn-spy/examples/shopify-upsell-cross-sell-1-star-churn-leads.md`
+  - `https://apify.com/ttyan0111/shopify-app-store-churn-spy/examples/shopify-email-marketing-klaviyo-churn-review-spy.md`
+  - `https://apify.com/ttyan0111/shopify-app-store-churn-spy/examples/shopify-loyalty-rewards-app-merchant-churn-spy.md`
+  - `https://apify.com/ttyan0111/shopify-app-store-churn-spy/examples/shopify-subscription-recurring-billing-churn-spy.md`
+  - `https://apify.com/ttyan0111/shopify-app-store-churn-spy/examples/shopify-product-reviews-ugc-app-1-star-bugs.md`
+  - `https://apify.com/ttyan0111/shopify-app-store-churn-spy/examples/shopify-bundles-volume-discount-app-churn-spy.md`
+  - `https://apify.com/ttyan0111/shopify-app-store-churn-spy/examples/shopify-shipping-fulfillment-returns-app-churn.md`
+  - `https://apify.com/ttyan0111/shopify-app-store-churn-spy/examples/shopify-page-builder-cro-app-performance-bugs.md`
+  - `https://apify.com/ttyan0111/shopify-app-store-churn-spy/examples/shopify-seo-schema-speed-app-developer-leads.md`
+  - `https://apify.com/ttyan0111/shopify-app-store-churn-spy/examples/shopify-helpdesk-live-chat-ai-support-churn-spy.md`
+
+---
+
+## Tool 9: Apple Podcasts Host Emails & Sponsor Leads
+- **Actor ID / Slug:** `VRbovzx0V0yMGBA2Q` (`ttyan0111/podcast-host-email-sponsor-spy`)
+- **Official MCP Registry:** `io.github.truonggiang0111/podcast-host-email-mcp` (`servers/podcast-email-spy/server.json`)
+- **Glama Connector:** `https://glama.ai/mcp/connectors/io.github.truonggiang0111/podcast-host-email-mcp`
+- **Direct MCP URL:** `https://mcp.apify.com?actors=ttyan0111/podcast-host-email-sponsor-spy`
+- **Sync REST URL:** `POST https://api.apify.com/v2/acts/ttyan0111~podcast-host-email-sponsor-spy/run-sync-get-dataset-items`
+- **Proxy Required:** None (`$0` proxy cost, 256 MB RAM, bounded 400 KB RSS streams)
+- **Pricing (Pay-per-Event):** `$0.006` start + `$2.50/1k` podcast leads + `$1.50/1k` RSS sponsor parses
+- **Sample Input JSON:**
+  ```json
+  {
+    "queries": [
+      "B2B SaaS",
+      "AI engineering"
+    ],
+    "country": "US",
+    "maxPodcastsPerQuery": 15,
+    "onlyWithEmail": true,
+    "activeWithinDays": 90,
+    "episodesToAnalyze": 5
+  }
+  ```
+- **Recommended Output Projection:** `podcastName,appleId,hostAuthor,hostEmail,isPlatformRelayEmail,websiteUrl,daysSinceLastEpisode,isActive,sponsorDomainsDetected,applePodcastUrl,feedUrl,agentSummary`
+- **KV Store Summary Key:** RUN_SUMMARY (`emailCoveragePercent, activeShowsCount, topSponsorDomains, topEmails`)
+- **Published Use-Case Tasks (`10` `.md`):**
+  - `https://apify.com/ttyan0111/podcast-host-email-sponsor-spy/examples/b2b-saas-podcast-host-direct-email-leads.md`
+  - `https://apify.com/ttyan0111/podcast-host-email-sponsor-spy/examples/ai-startup-engineering-podcast-host-emails.md`
+  - `https://apify.com/ttyan0111/podcast-host-email-sponsor-spy/examples/fintech-crypto-podcast-sponsor-email-finder.md`
+  - `https://apify.com/ttyan0111/podcast-host-email-sponsor-spy/examples/ecommerce-dtc-shopify-podcast-guest-booking-leads.md`
+  - `https://apify.com/ttyan0111/podcast-host-email-sponsor-spy/examples/cybersecurity-cloud-devops-podcast-host-emails.md`
+  - `https://apify.com/ttyan0111/podcast-host-email-sponsor-spy/examples/uk-london-business-finance-podcast-host-leads.md`
+  - `https://apify.com/ttyan0111/podcast-host-email-sponsor-spy/examples/australia-startup-investing-podcast-host-emails.md`
+  - `https://apify.com/ttyan0111/podcast-host-email-sponsor-spy/examples/health-wellness-longevity-podcast-sponsor-spy.md`
+  - `https://apify.com/ttyan0111/podcast-host-email-sponsor-spy/examples/real-estate-investing-podcast-host-email-leads.md`
+  - `https://apify.com/ttyan0111/podcast-host-email-sponsor-spy/examples/canada-marketing-agency-podcast-sponsor-finder.md`
+
+---
+
+## Tool 10: VS Code & Open-VSX (Cursor/Windsurf) Extension Spy
+- **Actor ID / Slug:** `tHlOKzyDNjIZ258tZ` (`ttyan0111/vscode-cursor-extension-spy`)
+- **Official MCP Registry:** `io.github.truonggiang0111/vscode-cursor-extension-mcp` (`servers/vscode-extension-spy/server.json`)
+- **Glama Connector:** `https://glama.ai/mcp/connectors/io.github.truonggiang0111/vscode-cursor-extension-mcp`
+- **Direct MCP URL:** `https://mcp.apify.com?actors=ttyan0111/vscode-cursor-extension-spy`
+- **Sync REST URL:** `POST https://api.apify.com/v2/acts/ttyan0111~vscode-cursor-extension-spy/run-sync-get-dataset-items`
+- **Proxy Required:** None (`$0` proxy cost, 256 MB RAM)
+- **Pricing (Pay-per-Event):** `$0.006` start + `$2.00/1k` extensions + `$1.20/1k` bug reviews
+- **Sample Input JSON:**
+  ```json
+  {
+    "queries": [
+      "mcp",
+      "ai coding"
+    ],
+    "maxExtensionsPerQuery": 10,
+    "sortBy": "installs",
+    "includeOpenVsxStats": true,
+    "includeReviews": true,
+    "maxRatingFilter": 3,
+    "maxReviewsPerExtension": 15
+  }
+  ```
+- **Recommended Output Projection:** `displayName,uniqueIdentifier,publisherDisplayName,verifiedDomain,isDomainVerified,vscodeInstalls,openVsxDownloads,totalCombinedInstalls,averageRating,reviewsCount,githubRepoUrl,marketplaceUrl,agentSummary`
+- **KV Store Summary Key:** RUN_SUMMARY (`totalCombinedInstalls, verifiedDomainCount, painSignalTotals`)
+- **Published Use-Case Tasks (`10` `.md`):**
+  - `https://apify.com/ttyan0111/vscode-cursor-extension-spy/examples/mcp-ai-coding-vscode-cursor-extension-installs.md`
+  - `https://apify.com/ttyan0111/vscode-cursor-extension-spy/examples/ai-copilot-cursor-autocomplete-1-star-bug-spy.md`
+  - `https://apify.com/ttyan0111/vscode-cursor-extension-spy/examples/trending-weekly-vscode-open-vsx-devtools-radar.md`
+  - `https://apify.com/ttyan0111/vscode-cursor-extension-spy/examples/python-jupyter-data-science-vscode-bug-audit.md`
+  - `https://apify.com/ttyan0111/vscode-cursor-extension-spy/examples/typescript-react-frontend-vscode-extension-spy.md`
+  - `https://apify.com/ttyan0111/vscode-cursor-extension-spy/examples/docker-kubernetes-devops-vscode-extension-bugs.md`
+  - `https://apify.com/ttyan0111/vscode-cursor-extension-spy/examples/git-pull-request-review-vscode-extension-spy.md`
+  - `https://apify.com/ttyan0111/vscode-cursor-extension-spy/examples/sql-database-postgres-vscode-extension-leads.md`
+  - `https://apify.com/ttyan0111/vscode-cursor-extension-spy/examples/rest-api-graphql-testing-vscode-extension-spy.md`
+  - `https://apify.com/ttyan0111/vscode-cursor-extension-spy/examples/continue-claude-code-direct-id-extension-audit.md`
+
+---
+
+## `5` Staged Cloud Extensions (Rolling Out Across Daily Apify Store Slots)
 - `ttyan0111/substack-viral-notes-outlier-spy` (`M94EJel0a0kLProDy`) — Substack viral Notes ranked by weighted Viral Score (`Likes + 3×Replies + 5×Restacks`), `>= 2.0x` outlier detection, peak UTC windows & Ghostwriter swipe prompts (`io.github.truonggiang0111/substack-viral-notes-mcp`)
 - `ttyan0111/uk-gov-tenders-buyer-leads` (`DzbTiN1nN4Ab1Yhki`) — UK Contracts Finder OCDS open tenders, contract awards, GBP values, CPV codes & direct `.gov.uk`/NHS/council buyer emails (`io.github.truonggiang0111/uk-gov-tenders-buyer-leads-mcp`)
 - `ttyan0111/atlassian-marketplace-b2b-spy` (`okE229LJXfmguNyI4`) — Jira & Confluence Marketplace app installs, active users, Cloud Fortified tiers, pricing, vendor emails & 1–2★ enterprise churn reviews (`io.github.truonggiang0111/atlassian-marketplace-b2b-spy-mcp`)
