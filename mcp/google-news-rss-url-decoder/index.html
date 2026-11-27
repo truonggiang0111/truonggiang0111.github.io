@@ -373,7 +373,7 @@ resp.raise_for_status()
 
 for item in resp.json():
     print(f"[{item['sourceName']}] {item['title']}")
-    print(f"  Real URL : {item['realUrl']}")
+    print(f"  Real URL : {item['url']} (decoded={item['urlDecoded']})")
     print(f"  Signals  : {', '.join(item.get('marketSignals', [])) or 'general'}")
     print(f"  Summary  : {item['agentSummary']}\n")</code></pre>
     </div>
@@ -430,7 +430,7 @@ for item in resp.json():
     </div>
     <div class="faq-item">
       <h3>What happens if a destination publisher has a hard paywall?</h3>
-      <p>You still receive the verified decoded <code>realUrl</code>, <code>sourceName</code>, <code>publishedAt</code> timestamp, and PR <code>marketSignals</code>, while <code>articleText</code> cleanly falls back to the stripped RSS summary without failing the batch.</p>
+      <p>You still receive the verified decoded <code>url</code> (with <code>urlDecoded: true</code>), <code>sourceName</code>, <code>publishedAt</code> timestamp, and PR <code>marketSignals</code>, while <code>articleText</code> cleanly falls back to the stripped RSS summary without failing the batch.</p>
     </div>
 
     <h2>More Technical Guides &amp; Real-Data Teardowns</h2>
