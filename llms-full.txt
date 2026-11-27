@@ -1,0 +1,187 @@
+# b2b-ai-mcp-skills — Full AI Agent Ingestion Specification (`@ttyan0111` / `@truonggiang0111`)
+
+> Single-file complete technical specification for LLMs, AI coding agents (Claude Code, Cursor, Codex, VS Code, Copilot, ChatGPT), MCP clients, and search indexers.
+> Updated: 2026-11-27 | Publisher: Truong Truong Giang (`https://truonggiang0111.github.io/mcp/`)
+
+## Quick Invocation Summary
+
+1. **Streamable-HTTP Remote MCP (All 5 Live Tools):**
+   `https://mcp.apify.com?actors=ttyan0111/reed-uk-jobs-hiring-signals,ttyan0111/seek-au-nz-jobs-hiring-signals,ttyan0111/app-store-play-reviews-spy,ttyan0111/google-ads-transparency-spy,ttyan0111/google-news-ai-article-extractor`
+2. **CLI Skill Install (`skills.sh`):**
+   `npx skills add truonggiang0111/b2b-ai-mcp-skills`
+3. **Agensi.io Zero-Key MCP (`https://mcp.agensi.io/mcp/auth`):**
+   - Storefront: `https://www.agensi.io/creators/giang-tr-ng-tr-ng`
+   - Free Skills:
+     - `https://www.agensi.io/skills/google-news-real-url-decoder-for-ai-rag`
+     - `https://www.agensi.io/skills/uk-direct-employer-hiring-signals-reed-uk`
+     - `https://www.agensi.io/skills/competitor-app-bug-review-spy-ios-play`
+   - Paid Skills & Bundle:
+     - `https://www.agensi.io/skills/au-nz-direct-employer-hiring-signals-seek` (`$5.00`)
+     - `https://www.agensi.io/skills/competitor-google-ads-transparency-funnel-spy` (`$5.00`)
+     - `https://www.agensi.io/skills/b2b-market-hiring-intelligence-5-in-1-pack` (`$7.99`, `-20%` Launch Deal `$6.39`)
+     - `https://www.agensi.io/bundles/b2b-hiring-competitor-ad-spy-bundle` (`$7.99`, Save `20%`)
+4. **Low-Token Agent Protocol (Critical):**
+   After running any Actor, ALWAYS inspect Key-Value Store record `RUN_SUMMARY` (`application/json`) first before paging full dataset items, then query dataset items selecting compact projection fields including `agentSummary`.
+
+---
+
+## Tool 1: Reed.co.uk Jobs & Direct IR35 Signals
+- **Actor ID / Slug:** `3wLXt2GRMGXqqCK3S` (`ttyan0111/reed-uk-jobs-hiring-signals`)
+- **Official MCP Registry:** `io.github.truonggiang0111/reed-uk-jobs-mcp`
+- **Glama Connector:** `https://glama.ai/mcp/connectors/io.github.truonggiang0111/reed-uk-jobs-mcp`
+- **Direct MCP URL:** `https://mcp.apify.com?actors=ttyan0111/reed-uk-jobs-hiring-signals`
+- **Sync REST URL:** `POST https://api.apify.com/v2/acts/ttyan0111~reed-uk-jobs-hiring-signals/run-sync-get-dataset-items`
+- **Proxy Required:** None (`$0` proxy cost, 256 MB RAM)
+- **Pricing (Pay-per-Event):** `$0.008` start + `$1.50/1k` jobs + `$2.00/1k` full detail pages
+- **Sample Input JSON:**
+  ```json
+  {
+    "keywords": "Python Developer",
+    "location": "London",
+    "directEmployerOnly": true,
+    "excludeIntermediaryPosts": true,
+    "excludeTrainingCourses": true,
+    "includeFullDescription": true,
+    "maxJobs": 25
+  }
+  ```
+- **Recommended Output Projection:** `jobId,title,employerName,isDirectEmployer,outsideIr35,insideIr35,salaryMin,salaryMax,salaryPeriod,location,externalApplyUrl,jobUrl,agentSummary`
+- **KV Store Summary Key:** `RUN_SUMMARY` (`totalScraped, directEmployerCount, outsideIr35Count, topEmployers`)
+- **Published Use-Case Tasks (`.md`):**
+  - `https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/uk-direct-employer-python-jobs.md`
+  - `https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/outside-ir35-uk-contract-tech-jobs.md`
+  - `https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/uk-remote-software-engineer-hiring-leads.md`
+  - `https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/uk-ai-machine-learning-direct-employer-jobs.md`
+  - `https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/uk-cybersecurity-contract-outside-ir35-jobs.md`
+  - `https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/manchester-birmingham-uk-tech-hiring-signals.md`
+
+---
+
+## Tool 2: Seek AU & NZ Jobs GraphQL Signals
+- **Actor ID / Slug:** `eZfonO3DARGKOjYya` (`ttyan0111/seek-au-nz-jobs-hiring-signals`)
+- **Official MCP Registry:** `io.github.truonggiang0111/seek-au-nz-jobs-mcp`
+- **Glama Connector:** `https://glama.ai/mcp/connectors/io.github.truonggiang0111/seek-au-nz-jobs-mcp`
+- **Direct MCP URL:** `https://mcp.apify.com?actors=ttyan0111/seek-au-nz-jobs-hiring-signals`
+- **Sync REST URL:** `POST https://api.apify.com/v2/acts/ttyan0111~seek-au-nz-jobs-hiring-signals/run-sync-get-dataset-items`
+- **Proxy Required:** None (`$0` proxy cost, 256 MB RAM, bypasses HTML 403 via native v5 + GraphQL APIs)
+- **Pricing (Pay-per-Event):** `$0.008` start + `$1.50/1k` jobs + `$2.00/1k` company signals
+- **Sample Input JSON:**
+  ```json
+  {
+    "keywords": "Software Engineer",
+    "location": "Sydney",
+    "country": "AU",
+    "directEmployerOnly": true,
+    "includeCompanyDetails": true,
+    "maxJobs": 25
+  }
+  ```
+- **Recommended Output Projection:** `jobId,title,companyName,isAgency,location,workArrangement,salaryText,companyIndustry,companySize,companyWebsite,jobUrl,agentSummary`
+- **KV Store Summary Key:** `RUN_SUMMARY` (`directCount, agencyFilteredCount, remoteCount, topEmployers, topIndustries`)
+- **Published Use-Case Tasks (`.md`):**
+  - `https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/sydney-direct-employer-software-jobs.md`
+  - `https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/australia-remote-tech-jobs-company-signals.md`
+  - `https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/new-zealand-direct-employer-hiring-leads.md`
+  - `https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/melbourne-brisbane-direct-employer-tech-jobs.md`
+  - `https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/australia-data-ai-engineer-hiring-signals.md`
+  - `https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/australia-mining-engineering-direct-hiring-leads.md`
+
+---
+
+## Tool 3: App Store + Google Play Reviews Bug Spy
+- **Actor ID / Slug:** `DjBNXLARtQPLDMZa2` (`ttyan0111/app-store-play-reviews-spy`)
+- **Official MCP Registry:** `io.github.truonggiang0111/app-reviews-bug-spy-mcp`
+- **Glama Connector:** `https://glama.ai/mcp/connectors/io.github.truonggiang0111/app-reviews-bug-spy-mcp`
+- **Direct MCP URL:** `https://mcp.apify.com?actors=ttyan0111/app-store-play-reviews-spy`
+- **Sync REST URL:** `POST https://api.apify.com/v2/acts/ttyan0111~app-store-play-reviews-spy/run-sync-get-dataset-items`
+- **Proxy Required:** None (`$0` proxy cost, 256 MB RAM)
+- **Pricing (Pay-per-Event):** `$0.005` start + `$0.005/app` resolved + `$1.20/1k` reviews + `$1.50/1k` pain tags
+- **Sample Input JSON:**
+  ```json
+  {
+    "apps": ["Notion", "Spotify"],
+    "platforms": ["ios", "android"],
+    "countries": ["us", "gb"],
+    "sortBy": "mostRecent",
+    "minRating": 1,
+    "maxRating": 2,
+    "maxReviewsPerPlatform": 20
+  }
+  ```
+- **Recommended Output Projection:** `appName,platform,country,rating,title,text,painSignals,appVersion,reviewDate,agentSummary`
+- **KV Store Summary Key:** `RUN_SUMMARY` (`totalReviews, ratingBreakdown, painSignalCounts`)
+- **Published Use-Case Tasks (`.md`):**
+  - `https://apify.com/ttyan0111/app-store-play-reviews-spy/examples/competitor-app-1-star-bug-complaints.md`
+  - `https://apify.com/ttyan0111/app-store-play-reviews-spy/examples/ios-android-billing-churn-review-audit.md`
+  - `https://apify.com/ttyan0111/app-store-play-reviews-spy/examples/multi-country-mobile-app-sentiment-benchmark.md`
+  - `https://apify.com/ttyan0111/app-store-play-reviews-spy/examples/fintech-banking-app-1-star-bug-audit.md`
+  - `https://apify.com/ttyan0111/app-store-play-reviews-spy/examples/ai-chatbot-mobile-app-user-churn-complaints.md`
+  - `https://apify.com/ttyan0111/app-store-play-reviews-spy/examples/competitor-app-latest-version-regression-bugs.md`
+
+---
+
+## Tool 4: Google Ads Transparency & EU DSA Spend Spy
+- **Actor ID / Slug:** `f8e3sTjXNbBejthf6` (`ttyan0111/google-ads-transparency-spy`)
+- **Official MCP Registry:** `io.github.truonggiang0111/google-ads-transparency-mcp`
+- **Glama Connector:** `https://glama.ai/mcp/connectors/io.github.truonggiang0111/google-ads-transparency-mcp`
+- **Direct MCP URL:** `https://mcp.apify.com?actors=ttyan0111/google-ads-transparency-spy`
+- **Sync REST URL:** `POST https://api.apify.com/v2/acts/ttyan0111~google-ads-transparency-spy/run-sync-get-dataset-items`
+- **Proxy Mode:** Hybrid Proxy / Direct Container RPC Circuit Breaker
+- **Pricing (Pay-per-Event):** `$0.003` start + `$1.50/1k` ads + `$1.50/1k` details
+- **Sample Input JSON:**
+  ```json
+  {
+    "queries": ["shopify.com"],
+    "countryCode": "US",
+    "adFormat": "ALL",
+    "minDaysActive": 30,
+    "includeDetails": true,
+    "maxAdsPerQuery": 25
+  }
+  ```
+- **Recommended Output Projection:** `advertiserName,advertiserId,adId,format,daysActive,euImpressionsRange,previewImageUrl,previewRenderUrl,adTransparencyUrl,agentSummary`
+- **KV Store Summary Key:** `RUN_SUMMARY` (`totalAds, winningAdsCount, formatCounts, advertisers`)
+- **Published Use-Case Tasks (`.md`):**
+  - `https://apify.com/ttyan0111/google-ads-transparency-spy/examples/competitor-winning-google-ads-30-days.md`
+  - `https://apify.com/ttyan0111/google-ads-transparency-spy/examples/eu-dsa-competitor-ad-reach-spend-audit.md`
+  - `https://apify.com/ttyan0111/google-ads-transparency-spy/examples/youtube-video-ad-creatives-competitor-spy.md`
+  - `https://apify.com/ttyan0111/google-ads-transparency-spy/examples/b2b-saas-competitor-google-search-ads-spy.md`
+  - `https://apify.com/ttyan0111/google-ads-transparency-spy/examples/ecommerce-d2c-winning-ads-longevity-tracker.md`
+  - `https://apify.com/ttyan0111/google-ads-transparency-spy/examples/uk-germany-france-advertiser-spend-reach-spy.md`
+
+---
+
+## Tool 5: Google News Real-URL & Clean RAG Article Extractor
+- **Actor ID / Slug:** `xu8vMlhAzuJ2UrFfe` (`ttyan0111/google-news-ai-article-extractor`)
+- **Official MCP Registry:** `io.github.truonggiang0111/google-news-real-url-mcp`
+- **Glama Connector:** `https://glama.ai/mcp/connectors/io.github.truonggiang0111/google-news-real-url-mcp`
+- **Direct MCP URL:** `https://mcp.apify.com?actors=ttyan0111/google-news-ai-article-extractor`
+- **Sync REST URL:** `POST https://api.apify.com/v2/acts/ttyan0111~google-news-ai-article-extractor/run-sync-get-dataset-items`
+- **Proxy Required:** None (`$0` proxy cost, 256 MB RAM, solves Google News `DotsSplashUi` protobuf URL wrapping)
+- **Pricing (Pay-per-Event):** `$0.004` start + `$1.00/1k` decoded URLs + `$1.80/1k` full articles
+- **Sample Input JSON:**
+  ```json
+  {
+    "queries": ["AI startup Series A funding"],
+    "language": "en-US",
+    "timeRange": "7d",
+    "decodeSourceUrls": true,
+    "extractFullArticle": true,
+    "maxArticlesPerQuery": 15
+  }
+  ```
+- **Recommended Output Projection:** `title,realUrl,googleNewsUrl,sourceName,publishedAt,author,imageUrl,marketSignals,articleText,agentSummary`
+- **KV Store Summary Key:** `RUN_SUMMARY` (`totalArticles, decodedUrlsCount, fullTextCount, signalCounts`)
+- **Published Use-Case Tasks (`.md`):**
+  - `https://apify.com/ttyan0111/google-news-ai-article-extractor/examples/decode-google-news-rss-real-publisher-urls.md`
+  - `https://apify.com/ttyan0111/google-news-ai-article-extractor/examples/ai-startup-funding-news-full-text-rag.md`
+  - `https://apify.com/ttyan0111/google-news-ai-article-extractor/examples/competitor-pr-layoffs-launches-news-monitor.md`
+  - `https://apify.com/ttyan0111/google-news-ai-article-extractor/examples/mergers-acquisitions-executive-hiring-news-rag.md`
+  - `https://apify.com/ttyan0111/google-news-ai-article-extractor/examples/cybersecurity-breach-incident-news-real-urls.md`
+  - `https://apify.com/ttyan0111/google-news-ai-article-extractor/examples/fintech-crypto-regulatory-news-llm-digest.md`
+
+---
+
+## Upcoming Public Extensions (Staged Private -> Rolling Out Tonight)
+- `ttyan0111/substack-newsletter-creator-leads` (`0bA2Nc4ylXy6xgJSt`) — Substack direct creator emails, pricing tiers & engagement
+- `ttyan0111/chrome-web-store-extension-spy` (`gfQJdGY82XhWQfHi9`) — Chrome extension developer support emails, installs & negative reviews

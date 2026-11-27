@@ -1,6 +1,7 @@
 # Truong Truong Giang (@truonggiang0111 / @ttyan0111) — AI & B2B Market Intel Tools
 
-> Agent-First MCP Servers, Apify Actors, skills.sh Playbooks, and n8n Workflows for B2B Hiring Signals (Reed UK, Seek AU/NZ), Google Ads Transparency EU DSA Spend, Unified iOS + Android App Bug Spy, and Google News Real-URL RAG.
+> Agent-First MCP Servers, Apify Actors, Agensi.io Managed Skills, skills.sh Playbooks, and n8n Workflows for B2B Hiring Signals (Reed UK, Seek AU/NZ), Google Ads Transparency EU DSA Spend, Unified iOS + Android App Bug Spy, and Google News Real-URL RAG.
+> Full single-file technical spec: https://truonggiang0111.github.io/llms-full.txt
 
 ## Direct MCP Servers (Streamable HTTP via Apify MCP)
 
@@ -11,11 +12,24 @@
 - **Google Ads Transparency EU Spend MCP (`io.github.truonggiang0111/google-ads-transparency-mcp`):** `https://mcp.apify.com?actors=ttyan0111/google-ads-transparency-spy`
 - **Google News Real-URL RAG MCP (`io.github.truonggiang0111/google-news-real-url-mcp`):** `https://mcp.apify.com?actors=ttyan0111/google-news-ai-article-extractor`
 
-## Public Repositories & Hubs
+## Zero-Key Managed Marketplace (Agensi.io — `https://mcp.agensi.io/mcp/auth`)
+
+- **Creator Storefront (`Start here` pinned):** https://www.agensi.io/creators/giang-tr-ng-tr-ng
+- **Google News Real URL Decoder for AI RAG (`Free`):** https://www.agensi.io/skills/google-news-real-url-decoder-for-ai-rag
+- **UK Direct Employer Hiring Signals — Reed UK (`Free`):** https://www.agensi.io/skills/uk-direct-employer-hiring-signals-reed-uk
+- **Competitor App Bug & Review Spy — iOS & Play (`Free`):** https://www.agensi.io/skills/competitor-app-bug-review-spy-ios-play
+- **AU/NZ Direct Employer Hiring Signals — Seek (`$5.00`):** https://www.agensi.io/skills/au-nz-direct-employer-hiring-signals-seek
+- **Competitor Google Ads Transparency & Funnel Spy (`$5.00`):** https://www.agensi.io/skills/competitor-google-ads-transparency-funnel-spy
+- **B2B Market & Hiring Intelligence 5-in-1 Pack (`$7.99`, `-20%` Launch Deal `$6.39`):** https://www.agensi.io/skills/b2b-market-hiring-intelligence-5-in-1-pack
+- **Bundle — B2B Hiring & Competitor Ad Spy Bundle (`$7.99`, Save `20%`):** https://www.agensi.io/bundles/b2b-hiring-competitor-ad-spy-bundle
+
+## Public Repositories, Directories & Glama Connectors
 
 - **Main Distribution Hub:** `https://github.com/truonggiang0111/b2b-ai-mcp-skills`
 - **Web Directory & Schema Page:** `https://truonggiang0111.github.io/mcp/`
+- **Sitemap & AI Spec:** `https://truonggiang0111.github.io/sitemap.xml` · `https://truonggiang0111.github.io/llms-full.txt`
 - **Official MCP Registry Feed:** `https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.truonggiang0111`
+- **Glama Connector Suite:** `https://glama.ai/mcp/connectors/io.github.truonggiang0111/b2b-market-intel-mcp`
 - **Apify Store Publisher Profile:** `https://apify.com/ttyan0111`
 - **Agent Skills CLI (`skills.sh`):** `npx skills add truonggiang0111/b2b-ai-mcp-skills`
 
@@ -27,20 +41,35 @@
 - **Google Ads Transparency & EU DSA Ad Spend Spy:** https://apify.com/ttyan0111/google-ads-transparency-spy
 - **Google News Real Publisher URL & AI Text Extractor:** https://apify.com/ttyan0111/google-news-ai-article-extractor
 
-## 15 Ready-to-Run Published Use-Case Tasks (Web + Markdown Endpoints)
+## 30 Ready-to-Run Published Use-Case Tasks (Web + Markdown Endpoints)
 
 - [Find UK Direct-Employer Python Jobs Without Agencies](https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/uk-direct-employer-python-jobs) ([.md](https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/uk-direct-employer-python-jobs.md))
 - [Track Outside IR35 UK Tech & Engineering Contracts](https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/outside-ir35-uk-contract-tech-jobs) ([.md](https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/outside-ir35-uk-contract-tech-jobs.md))
 - [Get Remote UK Companies Hiring Engineers In-House](https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/uk-remote-software-engineer-hiring-leads) ([.md](https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/uk-remote-software-engineer-hiring-leads.md))
+- [Find UK Direct-Employer AI & ML Engineering Jobs](https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/uk-ai-machine-learning-direct-employer-jobs) ([.md](https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/uk-ai-machine-learning-direct-employer-jobs.md))
+- [Track UK Cybersecurity Outside IR35 Contract Roles](https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/uk-cybersecurity-contract-outside-ir35-jobs) ([.md](https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/uk-cybersecurity-contract-outside-ir35-jobs.md))
+- [Scrape Manchester & Regional UK Direct Tech Hiring](https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/manchester-birmingham-uk-tech-hiring-signals) ([.md](https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/manchester-birmingham-uk-tech-hiring-signals.md))
 - [Find Sydney Companies Hiring Software Engineers Direct](https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/sydney-direct-employer-software-jobs) ([.md](https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/sydney-direct-employer-software-jobs.md))
 - [Scrape Remote Australia Jobs with Company Size & Website](https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/australia-remote-tech-jobs-company-signals) ([.md](https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/australia-remote-tech-jobs-company-signals.md))
 - [Extract New Zealand Direct-Employer Job Leads on Seek](https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/new-zealand-direct-employer-hiring-leads) ([.md](https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/new-zealand-direct-employer-hiring-leads.md))
+- [Extract Melbourne Direct-Employer Tech Jobs (Seek)](https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/melbourne-brisbane-direct-employer-tech-jobs) ([.md](https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/melbourne-brisbane-direct-employer-tech-jobs.md))
+- [Monitor Australia Data & AI Engineer Hiring on Seek](https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/australia-data-ai-engineer-hiring-signals) ([.md](https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/australia-data-ai-engineer-hiring-signals.md))
+- [Scrape Australia Mining & Engineering Hiring on Seek](https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/australia-mining-engineering-direct-hiring-leads) ([.md](https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/australia-mining-engineering-direct-hiring-leads.md))
 - [Monitor 1-Star & 2-Star Competitor App Bug Complaints](https://apify.com/ttyan0111/app-store-play-reviews-spy/examples/competitor-app-1-star-bug-complaints) ([.md](https://apify.com/ttyan0111/app-store-play-reviews-spy/examples/competitor-app-1-star-bug-complaints.md))
 - [Audit iOS & Google Play Billing and Subscription Complaints](https://apify.com/ttyan0111/app-store-play-reviews-spy/examples/ios-android-billing-churn-review-audit) ([.md](https://apify.com/ttyan0111/app-store-play-reviews-spy/examples/ios-android-billing-churn-review-audit.md))
 - [Compare US & UK App Store and Google Play User Reviews](https://apify.com/ttyan0111/app-store-play-reviews-spy/examples/multi-country-mobile-app-sentiment-benchmark) ([.md](https://apify.com/ttyan0111/app-store-play-reviews-spy/examples/multi-country-mobile-app-sentiment-benchmark.md))
+- [Audit Fintech App 1-Star Bugs Across iOS & Play](https://apify.com/ttyan0111/app-store-play-reviews-spy/examples/fintech-banking-app-1-star-bug-audit) ([.md](https://apify.com/ttyan0111/app-store-play-reviews-spy/examples/fintech-banking-app-1-star-bug-audit.md))
+- [Track AI Mobile App 1–2★ User Churn Complaints](https://apify.com/ttyan0111/app-store-play-reviews-spy/examples/ai-chatbot-mobile-app-user-churn-complaints) ([.md](https://apify.com/ttyan0111/app-store-play-reviews-spy/examples/ai-chatbot-mobile-app-user-churn-complaints.md))
+- [Detect Mobile App Update Regression Bugs Fast](https://apify.com/ttyan0111/app-store-play-reviews-spy/examples/competitor-app-latest-version-regression-bugs) ([.md](https://apify.com/ttyan0111/app-store-play-reviews-spy/examples/competitor-app-latest-version-regression-bugs.md))
 - [Find Competitor Winning Google Ads Running 30+ Days](https://apify.com/ttyan0111/google-ads-transparency-spy/examples/competitor-winning-google-ads-30-days) ([.md](https://apify.com/ttyan0111/google-ads-transparency-spy/examples/competitor-winning-google-ads-30-days.md))
 - [Audit Competitor EU DSA Ad Impressions & Reach in Europe](https://apify.com/ttyan0111/google-ads-transparency-spy/examples/eu-dsa-competitor-ad-reach-spend-audit) ([.md](https://apify.com/ttyan0111/google-ads-transparency-spy/examples/eu-dsa-competitor-ad-reach-spend-audit.md))
 - [Spy on Competitor YouTube & Video Ad Creatives on Google](https://apify.com/ttyan0111/google-ads-transparency-spy/examples/youtube-video-ad-creatives-competitor-spy) ([.md](https://apify.com/ttyan0111/google-ads-transparency-spy/examples/youtube-video-ad-creatives-competitor-spy.md))
+- [Spy on B2B SaaS Competitor Google Search Ads](https://apify.com/ttyan0111/google-ads-transparency-spy/examples/b2b-saas-competitor-google-search-ads-spy) ([.md](https://apify.com/ttyan0111/google-ads-transparency-spy/examples/b2b-saas-competitor-google-search-ads-spy.md))
+- [Track Ecommerce D2C Winning Google Image & Video Ads](https://apify.com/ttyan0111/google-ads-transparency-spy/examples/ecommerce-d2c-winning-ads-longevity-tracker) ([.md](https://apify.com/ttyan0111/google-ads-transparency-spy/examples/ecommerce-d2c-winning-ads-longevity-tracker.md))
+- [Compare European Advertiser Reach Across DE & FR](https://apify.com/ttyan0111/google-ads-transparency-spy/examples/uk-germany-france-advertiser-spend-reach-spy) ([.md](https://apify.com/ttyan0111/google-ads-transparency-spy/examples/uk-germany-france-advertiser-spend-reach-spy.md))
 - [Decode Google News RSS Links to Real Publisher URLs](https://apify.com/ttyan0111/google-news-ai-article-extractor/examples/decode-google-news-rss-real-publisher-urls) ([.md](https://apify.com/ttyan0111/google-news-ai-article-extractor/examples/decode-google-news-rss-real-publisher-urls.md))
 - [Track AI Startup Funding News with Full Text for RAG](https://apify.com/ttyan0111/google-news-ai-article-extractor/examples/ai-startup-funding-news-full-text-rag) ([.md](https://apify.com/ttyan0111/google-news-ai-article-extractor/examples/ai-startup-funding-news-full-text-rag.md))
 - [Monitor Tech Layoffs, Product Launches & M&A News Signals](https://apify.com/ttyan0111/google-news-ai-article-extractor/examples/competitor-pr-layoffs-launches-news-monitor) ([.md](https://apify.com/ttyan0111/google-news-ai-article-extractor/examples/competitor-pr-layoffs-launches-news-monitor.md))
+- [Monitor M&A Deals & Executive Hiring News for RAG](https://apify.com/ttyan0111/google-news-ai-article-extractor/examples/mergers-acquisitions-executive-hiring-news-rag) ([.md](https://apify.com/ttyan0111/google-news-ai-article-extractor/examples/mergers-acquisitions-executive-hiring-news-rag.md))
+- [Extract Cybersecurity Breach News with Real URLs](https://apify.com/ttyan0111/google-news-ai-article-extractor/examples/cybersecurity-breach-incident-news-real-urls) ([.md](https://apify.com/ttyan0111/google-news-ai-article-extractor/examples/cybersecurity-breach-incident-news-real-urls.md))
+- [Track Fintech & Crypto Regulation News for LLMs](https://apify.com/ttyan0111/google-news-ai-article-extractor/examples/fintech-crypto-regulatory-news-llm-digest) ([.md](https://apify.com/ttyan0111/google-news-ai-article-extractor/examples/fintech-crypto-regulatory-news-llm-digest.md))
