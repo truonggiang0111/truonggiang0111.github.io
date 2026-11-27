@@ -464,3 +464,13 @@
 - 14. `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/n8n-ai-agent-streamable-http-mcp-prospecting.n8n.json`
 - 15. `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/n8n-ai-agent-stdio-zero-key-mcp-research.n8n.json`
 - 16. `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/weekly-competitor-review-databait-outreach-drafter.n8n.json`
+
+### Google Sheets No-Code Apps Script Add-on & Custom Formulas (`google-sheets-b2b-lead-scraper`)
+- **Repo:** `https://github.com/truonggiang0111/google-sheets-b2b-lead-scraper` (`v1.0.0`) · **Single-File Gist:** `https://gist.github.com/truonggiang0111/e219e0531b5e28969da0a112f64cdb10`
+- **3 Zero-Key Sheet Formulas:** `=DECODE_GNEWS_URL(cell)`, `=UK_GOV_TENDERS(keyword, limit)`, `=CLINICAL_TRIALS_LEADS(condition, phase, limit)`
+- **15-Actor Cloud Sidebar:** Pulls any `ttyan0111/*` Apify Actor directly into active sheet tabs (`$5/mo` free tier at `https://apify.com/ttyan0111`).
+- **Setup Guide:** `https://truonggiang0111.github.io/mcp/google-sheets-apify-b2b-lead-automation/`
+
+### Direct Storefront, Verified CSV Packs & Custom Scraper Builds
+- **Direct Checkout & Order Hub:** `https://truonggiang0111.github.io/mcp/b2b-leads-datasets-and-custom-scrapers/`
+- **Agensi Storefront & Affiliate Portal:** `https://www.agensi.io/r/GIANGTRNGTRNG?utm_source=llms-full` (`https://www.agensi.io/creators/giang-tr-ng-tr-ng`)

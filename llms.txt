@@ -1,11 +1,16 @@
 # b2b-ai-mcp-skills (`ttyan0111` / `truonggiang0111`)
 
-> Zero-proxy B2B Hiring Intelligence, Public Tenders, ClinicalTrials Biotech Leads, Competitor Ad Spend Spy, Multi-Store Review Churn Spy & Google News Real-URL RAG tools (`15` Agent Skills, `16` `n8n` Workflows, `n8n` Community Node `18` Ops, `100` AI `.md` Tasks, `16` Live Agensi Skills + `3` Bundles, Node STDIO MCP + Python SDK + Sample Datasets).
+> Zero-proxy B2B Hiring Intelligence, Public Tenders, ClinicalTrials Biotech Leads, Competitor Ad Spend Spy, Multi-Store Review Churn Spy & Google News Real-URL RAG tools (`15` Agent Skills, `16` `n8n` Workflows, `n8n` Community Node `18` Ops, Google Sheets Add-on `18` Ops, `100` AI `.md` Tasks, `16` Live Agensi Skills + `3` Bundles, Node STDIO MCP + Python SDK + Sample Datasets).
 > Hosted serverless on Apify (`$5/month` free credit included) and distributed on Agensi.io (`https://mcp.agensi.io/mcp/auth`).
 > Full single-file spec: [llms-full.txt](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/llms-full.txt)
 
-## Technical Guides, Open-Source SDKs & Sample Datasets
+## Technical Guides, Storefront, Open-Source SDKs & Sample Datasets
 
+- [Direct B2B Data Storefront ($29 Lead Packs, Custom Scrapers $199–$350, Agensi Bundles & Free Samples)](https://truonggiang0111.github.io/mcp/b2b-leads-datasets-and-custom-scrapers/)
+- [Interactive 1-Click n8n Workflow & MCP Gallery (16 Workflows)](https://truonggiang0111.github.io/mcp/n8n-b2b-lead-automation-workflows/)
+- [How to Connect n8n AI Agents to Streamable HTTP & STDIO MCP Servers for B2B Lead Generation (2026)](https://truonggiang0111.github.io/mcp/n8n-mcp-client-ai-agent-b2b-leads/)
+- [How to Pull Live UK Gov Tenders, ClinicalTrials & Competitor Churn Leads Into Google Sheets (Zero-Key Apps Script + Apify)](https://truonggiang0111.github.io/mcp/google-sheets-apify-b2b-lead-automation/)
+- [Mining 1-Star WooCommerce & Atlassian App Churn Signals with Public REST APIs, n8n & MCP](https://truonggiang0111.github.io/mcp/wordpress-woocommerce-1-star-churn-leads/)
 - [How to Decode Opaque news.google.com/rss CBMi Links Into Real Publisher URLs & Clean Markdown for AI RAG (2026)](https://truonggiang0111.github.io/mcp/google-news-rss-url-decoder/)
 - [Mining 1-Star & 2-Star App, Extension & SaaS Reviews for B2B Churn Leads](https://truonggiang0111.github.io/mcp/shopify-app-store-1-star-churn-teardown/)
 - [Filtering Out Recruitment Agency & Bootcamp Spam (~48% Noise) on Reed.co.uk & Seek.com.au via MCP & n8n](https://truonggiang0111.github.io/mcp/direct-employer-hiring-leads-uk-au/)
@@ -13,7 +18,9 @@
 - [ClinicalTrials.gov Biotech & PI Email Leads Guide](https://truonggiang0111.github.io/mcp/clinicaltrials-gov-biotech-sponsor-leads/)
 - [VS Code Marketplace vs Open-VSX (Cursor/Windsurf) Benchmark & Churn Guide](https://truonggiang0111.github.io/mcp/vscode-vs-openvsx-cursor-extension-metrics/)
 - [Substack Viral Notes Outlier Formula & Ghostwriter Guide](https://truonggiang0111.github.io/mcp/substack-viral-notes-outlier-formula/)
-- [Dev.to Technical Breakdown (Google News AU_yqL RAG & MCP)](https://dev.to/truonggiang0111/why-google-news-rss-base64-decoding-broke-2024-2026-and-how-to-fix-it-for-ai-rag-mcp-26pi)
+- [Dev.to Technical Breakdown #1 (Google News AU_yqL RAG & MCP)](https://dev.to/truonggiang0111/why-google-news-rss-base64-decoding-broke-2024-2026-and-how-to-fix-it-for-ai-rag-mcp-26pi)
+- [Dev.to Technical Breakdown #2 (n8n AI Agents + MCP + Zero-Key APIs)](https://dev.to/truonggiang0111/how-to-connect-n8n-ai-agents-to-b2b-lead-scrapers-via-mcp-zero-key-apis-16-free-workflows-145b)
+- [Google Sheets Zero-Dep Apps Script Add-on & Custom Formulas (`DECODE_GNEWS_URL`, `UK_GOV_TENDERS`, `CLINICAL_TRIALS_LEADS` + 15-Actor Sidebar)](https://github.com/truonggiang0111/google-sheets-b2b-lead-scraper)
 - [Open-Source Zero-Dep n8n Community Node & AI Agent Tool (`npm install github:truonggiang0111/n8n-nodes-b2b-market-intel` — 18 Ops, `usableAsTool: true`)](https://github.com/truonggiang0111/n8n-nodes-b2b-market-intel)
 - [Open-Source Zero-Dep Node STDIO MCP Server (`npx -y github:truonggiang0111/b2b-market-intel-mcp`)](https://github.com/truonggiang0111/b2b-market-intel-mcp)
 - [Open-Source Zero-Dep Python 3.10+ SDK & CLI (`b2b-market-intel-python` v1.0.0)](https://github.com/truonggiang0111/b2b-market-intel-python)
