@@ -1,8 +1,8 @@
-# Truong Truong Giang (@truonggiang0111 / @ttyan0111) — AI & B2B Market Intel Tools
+# b2b-ai-mcp-skills (`ttyan0111` / `truonggiang0111`)
 
-> Zero-proxy B2B Hiring Intelligence, Public Tenders, ClinicalTrials Biotech Leads, Competitor Ad Spend Spy, Multi-Store Review Churn Spy & Google News Real-URL RAG tools (`15` Agent Skills, `8` `n8n` Workflows, `100` AI `.md` Tasks, `16` Live Agensi Skills + `3` Bundles, Node STDIO MCP + Python SDK + Sample Datasets).
+> Zero-proxy B2B Hiring Intelligence, Public Tenders, ClinicalTrials Biotech Leads, Competitor Ad Spend Spy, Multi-Store Review Churn Spy & Google News Real-URL RAG tools (`15` Agent Skills, `16` `n8n` Workflows, `n8n` Community Node `18` Ops, `100` AI `.md` Tasks, `16` Live Agensi Skills + `3` Bundles, Node STDIO MCP + Python SDK + Sample Datasets).
 > Hosted serverless on Apify (`$5/month` free credit included) and distributed on Agensi.io (`https://mcp.agensi.io/mcp/auth`).
-> Full single-file spec: [llms-full.txt](https://truonggiang0111.github.io/llms-full.txt)
+> Full single-file spec: [llms-full.txt](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/llms-full.txt)
 
 ## Technical Guides, Open-Source SDKs & Sample Datasets
 
@@ -14,6 +14,7 @@
 - [VS Code Marketplace vs Open-VSX (Cursor/Windsurf) Benchmark & Churn Guide](https://truonggiang0111.github.io/mcp/vscode-vs-openvsx-cursor-extension-metrics/)
 - [Substack Viral Notes Outlier Formula & Ghostwriter Guide](https://truonggiang0111.github.io/mcp/substack-viral-notes-outlier-formula/)
 - [Dev.to Technical Breakdown (Google News AU_yqL RAG & MCP)](https://dev.to/truonggiang0111/why-google-news-rss-base64-decoding-broke-2024-2026-and-how-to-fix-it-for-ai-rag-mcp-26pi)
+- [Open-Source Zero-Dep n8n Community Node & AI Agent Tool (`npm install github:truonggiang0111/n8n-nodes-b2b-market-intel` — 18 Ops, `usableAsTool: true`)](https://github.com/truonggiang0111/n8n-nodes-b2b-market-intel)
 - [Open-Source Zero-Dep Node STDIO MCP Server (`npx -y github:truonggiang0111/b2b-market-intel-mcp`)](https://github.com/truonggiang0111/b2b-market-intel-mcp)
 - [Open-Source Zero-Dep Python 3.10+ SDK & CLI (`b2b-market-intel-python` v1.0.0)](https://github.com/truonggiang0111/b2b-market-intel-python)
 - [Open-Source Node.js 18+ CLI Decoder (`google-news-url-decoder` v1.0.0)](https://github.com/truonggiang0111/google-news-url-decoder)
@@ -79,8 +80,10 @@
   - [skills/clinical-trials-biotech-leads/SKILL.md](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/skills/clinical-trials-biotech-leads/SKILL.md)
   - [skills/wordpress-plugin-churn-spy/SKILL.md](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/skills/wordpress-plugin-churn-spy/SKILL.md)
 
-## `8` Automation Templates (`n8n`)
+## `16` Automation Templates (`n8n`) & Native Community Node
 
+- Native n8n Community Node (`usableAsTool: true`, `18` ops): `npm install github:truonggiang0111/n8n-nodes-b2b-market-intel` (`https://github.com/truonggiang0111/n8n-nodes-b2b-market-intel`)
+- Workflow Index: [workflows/n8n/README.md](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/README.md)
 - [workflows/n8n/daily-google-news-ai-rag-digest.n8n.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/daily-google-news-ai-rag-digest.n8n.json)
 - [workflows/n8n/weekly-competitor-app-bug-spy.n8n.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/weekly-competitor-app-bug-spy.n8n.json)
 - [workflows/n8n/weekly-shopify-app-churn-leads.n8n.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/weekly-shopify-app-churn-leads.n8n.json)
@@ -89,6 +92,14 @@
 - [workflows/n8n/weekly-google-ads-winning-creatives.n8n.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/weekly-google-ads-winning-creatives.n8n.json)
 - [workflows/n8n/weekly-podcast-guest-sponsor-outreach.n8n.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/weekly-podcast-guest-sponsor-outreach.n8n.json)
 - [workflows/n8n/weekly-vscode-chrome-extension-bugs.n8n.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/weekly-vscode-chrome-extension-bugs.n8n.json)
+- [workflows/n8n/weekly-substack-paid-creator-leads.n8n.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/weekly-substack-paid-creator-leads.n8n.json)
+- [workflows/n8n/daily-substack-viral-notes-ghostwriter.n8n.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/daily-substack-viral-notes-ghostwriter.n8n.json)
+- [workflows/n8n/daily-clinical-trials-biotech-sponsor-leads.n8n.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/daily-clinical-trials-biotech-sponsor-leads.n8n.json)
+- [workflows/n8n/weekly-atlassian-jira-app-churn-leads.n8n.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/weekly-atlassian-jira-app-churn-leads.n8n.json)
+- [workflows/n8n/weekly-wordpress-woocommerce-plugin-churn-leads.n8n.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/weekly-wordpress-woocommerce-plugin-churn-leads.n8n.json)
+- [workflows/n8n/n8n-ai-agent-streamable-http-mcp-prospecting.n8n.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/n8n-ai-agent-streamable-http-mcp-prospecting.n8n.json)
+- [workflows/n8n/n8n-ai-agent-stdio-zero-key-mcp-research.n8n.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/n8n-ai-agent-stdio-zero-key-mcp-research.n8n.json)
+- [workflows/n8n/weekly-competitor-review-databait-outreach-drafter.n8n.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/weekly-competitor-review-databait-outreach-drafter.n8n.json)
 
 ## `100` Ready-to-Run Published Use-Case Tasks (Web + `.md`)
 
@@ -193,7 +204,3 @@
 - https://apify.com/ttyan0111/vscode-cursor-extension-spy/examples/rest-api-graphql-testing-vscode-extension-spy (.md)
 - https://apify.com/ttyan0111/vscode-cursor-extension-spy/examples/continue-claude-code-direct-id-extension-audit (.md)
 - Web Hub: https://truonggiang0111.github.io/mcp/ · https://truonggiang0111.github.io/llms.txt · https://truonggiang0111.github.io/llms-full.txt
-
-- Hub Repo (15 Skills + 8 n8n): https://github.com/truonggiang0111/b2b-ai-mcp-skills
-- Sitemap (12 URLs): https://truonggiang0111.github.io/sitemap.xml
-- Official MCP Registry Feed: https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.truonggiang0111
