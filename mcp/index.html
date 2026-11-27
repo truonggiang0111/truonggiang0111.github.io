@@ -10,7 +10,7 @@
   <link rel="alternate" type="text/plain" title="LLM Full Specification" href="https://truonggiang0111.github.io/llms-full.txt" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="B2B Market Intel MCP Servers, Agent Skills &amp; Zero-Proxy Apify Actors | @ttyan0111" />
-  <meta property="og:description" content="Serverless MCP endpoints, zero-key npx STDIO MCP, n8n Community Node (usableAsTool), 15 portable skills.sh playbooks, 16 Live Agensi.io skills + 3 Bundles, 16 n8n workflows, 100 AI .md tasks, and 10 technical SEO/RAG guides &amp; galleries." />
+  <meta property="og:description" content="Serverless MCP endpoints, zero-key npx STDIO MCP, n8n Community Node (usableAsTool), Google Sheets Apps Script Add-on, 15 portable skills.sh playbooks, 16 Live Agensi.io skills + 3 Bundles, 16 n8n workflows, 100 AI .md tasks, and 12 technical SEO/RAG guides, storefront &amp; galleries." />
   <meta property="og:url" content="https://truonggiang0111.github.io/mcp/" />
   <meta property="og:site_name" content="Truong Truong Giang — B2B &amp; AI MCP Hub" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -72,8 +72,11 @@
           "https://apify.com/ttyan0111",
           "https://github.com/truonggiang0111/b2b-market-intel-mcp",
           "https://github.com/truonggiang0111/n8n-nodes-b2b-market-intel",
+          "https://github.com/truonggiang0111/google-sheets-b2b-lead-scraper",
           "https://github.com/truonggiang0111/google-news-url-decoder",
           "https://truonggiang0111.github.io/mcp/n8n-b2b-lead-automation-workflows/",
+          "https://truonggiang0111.github.io/mcp/b2b-leads-datasets-and-custom-scrapers/",
+          "https://truonggiang0111.github.io/mcp/google-sheets-apify-b2b-lead-automation/",
           "https://www.agensi.io/creators/giang-tr-ng-tr-ng",
           "https://www.agensi.io/bundles/b2b-hiring-competitor-ad-spy-bundle",
           "https://www.agensi.io/bundles/e-commerce-saas-churn-spy-bundle",
@@ -156,6 +159,18 @@
             "position": 10,
             "name": "Mining 1-Star WooCommerce & Atlassian App Churn Signals with Public REST APIs, n8n & MCP",
             "url": "https://truonggiang0111.github.io/mcp/wordpress-woocommerce-1-star-churn-leads/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 11,
+            "name": "Direct B2B Data Storefront, Agensi Bundles & Custom Scraper Order Hub",
+            "url": "https://truonggiang0111.github.io/mcp/b2b-leads-datasets-and-custom-scrapers/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 12,
+            "name": "How to Pull Live UK Gov Tenders, ClinicalTrials & Competitor Churn Leads Directly into Google Sheets (Zero-Key Apps Script + Apify)",
+            "url": "https://truonggiang0111.github.io/mcp/google-sheets-apify-b2b-lead-automation/"
           }
         ]
       },
@@ -190,14 +205,17 @@
     <p>Serverless Model Context Protocol (MCP) endpoints, <code>15</code> <code>skills.sh</code> Agent Skills, <code>16</code> <code>n8n</code> workflows, and <code>n8n-nodes-b2b-market-intel</code> built for AI Agents and growth teams by <a href="https://truonggiang0111.github.io/">Truong Truong Giang</a>.</p>
 
     <div class="badges">
+      <a class="badge" href="/mcp/b2b-leads-datasets-and-custom-scrapers/">Direct B2B Storefront &amp; Custom Scrapers</a>
+      <a class="badge" href="/mcp/google-sheets-apify-b2b-lead-automation/">Google Sheets Lead Add-on (0₫)</a>
       <a class="badge" href="/mcp/n8n-b2b-lead-automation-workflows/">Interactive 16 n8n Workflows Gallery</a>
+      <a class="badge" href="https://github.com/truonggiang0111/google-sheets-b2b-lead-scraper">Google Sheets Apps Script Repo</a>
       <a class="badge" href="https://github.com/truonggiang0111/n8n-nodes-b2b-market-intel">n8n Community Node (18 Ops)</a>
       <a class="badge" href="https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.truonggiang0111">Official MCP Registry</a>
       <a class="badge" href="https://github.com/truonggiang0111/b2b-ai-mcp-skills">GitHub Hub (15 Skills + 16 n8n)</a>
       <a class="badge" href="https://github.com/truonggiang0111/b2b-market-intel-mcp">Zero-Key npx STDIO MCP</a>
       <a class="badge" href="https://github.com/truonggiang0111/google-news-url-decoder">Node.js CBMi URL Decoder CLI</a>
       <a class="badge" href="https://apify.com/ttyan0111">Apify Store (@ttyan0111)</a>
-      <a class="badge" href="https://www.agensi.io/creators/giang-tr-ng-tr-ng">Agensi Storefront (16 Live + 3 Bundles)</a>
+      <a class="badge" href="https://www.agensi.io/r/GIANGTRNGTRNG?to=/creators/giang-tr-ng-tr-ng&amp;utm_source=wave7_hub">Agensi Storefront (16 Live + 3 Bundles)</a>
       <a class="badge" href="https://glama.ai/mcp/connectors/io.github.truonggiang0111/b2b-market-intel-mcp">Glama MCP Connector</a>
       <a class="badge" href="/llms.txt">llms.txt</a>
       <a class="badge" href="/llms-full.txt">llms-full.txt</a>
@@ -269,6 +287,16 @@ npx skills add truonggiang0111/b2b-ai-mcp-skills</pre>
         <div class="tag">WOOCOMMERCE &amp; ATLASSIAN CHURN</div>
         <h3><a href="/mcp/wordpress-woocommerce-1-star-churn-leads/">Mining 1-Star WooCommerce &amp; Atlassian App Churn Signals</a></h3>
         <p>Zero-proxy REST + RSS benchmarks: <code>WooCommerce PayPal Payments</code> (<code>2.9★</code>, <code>289×1★</code>), <code>Stripe Gateway</code> (<code>3.1★</code>, <code>94×1★</code>), and Atlassian REST v2 <code>10/10</code> vendor contacts in <code>3.92s</code>.</p>
+      </div>
+      <div class="card">
+        <div class="tag">DIRECT B2B STOREFRONT &amp; CUSTOM ORDERS</div>
+        <h3><a href="/mcp/b2b-leads-datasets-and-custom-scrapers/">Direct B2B Data Storefront, Agensi Bundles &amp; Custom Scraper Order Hub</a></h3>
+        <p>Compare all 3 buying paths: Agensi zero-key skills (<code>$0</code>–<code>$12.99</code>), self-serve Apify + Sheets + <code>n8n</code> (<code>$5/mo</code> free tier + <code>150</code> sample rows), or fixed-price <code>$29</code> CSV lead packs &amp; <code>$199–$350</code> custom builds.</p>
+      </div>
+      <div class="card">
+        <div class="tag">NO-CODE GOOGLE SHEETS AUTOMATION</div>
+        <h3><a href="/mcp/google-sheets-apify-b2b-lead-automation/">Pull UK Gov Tenders, ClinicalTrials &amp; Churn Leads Into Google Sheets</a></h3>
+        <p>Zero-key custom formulas (<code>=DECODE_GNEWS_URL()</code>, <code>=UK_GOV_TENDERS()</code>, <code>=CLINICAL_TRIALS_LEADS()</code>) + 15-Actor Apify Sidebar inside <code>Extensions -&gt; Apps Script</code> via <code>google-sheets-b2b-lead-scraper</code>.</p>
       </div>
     </div>
 

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Pull Live UK Gov Tenders, ClinicalTrials &amp; Competitor Churn Leads Directly into Google Sheets (Zero-Key Apps Script + Apify) | @ttyan0111</title>
+  <meta name="description" content="2-minute Google Apps Script guide to pull live UK Contracts Finder OCDS tenders, ClinicalTrials.gov Phase 1-3 sponsor emails, decoded Google News URLs, and all 15 Apify B2B lead actors directly into Google Sheets ($0 upfront)." />
+  <link rel="canonical" href="https://truonggiang0111.github.io/mcp/google-sheets-apify-b2b-lead-automation/" />
+  <link rel="alternate" type="text/plain" title="LLM Context Index" href="https://truonggiang0111.github.io/llms.txt" />
+  <link rel="alternate" type="text/plain" title="LLM Full Specification" href="https://truonggiang0111.github.io/llms-full.txt" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="How to Pull Live UK Gov Tenders, ClinicalTrials &amp; Competitor Churn Leads Directly into Google Sheets (Zero-Key Apps Script + Apify)" />
+  <meta property="og:description" content="Install zero-key custom formulas (=DECODE_GNEWS_URL(), =UK_GOV_TENDERS(), =CLINICAL_TRIALS_LEADS()) and the 15-Actor Apify Lead Importer Sidebar inside Google Sheets in 2 minutes." />
+  <meta property="og:url" content="https://truonggiang0111.github.io/mcp/google-sheets-apify-b2b-lead-automation/" />
+  <meta property="og:site_name" content="Truong Truong Giang — B2B &amp; AI MCP Hub" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Google Sheets Zero-Key B2B Lead Scraper + 15-Actor Apify Sidebar" />
+  <meta name="twitter:description" content="Pull live UK Gov Tenders, ClinicalTrials.gov biotech emails, Google News real URLs, and 15 Apify B2B lead scrapers directly into Google Sheets." />
+
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --card: #121826;
+      --card-alt: #0e1420;
+      --border: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --green: #10b981;
+      --amber: #f59e0b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 32px 20px 84px; }
+    .breadcrumb { font-size: 0.85rem; color: var(--muted); margin-bottom: 18px; }
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    h1 { font-size: 1.85rem; line-height: 1.27; margin: 0 0 12px; color: #f8fafc; }
+    h2 { font-size: 1.3rem; margin: 40px 0 14px; color: #f8fafc; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    h3 { font-size: 1.05rem; margin: 22px 0 8px; color: #f8fafc; }
+    p, li { color: var(--muted); }
+    strong { color: var(--text); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.85em;
+      background: #06090f;
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #e2e8f0;
+    }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; font-size: 0.84rem; color: var(--muted); margin-bottom: 18px; }
+    .pill {
+      display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 0.76rem; font-weight: 700;
+      background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); color: var(--green);
+    }
+    .pill.blue {
+      background: rgba(56, 189, 248, 0.12); border-color: rgba(56, 189, 248, 0.35); color: var(--accent);
+    }
+    .badges { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 28px; }
+    .badge {
+      display: inline-block; padding: 6px 12px; border-radius: 6px; font-size: 0.84rem; font-weight: 600;
+      background: var(--card); border: 1px solid var(--border); color: var(--text);
+    }
+    .badge:hover { border-color: var(--accent); text-decoration: none; }
+    .callout {
+      background: var(--card); border-left: 4px solid var(--accent); border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      border-radius: 8px; padding: 16px 18px; margin: 20px 0;
+    }
+    .callout.green { border-left-color: var(--green); }
+    .callout p { margin: 0; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(275px, 1fr)); gap: 16px; margin: 18px 0; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+    .card h3 { margin-top: 0; }
+    .tag { display: inline-block; font-size: 0.74rem; color: var(--green); font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.03em; }
+    .table-wrap { overflow-x: auto; margin: 16px 0 24px; border: 1px solid var(--border); border-radius: 10px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.86rem; background: var(--card-alt); }
+    th, td { text-align: left; padding: 10px 13px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { background: var(--card); color: #f8fafc; font-weight: 600; }
+    td { color: var(--muted); }
+    tr:last-child td { border-bottom: none; }
+    .code-block { position: relative; margin: 12px 0 20px; }
+    .code-header {
+      display: flex; justify-content: space-between; align-items: center;
+      background: #0d1320; border: 1px solid var(--border); border-bottom: none;
+      border-radius: 8px 8px 0 0; padding: 7px 12px; font-size: 0.78rem; color: var(--muted);
+    }
+    .copy-btn {
+      background: var(--card); color: var(--text); border: 1px solid var(--border);
+      border-radius: 5px; padding: 3px 9px; font-size: 0.75rem; cursor: pointer; font-weight: 600;
+    }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    pre {
+      margin: 0; background: #06090f; border: 1px solid var(--border); border-radius: 0 0 8px 8px;
+      padding: 14px; overflow-x: auto; font-size: 0.84rem; color: #cbd5e1; line-height: 1.55;
+    }
+    pre code { background: none; border: none; padding: 0; color: inherit; font-size: inherit; }
+    .cta-box {
+      background: linear-gradient(180deg, #121826 0%, #0d1524 100%);
+      border: 1px solid #26354d; border-radius: 12px; padding: 22px; margin: 34px 0;
+    }
+    .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
+    .btn {
+      display: inline-block; padding: 9px 15px; border-radius: 7px; font-weight: 600; font-size: 0.86rem;
+      border: 1px solid var(--border); background: var(--card); color: var(--text);
+    }
+    .btn.primary { background: var(--accent); color: #081018; border-color: var(--accent); }
+    .btn:hover { text-decoration: none; opacity: 0.93; border-color: var(--accent); }
+    .faq-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px; }
+    .faq-item h3 { margin: 0 0 6px; font-size: 1rem; }
+    .faq-item p { margin: 0; }
+    footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.84rem; color: var(--muted); }
+    @media (max-width: 640px) { h1 { font-size: 1.5rem; } }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Portfolio", "item": "https://truonggiang0111.github.io/" },
+          { "@type": "ListItem", "position": 2, "name": "MCP & AI Skills Hub", "item": "https://truonggiang0111.github.io/mcp/" },
+          { "@type": "ListItem", "position": 3, "name": "Google Sheets No-Code B2B Scraper", "item": "https://truonggiang0111.github.io/mcp/google-sheets-apify-b2b-lead-automation/" }
+        ]
+      },
+      {
+        "@type": "TechArticle",
+        "headline": "How to Pull Live UK Gov Tenders, ClinicalTrials & Competitor Churn Leads Directly into Google Sheets (Zero-Key Apps Script + Apify)",
+        "description": "Step-by-step Google Apps Script guide for installing zero-key custom sheet formulas (=DECODE_GNEWS_URL, =UK_GOV_TENDERS, =CLINICAL_TRIALS_LEADS) and a 15-Actor Apify Lead Importer Sidebar using Apify's built-in $5/month free tier.",
+        "datePublished": "2026-11-27",
+        "dateModified": "2026-11-27",
+        "proficiencyLevel": "Beginner",
+        "author": {
+          "@type": "Person",
+          "name": "Truong Truong Giang",
+          "url": "https://truonggiang0111.github.io/"
+        },
+        "publisher": {
+          "@type": "Person",
+          "name": "Truong Truong Giang",
+          "url": "https://truonggiang0111.github.io/mcp/"
+        },
+        "mainEntityOfPage": "https://truonggiang0111.github.io/mcp/google-sheets-apify-b2b-lead-automation/",
+        "about": [
+          { "@type": "SoftwareSourceCode", "name": "google-sheets-b2b-lead-scraper", "codeRepository": "https://github.com/truonggiang0111/google-sheets-b2b-lead-scraper" },
+          { "@type": "SoftwareApplication", "name": "Apify B2B Market Intel Actors (@ttyan0111)", "url": "https://apify.com/ttyan0111" }
+        ]
+      },
+      {
+        "@type": "HowTo",
+        "name": "Install Zero-Key B2B Lead Formulas & 15-Actor Apify Sidebar in Google Sheets",
+        "totalTime": "PT2M",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Open Extensions -> Apps Script in Google Sheets",
+            "text": "Create or open a spreadsheet, open Extensions -> Apps Script, paste Code.gs and Sidebar.html from github.com/truonggiang0111/google-sheets-b2b-lead-scraper, save, and reload the Sheet."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Run Zero-Key Sheet Formulas Immediately",
+            "text": "Type =DECODE_GNEWS_URL(A2:A20), =UK_GOV_TENDERS(\"software\", 15), or =CLINICAL_TRIALS_LEADS(\"oncology\", \"PHASE2,PHASE3\", 15) directly into any cell with zero API keys."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Open the 15-Actor Apify Cloud Batch Sidebar",
+            "text": "Click B2B Market Intel -> Open Lead Importer Sidebar, store your Apify API token securely in UserProperties (starting with Apify's $5/mo free credit), choose any of the 15 ttyan0111 actors, and import structured rows into a sheet tab."
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Do I need an Apify API key or paid server to use =UK_GOV_TENDERS(), =CLINICAL_TRIALS_LEADS(), or =DECODE_GNEWS_URL()?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. All three custom formulas and the Decode Selected Google News URLs menu command execute directly from Google Apps Script via UrlFetchApp against public APIs with zero API keys and $0 cost."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How is my Apify API token stored inside the 15-Actor Lead Importer Sidebar?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Your token is saved privately per Google user inside PropertiesService.getUserProperties(), never written to spreadsheet cells or shared with collaborators. Every Apify account starts with $5/month in free platform credits."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I run the same 15 scrapers without Google Apps Script setup?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Run zero-key hosted skills and bundles on Agensi.io, import any of our 16 MIT-licensed n8n workflows, preview 150 sanitized sample rows in b2b-sample-datasets-2026, or order fresh $29 CSV lead packs directly."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="https://truonggiang0111.github.io/">Home</a> /
+      <a href="https://truonggiang0111.github.io/mcp/">MCP &amp; Skills Hub</a> /
+      <span>Google Sheets No-Code B2B Scraper</span>
+    </nav>
+
+    <div class="meta-row">
+      <span class="pill">2-Minute No-Code Setup</span>
+      <span class="pill blue">3 Zero-Key Formulas + 15 Apify Actors</span>
+      <span>MIT License · Zero External Dependencies</span>
+    </div>
+
+    <h1>How to Pull Live UK Gov Tenders, ClinicalTrials &amp; Competitor Churn Leads Directly into Google Sheets (Zero-Key Apps Script + Apify)</h1>
+    <p>Sales ops teams, recruiters, and founders shouldn't need Python environments or expensive monthly SaaS seats just to populate a clean lead pipeline. Using <a href="https://github.com/truonggiang0111/google-sheets-b2b-lead-scraper"><code>truonggiang0111/google-sheets-b2b-lead-scraper</code></a>, you can paste a single zero-dependency Apps Script project into <strong>Google Sheets</strong> to unlock <strong>3 instant zero-key custom formulas</strong> plus a built-in <strong>15-Actor Apify Cloud Sidebar</strong> powered by Apify's <strong><code>$5/month</code> free tier</strong>.</p>
+
+    <div class="badges">
+      <a class="badge" href="https://github.com/truonggiang0111/google-sheets-b2b-lead-scraper">GitHub: <code>google-sheets-b2b-lead-scraper</code></a>
+      <a class="badge" href="https://apify.com/ttyan0111">Apify Free <code>$5/mo</code> Credit (<code>@ttyan0111</code>)</a>
+      <a class="badge" href="https://www.agensi.io/r/GIANGTRNGTRNG?to=/creators/giang-tr-ng-tr-ng&amp;utm_source=wave7_sheets">Agensi Zero-Key Skills (3 Free + Bundles)</a>
+      <a class="badge" href="/mcp/b2b-leads-datasets-and-custom-scrapers/">Direct Storefront &amp; <code>$29</code> CSV Packs</a>
+      <a class="badge" href="/mcp/n8n-b2b-lead-automation-workflows/">16 <code>n8n</code> Workflows Gallery</a>
+    </div>
+
+    <h2>1. 2-Minute Install via <code>Extensions -&gt; Apps Script</code></h2>
+    <p>Everything runs natively inside Google's V8 Apps Script runtime with minimal least-privilege scopes (<code>spreadsheets.currentonly</code>, <code>script.container.ui</code>, <code>script.external_request</code> — zero access to other Drive files or email).</p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="tag">Step 1 · Open Script Editor</div>
+        <h3>Open <code>Extensions -&gt; Apps Script</code></h3>
+        <p>Create a new Google Sheet, click <strong>Extensions &rarr; Apps Script</strong> in the top toolbar, and delete any placeholder <code>myFunction()</code> inside <code>Code.gs</code>.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Step 2 · Paste Two Files</div>
+        <h3>Add <code>Code.gs</code> &amp; <code>Sidebar.html</code></h3>
+        <p>Copy <a href="https://github.com/truonggiang0111/google-sheets-b2b-lead-scraper"><code>Code.gs</code></a> into the script editor, click <strong>+ &rarr; HTML</strong> named exactly <code>Sidebar</code>, paste <code>Sidebar.html</code>, and click Save (<code>Ctrl+S</code>).</p>
+      </div>
+      <div class="card">
+        <div class="tag">Step 3 · Reload &amp; Authorize</div>
+        <h3>Activate <code>B2B Market Intel</code> Menu</h3>
+        <p>Reload the spreadsheet tab. Wait 2 seconds for <code>onOpen()</code> to add the <strong>B2B Market Intel</strong> menu, then approve the external fetch permission once.</p>
+      </div>
+    </div>
+
+    <h2>2. Copy-Paste Zero-Key Custom Formulas (<code>$0</code>, Zero API Tokens)</h2>
+    <p>These three custom formulas execute live via Google's <code>UrlFetchApp.fetch()</code> directly against public endpoints — no Apify key or paid API required:</p>
+
+    <h3>A. <code>=DECODE_GNEWS_URL(urlOrRange)</code> — Decode Single Links or Entire Columns</h3>
+    <p>Solves both legacy <code>CBMi</code> protobuf Base64 links offline and modern encrypted <code>AU_yqL</code> links via <code>DotsSplashUi</code> <code>Fbv4je</code>. You can also highlight cells in Google Sheets and click <strong><code>B2B Market Intel -&gt; Decode Selected Google News URLs</code></strong> to overwrite or write decoded URLs in bulk.</p>
+    <div class="code-block">
+      <div class="code-header">
+        <span>Google Sheets Formula — Single Cell or Spill Range</span>
+        <button class="copy-btn" type="button" data-copy="f-gnews">Copy</button>
+      </div>
+      <pre id="f-gnews"><code>=DECODE_GNEWS_URL(A2)
+=DECODE_GNEWS_URL(A2:A25)</code></pre>
+    </div>
+
+    <h3>B. <code>=UK_GOV_TENDERS(keyword, limit)</code> — Live UK Contracts Finder OCDS Table</h3>
+    <p>Pulls fresh public procurement notices from <code>contractsfinder.service.gov.uk/Published/Notices/OCDS/Search</code> (and REST v2 fallback), spilling a formatted header row plus live records with columns <code>[OCID, Title, Buyer, ValueGBP, Deadline, NoticeURL]</code>.</p>
+    <div class="code-block">
+      <div class="code-header">
+        <span>Google Sheets Formula — Live UK Gov Tenders</span>
+        <button class="copy-btn" type="button" data-copy="f-ukgov">Copy</button>
+      </div>
+      <pre id="f-ukgov"><code>=UK_GOV_TENDERS("software", 15)
+=UK_GOV_TENDERS("cloud", 25)</code></pre>
+    </div>
+
+    <h3>C. <code>=CLINICAL_TRIALS_LEADS(condition, phase, limit)</code> — Recruiting Biotech Sponsor Emails</h3>
+    <p>Queries <code>clinicaltrials.gov/api/v2/studies</code> for actively recruiting Phase 1–3 Industry trials and spills a 7-column lead table: <code>[NCT, BriefTitle, Sponsor, Phase, Status, CentralContactName, CentralContactEmail]</code>.</p>
+    <div class="code-block">
+      <div class="code-header">
+        <span>Google Sheets Formula — Recruiting ClinicalTrials.gov Leads</span>
+        <button class="copy-btn" type="button" data-copy="f-trials">Copy</button>
+      </div>
+      <pre id="f-trials"><code>=CLINICAL_TRIALS_LEADS("oncology", "PHASE2,PHASE3", 15)
+=CLINICAL_TRIALS_LEADS("CAR-T", "Phase 1", 10)</code></pre>
+    </div>
+
+    <h2>3. Using the 15-Actor Apify Cloud Sidebar (<code>$5/mo</code> Built-In Free Tier)</h2>
+    <p>Need competitor Shopify/WooCommerce <code>1★</code> churn reviews, Reed UK / Seek AU direct hiring leads, Substack creator emails, Podcast sponsor contacts, or Google Ads EU spend inside Google Sheets? Open <strong><code>B2B Market Intel -&gt; Open Lead Importer Sidebar</code></strong>:</p>
+    <ol>
+      <li><strong>Store Your Apify Token Privately:</strong> Grab your free Apify account token at <a href="https://apify.com/ttyan0111"><code>apify.com/ttyan0111</code></a> (every account starts with <strong><code>$5/month</code> free platform credits</strong> — zero card required). Paste it into the sidebar once; Apps Script saves it safely inside <code>PropertiesService.getUserProperties()</code>, never in spreadsheet cells.</li>
+      <li><strong>Select Any of the 15 Actors &amp; Edit Preset JSON:</strong> Pick an Actor from the categorized dropdown — default JSON input populates automatically.</li>
+      <li><strong>Sync Directly to Sheet Tab:</strong> Click Run. Apps Script sends a synchronous POST to <code>https://api.apify.com/v2/acts/ttyan0111~&lt;slug&gt;/run-sync-get-dataset-items</code>, normalizes nested JSON fields, and writes clean headers + rows into a new or active tab.</li>
+    </ol>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Actor Slug (<code>ttyan0111~&lt;slug&gt;</code>)</th>
+            <th>Category</th>
+            <th>Default Sidebar Input Preset</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td><code>reed-uk-jobs-hiring-signals</code></td><td>Hiring &amp; Intent</td><td><code>{"keywords":"Python Developer","location":"London","directOnly":true,"maxJobs":25}</code></td></tr>
+          <tr><td>2</td><td><code>seek-au-nz-jobs-hiring-signals</code></td><td>Hiring &amp; Intent</td><td><code>{"keywords":"Software Engineer","location":"Sydney","country":"AU","maxJobs":25}</code></td></tr>
+          <tr><td>3</td><td><code>google-news-ai-article-extractor</code></td><td>AI RAG &amp; News</td><td><code>{"queries":["artificial intelligence startups"],"decodeSourceUrls":true,"maxArticlesPerQuery":20}</code></td></tr>
+          <tr><td>4</td><td><code>app-store-play-reviews-spy</code></td><td>Product Churn &amp; Reviews</td><td><code>{"queries":["notion"],"maxRating":2,"maxReviewsPerPlatform":30}</code></td></tr>
+          <tr><td>5</td><td><code>google-ads-transparency-spy</code></td><td>Competitor Ads</td><td><code>{"queries":["shopify.com"],"countryCode":"US","maxAdsPerQuery":25}</code></td></tr>
+          <tr><td>6</td><td><code>shopify-app-store-churn-spy</code></td><td>Product Churn &amp; Reviews</td><td><code>{"queries":["upsell"],"maxAppsPerQuery":5,"maxReviewsPerApp":20}</code></td></tr>
+          <tr><td>7</td><td><code>chrome-web-store-extension-spy</code></td><td>Product Churn &amp; Reviews</td><td><code>{"queries":["ai writing"],"maxExtensionsPerQuery":15,"maxReviewsPerExtension":10}</code></td></tr>
+          <tr><td>8</td><td><code>vscode-cursor-extension-spy</code></td><td>Product Churn &amp; Reviews</td><td><code>{"queries":["mcp"],"maxExtensionsPerQuery":10,"maxRatingFilter":3,"maxReviewsPerExtension":15}</code></td></tr>
+          <tr><td>9</td><td><code>substack-newsletter-creator-leads</code></td><td>Creator &amp; Media Leads</td><td><code>{"queries":["b2b saas"],"maxPublicationsPerQuery":25,"maxPostsPerPublication":3}</code></td></tr>
+          <tr><td>10</td><td><code>podcast-host-email-sponsor-spy</code></td><td>Creator &amp; Media Leads</td><td><code>{"queries":["b2b saas"],"maxShowsPerQuery":10,"maxEpisodesPerShow":5}</code></td></tr>
+          <tr><td>11</td><td><code>substack-viral-notes-outlier-spy</code></td><td>Creator &amp; Media Leads</td><td><code>{"queries":["gurwinder"],"maxCreatorsPerKeyword":3,"maxNotesPerCreator":25}</code></td></tr>
+          <tr><td>12</td><td><code>uk-gov-tenders-buyer-leads</code></td><td>Public Sector &amp; GovTech</td><td><code>{"keywords":["software","cloud"],"onlyWithEmail":false,"maxItems":20}</code></td></tr>
+          <tr><td>13</td><td><code>atlassian-marketplace-b2b-spy</code></td><td>Product Churn &amp; Reviews</td><td><code>{"queries":["time tracking"],"hosting":"cloud","maxAppsPerQuery":5,"maxReviewsPerApp":15}</code></td></tr>
+          <tr><td>14</td><td><code>clinical-trials-biotech-leads</code></td><td>Biotech &amp; Pharma Leads</td><td><code>{"queries":["oncology"],"location":"United States","sponsorClass":"INDUSTRY","maxTrials":20}</code></td></tr>
+          <tr><td>15</td><td><code>wordpress-plugin-churn-spy</code></td><td>Product Churn &amp; Reviews</td><td><code>{"queries":["woocommerce stripe"],"maxPluginsPerQuery":5,"minActiveInstalls":500,"maxReviewsPerPlugin":15}</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout green">
+      <p><strong>Want zero setup in Claude, Cursor, or ChatGPT too?</strong> Use <a href="https://www.agensi.io/r/GIANGTRNGTRNG?to=/creators/giang-tr-ng-tr-ng&amp;utm_source=wave7_sheets">Agensi Creator Storefront</a> (<a href="https://www.agensi.io/creators/giang-tr-ng-tr-ng">direct link</a>) to run <code>3</code> Free Starter Skills or save up to <code>35%</code> on <a href="https://www.agensi.io/r/GIANGTRNGTRNG?to=/bundles/b2b-biotech-gov-tenders-creator-leads-bundle&amp;utm_source=wave7_sheets">Bundle #3 (Biotech, Gov Tenders &amp; Creator Leads)</a> and <a href="https://www.agensi.io/r/GIANGTRNGTRNG?to=/bundles/e-commerce-saas-churn-spy-bundle&amp;utm_source=wave7_sheets">Bundle #2 (E-Commerce &amp; SaaS Churn Spy)</a>.</p>
+    </div>
+
+    <div class="cta-box">
+      <h3>Choose Your Next Step: Self-Serve Sheets, Agensi Bundles, or $29 CSV Delivery</h3>
+      <p>Grab the MIT-licensed Google Sheets source code, test Apify's <code>$5/mo</code> free tier, run <code>3</code> free hosted skills on Agensi, or order a freshly compiled <code>500–1,000</code> row CSV pack (<code>$29</code>) / custom scraper (<code>$199–$350</code>).</p>
+      <div class="cta-actions">
+        <a class="btn primary" href="https://github.com/truonggiang0111/google-sheets-b2b-lead-scraper">Get <code>google-sheets-b2b-lead-scraper</code></a>
+        <a class="btn" href="https://apify.com/ttyan0111">Claim Apify <code>$5/mo</code> Free Tier</a>
+        <a class="btn" href="https://www.agensi.io/r/GIANGTRNGTRNG?to=/creators/giang-tr-ng-tr-ng&amp;utm_source=wave7_sheets">Agensi Free Skills &amp; Bundles</a>
+        <a class="btn" href="/mcp/b2b-leads-datasets-and-custom-scrapers/">Order $29 CSV / Custom Scraper</a>
+      </div>
+    </div>
+
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <h3>Do I need an Apify API key for <code>=DECODE_GNEWS_URL()</code>, <code>=UK_GOV_TENDERS()</code>, or <code>=CLINICAL_TRIALS_LEADS()</code>?</h3>
+      <p>No. All three formulas and the <strong>Decode Selected Google News URLs</strong> menu option query public endpoints directly from Google Apps Script at <code>$0</code> with zero API keys.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How does the 15-Actor Sidebar keep my Apify API token safe?</h3>
+      <p>Your token is saved privately per user inside <code>PropertiesService.getUserProperties()</code>. Collaborators viewing the spreadsheet cannot read your stored key.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What if I want automated scheduled syncs or custom columns?</h3>
+      <p>Import any of our <a href="/mcp/n8n-b2b-lead-automation-workflows/">16 free <code>n8n</code> workflows</a>, inspect <a href="https://github.com/truonggiang0111/b2b-sample-datasets-2026">150 real sample rows</a>, or visit the <a href="/mcp/b2b-leads-datasets-and-custom-scrapers/">Direct Storefront &amp; Custom Order Hub</a> to commission a custom Google Sheets / Apify scraper delivered in <code>24–48h</code>.</p>
+    </div>
+
+    <footer>
+      Built by <a href="https://truonggiang0111.github.io/">Truong Truong Giang</a> · <a href="/mcp/">MCP Directory Hub</a> · <a href="/mcp/b2b-leads-datasets-and-custom-scrapers/">Direct B2B Storefront</a> · <a href="/mcp/uk-gov-contracts-finder-buyer-emails/">UK Gov Tenders Guide</a> · <a href="/mcp/clinicaltrials-gov-biotech-sponsor-leads/">ClinicalTrials.gov Guide</a> · <a href="/llms.txt">llms.txt</a>
+    </footer>
+  </main>
+
+  <script>
+    document.querySelectorAll('.copy-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var target = document.getElementById(btn.getAttribute('data-copy'));
+        if (!target) return;
+        navigator.clipboard.writeText(target.innerText).then(function () {
+          var prev = btn.textContent;
+          btn.textContent = 'Copied!';
+          setTimeout(function () { btn.textContent = prev; }, 1600);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

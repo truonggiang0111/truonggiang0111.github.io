@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Direct B2B Data Storefront, Agensi Bundles &amp; Custom Scraper Order Hub | @ttyan0111</title>
+  <meta name="description" content="Buy instant AI B2B lead skills ($0 free / $5 single / $7.99-$12.99 bundles on Agensi), run self-serve Apify actors ($5/mo free tier), preview sanitized CSV/JSON datasets, or order 500-1,000 fresh B2B lead packs ($29) and custom scrapers ($199-$350 fixed, 24-48h)." />
+  <link rel="canonical" href="https://truonggiang0111.github.io/mcp/b2b-leads-datasets-and-custom-scrapers/" />
+  <link rel="alternate" type="text/plain" title="LLM Context Index" href="https://truonggiang0111.github.io/llms.txt" />
+  <link rel="alternate" type="text/plain" title="LLM Full Specification" href="https://truonggiang0111.github.io/llms-full.txt" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Direct B2B Data Storefront, Agensi Bundles &amp; Custom Scraper Order Hub" />
+  <meta property="og:description" content="3 buying paths for B2B lead generation: Agensi zero-key skills &amp; 35%-off bundles (Card/USDC), self-serve Apify + Google Sheets + n8n ($5/mo free tier), and done-for-you CSV packs ($29) or custom scrapers ($199-$350)." />
+  <meta property="og:url" content="https://truonggiang0111.github.io/mcp/b2b-leads-datasets-and-custom-scrapers/" />
+  <meta property="og:site_name" content="Truong Truong Giang — B2B &amp; AI MCP Hub" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Direct B2B Data Storefront &amp; Custom Scraper Order Hub | @ttyan0111" />
+  <meta name="twitter:description" content="Agensi AI bundles ($7.99-$12.99), Apify self-serve actors ($5/mo free), verified CSV packs ($29), and 24-48h custom scrapers ($199-$350)." />
+
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --card: #121826;
+      --card-alt: #0e1420;
+      --border: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --green: #10b981;
+      --amber: #f59e0b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.64;
+    }
+    .wrap { max-width: 1060px; margin: 0 auto; padding: 32px 20px 84px; }
+    .breadcrumb { font-size: 0.85rem; color: var(--muted); margin-bottom: 18px; }
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    h1 { font-size: 1.92rem; line-height: 1.25; margin: 0 0 12px; color: #f8fafc; }
+    h2 { font-size: 1.32rem; margin: 42px 0 14px; color: #f8fafc; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    h3 { font-size: 1.05rem; margin: 0 0 8px; color: #f8fafc; }
+    p, li { color: var(--muted); }
+    strong { color: var(--text); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.85em;
+      background: #06090f;
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #e2e8f0;
+    }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; font-size: 0.84rem; color: var(--muted); margin-bottom: 18px; }
+    .pill {
+      display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 0.76rem; font-weight: 700;
+      background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); color: var(--green);
+    }
+    .pill.blue {
+      background: rgba(56, 189, 248, 0.12); border-color: rgba(56, 189, 248, 0.35); color: var(--accent);
+    }
+    .pill.amber {
+      background: rgba(245, 158, 11, 0.12); border-color: rgba(245, 158, 11, 0.35); color: var(--amber);
+    }
+    .badges { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 26px; }
+    .badge {
+      display: inline-block; padding: 6px 12px; border-radius: 6px; font-size: 0.84rem; font-weight: 600;
+      background: var(--card); border: 1px solid var(--border); color: var(--text);
+    }
+    .badge:hover { border-color: var(--accent); text-decoration: none; }
+    .tier-nav {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin: 20px 0 32px;
+    }
+    .tier-jump {
+      display: block; background: var(--card-alt); border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px 16px; color: var(--text); transition: border-color 0.15s ease;
+    }
+    .tier-jump:hover { border-color: var(--accent); text-decoration: none; }
+    .tier-jump .step { font-size: 0.73rem; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 0.04em; }
+    .tier-jump .title { font-size: 0.98rem; font-weight: 700; margin: 4px 0; color: #f8fafc; }
+    .tier-jump .sub { font-size: 0.82rem; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; margin: 16px 0; }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 11px; padding: 18px;
+      display: flex; flex-direction: column; justify-content: space-between; gap: 12px;
+    }
+    .card.highlight { border-color: #27446b; background: linear-gradient(180deg, #131c2e 0%, #101624 100%); }
+    .tag { display: inline-block; font-size: 0.74rem; color: var(--green); font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 6px; }
+    .tag.amber { color: var(--amber); }
+    .tag.blue { color: var(--accent); }
+    .price-row { display: flex; align-items: baseline; gap: 8px; margin: 4px 0 8px; }
+    .price { font-size: 1.48rem; font-weight: 800; color: #f8fafc; }
+    .strike { font-size: 0.92rem; color: var(--muted); text-decoration: line-through; }
+    .price-note { font-size: 0.82rem; color: var(--green); font-weight: 600; }
+    .card ul { margin: 0; padding-left: 18px; font-size: 0.9rem; }
+    .card li { margin-bottom: 4px; }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+    .btn {
+      display: inline-block; padding: 9px 14px; border-radius: 7px; font-weight: 600; font-size: 0.85rem;
+      border: 1px solid var(--border); background: #0d1524; color: var(--text); text-align: center; cursor: pointer;
+    }
+    .btn.primary { background: var(--accent); color: #081018; border-color: var(--accent); }
+    .btn.green { background: var(--green); color: #06120e; border-color: var(--green); }
+    .btn:hover { text-decoration: none; opacity: 0.93; border-color: var(--accent); }
+    .table-wrap { overflow-x: auto; margin: 16px 0 24px; border: 1px solid var(--border); border-radius: 10px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.86rem; background: var(--card-alt); }
+    th, td { text-align: left; padding: 10px 13px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { background: var(--card); color: #f8fafc; font-weight: 600; }
+    td { color: var(--muted); }
+    tr:last-child td { border-bottom: none; }
+    .callout {
+      background: var(--card); border-left: 4px solid var(--accent); border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      border-radius: 8px; padding: 16px 18px; margin: 22px 0;
+    }
+    .callout.green { border-left-color: var(--green); }
+    .callout p { margin: 0; }
+    .pay-strip {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;
+      background: var(--card); border: 1px solid #26354d; border-radius: 12px; padding: 18px; margin: 24px 0;
+    }
+    .pay-item strong { display: block; margin-bottom: 4px; color: #f8fafc; }
+    .pay-item span { font-size: 0.86rem; color: var(--muted); }
+    .faq-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px; }
+    .faq-item h3 { margin: 0 0 6px; font-size: 1rem; }
+    .faq-item p { margin: 0; }
+    footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.84rem; color: var(--muted); }
+    @media (max-width: 640px) { h1 { font-size: 1.52rem; } }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Portfolio", "item": "https://truonggiang0111.github.io/" },
+          { "@type": "ListItem", "position": 2, "name": "MCP & AI Skills Hub", "item": "https://truonggiang0111.github.io/mcp/" },
+          { "@type": "ListItem", "position": 3, "name": "B2B Leads, Datasets & Custom Scrapers", "item": "https://truonggiang0111.github.io/mcp/b2b-leads-datasets-and-custom-scrapers/" }
+        ]
+      },
+      {
+        "@type": "OfferCatalog",
+        "name": "B2B Market Intel Storefront: AI Skills, Self-Serve Scrapers, CSV Lead Packs & Custom Builds",
+        "url": "https://truonggiang0111.github.io/mcp/b2b-leads-datasets-and-custom-scrapers/",
+        "description": "Direct buying paths for zero-key Agensi AI skills and bundles ($0-$12.99), self-serve Apify Cloud actors + Google Sheets + n8n ($5/mo free tier), verified B2B CSV lead packs ($29), and custom scrapers or bespoke web hubs ($199-$350 fixed).",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "B2B Hiring & Competitor Ad Spy Bundle (Agensi)",
+              "description": "Zero-key Agensi bundle combining AU/NZ Direct Employer Hiring Signals (Seek) and Competitor Google Ads Transparency & Funnel Spy.",
+              "url": "https://www.agensi.io/bundles/b2b-hiring-competitor-ad-spy-bundle",
+              "brand": { "@type": "Brand", "name": "@ttyan0111" }
+            },
+            "price": "7.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://www.agensi.io/bundles/b2b-hiring-competitor-ad-spy-bundle"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "E-Commerce & SaaS Churn Spy Bundle (Agensi)",
+              "description": "4-platform churn bundle covering Shopify App Store, WordPress/WooCommerce, Chrome Web Store, VS Code/Cursor, and Atlassian Marketplace.",
+              "url": "https://www.agensi.io/bundles/e-commerce-saas-churn-spy-bundle",
+              "brand": { "@type": "Brand", "name": "@ttyan0111" }
+            },
+            "price": "12.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://www.agensi.io/bundles/e-commerce-saas-churn-spy-bundle"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "B2B Biotech, Gov Tenders & Creator Leads Bundle (Agensi)",
+              "description": "Zero-key Agensi bundle including UK Gov Tenders & Buyer Emails, ClinicalTrials.gov Biotech & PI Leads, Substack Creator Leads, and Podcast Host Sponsor Finder.",
+              "url": "https://www.agensi.io/bundles/b2b-biotech-gov-tenders-creator-leads-bundle",
+              "brand": { "@type": "Brand", "name": "@ttyan0111" }
+            },
+            "price": "12.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://www.agensi.io/bundles/b2b-biotech-gov-tenders-creator-leads-bundle"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Agensi Single B2B Market Intel AI Skill",
+              "description": "Single managed zero-key AI skill on Agensi.io (13 paid vertical skills plus 3 free starter skills).",
+              "url": "https://www.agensi.io/creators/giang-tr-ng-tr-ng",
+              "brand": { "@type": "Brand", "name": "@ttyan0111" }
+            },
+            "price": "5.00",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://www.agensi.io/creators/giang-tr-ng-tr-ng"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Verified B2B CSV & Google Sheets Lead Pack (500-1,000 Fresh Rows)",
+              "description": "Freshly queried, deduplicated B2B lead export (500-1,000 rows) delivered as CSV and Google Sheets within 24 hours across podcast hosts, UK/AU employers, Substack creators, app churn vendors, UK gov buyers, or biotech sponsors.",
+              "url": "https://truonggiang0111.github.io/mcp/b2b-leads-datasets-and-custom-scrapers/#tier-3-direct-orders",
+              "brand": { "@type": "Brand", "name": "@ttyan0111" }
+            },
+            "price": "29.00",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "mailto:giang12aa3@gmail.com?subject=Order%3A%20Verified%20B2B%20CSV%20Lead%20Pack%20(%2429%20Fixed)"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom Apify Scraper, Google Sheets / n8n Pipeline & Bespoke Web Hub (24-48h)",
+              "description": "Fixed-price custom API/GraphQL scraper, automated Google Sheets or n8n lead workflow, or static $0/mo bespoke product web hub delivered in 24-48 hours.",
+              "provider": {
+                "@type": "Person",
+                "name": "Truong Truong Giang",
+                "email": "giang12aa3@gmail.com",
+                "url": "https://truonggiang0111.github.io/"
+              },
+              "url": "https://truonggiang0111.github.io/mcp/b2b-leads-datasets-and-custom-scrapers/#tier-3-direct-orders"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "199.00",
+              "maxPrice": "350.00",
+              "priceCurrency": "USD"
+            },
+            "availability": "https://schema.org/InStock",
+            "url": "mailto:giang12aa3@gmail.com?subject=Order%3A%20Custom%20Scraper%20%2F%20Automation%20(%24199-%24350%20Fixed)"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the fastest way to run these B2B lead scrapers for $0 out-of-pocket?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You have three $0 entry options: (1) install any of the 3 Free Starter Skills on Agensi.io (Google News Real URL Decoder, Reed UK Hiring Signals, or App Store & Play Review Spy), (2) use Apify's built-in $5/month free usage credit on apify.com/ttyan0111 or inside the Google Sheets Apps Script Add-on, or (3) run npx -y github:truonggiang0111/b2b-market-intel-mcp locally with zero API keys."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I inspect real output quality before buying a $29 CSV pack or ordering a custom scraper?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. The public repository github.com/truonggiang0111/b2b-sample-datasets-2026 ships 6 sanitized CSV and JSON files (150 real cloud-run records across UK Hiring, AU/NZ Hiring, Decoded Google News, iOS/Play 1-2 star reviews, Shopify App Churn, and UK Gov Tenders) so you can verify exact field schemas before ordering."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which payment methods are accepted for $29 CSV packs and $199-$350 custom scrapers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Direct CSV Lead Packs ($29 fixed) and Custom Scraper / Bespoke Web Hub builds ($199-$350 fixed, 24-48h turnaround) are billed via PayPal (giang12aa3@gmail.com) or Solana USDC. Self-serve AI skills and bundles on Agensi.io accept Card and Solana USDC directly at checkout."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="https://truonggiang0111.github.io/">Home</a> /
+      <a href="https://truonggiang0111.github.io/mcp/">MCP &amp; Skills Hub</a> /
+      <span>Direct B2B Data Storefront &amp; Custom Scrapers</span>
+    </nav>
+
+    <div class="meta-row">
+      <span class="pill">3 Buying Paths · $0 to Done-For-You</span>
+      <span class="pill blue">Card · PayPal · Solana USDC</span>
+      <span class="pill amber">24–48h Custom Turnaround</span>
+    </div>
+
+    <h1>Direct B2B Data Storefront, Agensi Bundles &amp; Custom Scraper Order Hub</h1>
+    <p>Choose the workflow that fits your stack: run zero-key AI skills instantly in Claude/Cursor via <strong>Agensi.io</strong>, run self-serve <strong>Apify Cloud Actors + Google Sheets + <code>n8n</code></strong> on Apify's built-in <strong><code>$5/mo</code> free tier</strong>, or order fresh <strong>500–1,000 row B2B CSV Lead Packs (<code>$29</code>)</strong> and <strong>custom scrapers / <code>$0/mo</code> web hubs (<code>$199–$350</code>)</strong> delivered in <code>24–48h</code>.</p>
+
+    <div class="badges">
+      <a class="badge" href="https://www.agensi.io/r/GIANGTRNGTRNG?to=/creators/giang-tr-ng-tr-ng&amp;utm_source=wave7_storefront">Agensi Storefront (16 Live + 3 Bundles)</a>
+      <a class="badge" href="https://apify.com/ttyan0111">Apify Store (<code>@ttyan0111</code> · $5/mo Free)</a>
+      <a class="badge" href="/mcp/google-sheets-apify-b2b-lead-automation/">Google Sheets No-Code Guide</a>
+      <a class="badge" href="https://github.com/truonggiang0111/b2b-sample-datasets-2026">Free 150-Row Sample CSV/JSON</a>
+      <a class="badge" href="mailto:giang12aa3@gmail.com?subject=B2B%20Data%20%2F%20Custom%20Scraper%20Inquiry">Direct Email (<code>giang12aa3@gmail.com</code>)</a>
+    </div>
+
+    <div class="tier-nav">
+      <a class="tier-jump" href="#tier-1-agensi">
+        <div class="step">Tier 1 · Instant Zero-Key AI</div>
+        <div class="title">Agensi Skills &amp; Bundles</div>
+        <div class="sub"><code>$0</code> Free · <code>$5.00</code> Single · <code>$7.99–$12.99</code> Bundles</div>
+      </a>
+      <a class="tier-jump" href="#tier-2-self-serve">
+        <div class="step">Tier 2 · Self-Serve Pipelines</div>
+        <div class="title">Apify + Google Sheets + <code>n8n</code></div>
+        <div class="sub"><code>$5/mo</code> Free Apify Tier · Pay-per-Event · MIT SDKs</div>
+      </a>
+      <a class="tier-jump" href="#tier-3-direct-orders">
+        <div class="step">Tier 3 · Done-For-You Delivery</div>
+        <div class="title">CSV Packs (<code>$29</code>) &amp; Custom Builds</div>
+        <div class="sub"><code>$29</code> Lead Packs · <code>$199–$350</code> Scrapers &amp; Web Hubs</div>
+      </a>
+    </div>
+
+    <h2 id="tier-1-agensi">Tier 1 — Agensi Instant AI Skills &amp; Bundles (<code>$0</code> Free · <code>$5.00</code> Single · <code>$7.99–$12.99</code> Bundles)</h2>
+    <p>Execute live queries inside Claude Code, Codex CLI, Cursor, or ChatGPT via <a href="https://www.agensi.io/r/GIANGTRNGTRNG?to=/creators/giang-tr-ng-tr-ng&amp;utm_source=wave7_storefront">Agensi Creator Storefront</a> (<a href="https://www.agensi.io/creators/giang-tr-ng-tr-ng">direct storefront</a> · <code>https://mcp.agensi.io/mcp/auth</code>) with <strong>zero API keys</strong> to configure. Checkout natively via <strong>Card or Solana USDC</strong>.</p>
+
+    <div class="grid">
+      <div class="card highlight">
+        <div>
+          <div class="tag">Bundle #1 · Save 20%</div>
+          <h3>B2B Hiring &amp; Competitor Ad Spy Bundle</h3>
+          <div class="price-row">
+            <span class="price">$7.99</span>
+            <span class="strike">$10.00</span>
+            <span class="price-note">Card / USDC</span>
+          </div>
+          <ul>
+            <li><strong>AU/NZ Direct Hiring Signals (Seek):</strong> GraphQL company sizes, industries, websites, agency spam stripped.</li>
+            <li><strong>Google Ads Transparency &amp; Funnel Spy:</strong> EU DSA reach/spend &amp; <code>minDaysActive</code> winning creative detection.</li>
+          </ul>
+        </div>
+        <div class="btn-row">
+          <a class="btn primary" href="https://www.agensi.io/r/GIANGTRNGTRNG?to=/bundles/b2b-hiring-competitor-ad-spy-bundle&amp;utm_source=wave7_storefront">Buy Bundle #1 ($7.99)</a>
+          <a class="btn" href="https://www.agensi.io/bundles/b2b-hiring-competitor-ad-spy-bundle">Direct Link</a>
+        </div>
+      </div>
+
+      <div class="card highlight">
+        <div>
+          <div class="tag">Bundle #2 · Save 35% (4-in-1 Churn)</div>
+          <h3>E-Commerce &amp; SaaS Churn Spy Bundle</h3>
+          <div class="price-row">
+            <span class="price">$12.99</span>
+            <span class="strike">$20.00</span>
+            <span class="price-note">Card / USDC</span>
+          </div>
+          <ul>
+            <li><strong>Shopify App Store <code>1★</code> Churn &amp; Dev Email Spy</strong></li>
+            <li><strong>Atlassian Marketplace B2B App &amp; Churn Spy</strong></li>
+            <li><strong>Chrome Web Store Extension &amp; Dev Email Spy</strong></li>
+            <li><strong>VS Code &amp; Cursor Extension Install &amp; Bug Spy</strong></li>
+          </ul>
+        </div>
+        <div class="btn-row">
+          <a class="btn primary" href="https://www.agensi.io/r/GIANGTRNGTRNG?to=/bundles/e-commerce-saas-churn-spy-bundle&amp;utm_source=wave7_storefront">Buy Bundle #2 ($12.99)</a>
+          <a class="btn" href="https://www.agensi.io/bundles/e-commerce-saas-churn-spy-bundle">Direct Link</a>
+        </div>
+      </div>
+
+      <div class="card highlight">
+        <div>
+          <div class="tag">Bundle #3 · Save 35% (High-Ticket B2B)</div>
+          <h3>B2B Biotech, Gov Tenders &amp; Creator Leads Bundle</h3>
+          <div class="price-row">
+            <span class="price">$12.99</span>
+            <span class="strike">$20.00</span>
+            <span class="price-note">Card / USDC</span>
+          </div>
+          <ul>
+            <li><strong>UK Gov Tenders &amp; Direct <code>.gov.uk</code> Buyer Emails</strong></li>
+            <li><strong>ClinicalTrials.gov Biotech &amp; Site PI Email Leads</strong></li>
+            <li><strong>Substack Newsletter Creator &amp; Email Leads</strong></li>
+            <li><strong>Podcast Host Direct Email &amp; Sponsor Finder</strong></li>
+          </ul>
+        </div>
+        <div class="btn-row">
+          <a class="btn primary" href="https://www.agensi.io/r/GIANGTRNGTRNG?to=/bundles/b2b-biotech-gov-tenders-creator-leads-bundle&amp;utm_source=wave7_storefront">Buy Bundle #3 ($12.99)</a>
+          <a class="btn" href="https://www.agensi.io/bundles/b2b-biotech-gov-tenders-creator-leads-bundle">Direct Link</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div>
+          <div class="tag">3 Free Starter Skills ($0)</div>
+          <h3>Try Live Without Spending $1</h3>
+          <ul>
+            <li><a href="https://www.agensi.io/skills/google-news-real-url-decoder-for-ai-rag">Google News Real URL Decoder for AI RAG</a> (<code>$0</code>)</li>
+            <li><a href="https://www.agensi.io/skills/uk-direct-employer-hiring-signals-reed-uk">UK Direct Employer Hiring Signals — Reed UK</a> (<code>$0</code>)</li>
+            <li><a href="https://www.agensi.io/skills/competitor-app-bug-review-spy-ios-play">Competitor App Bug &amp; Review Spy — iOS &amp; Play</a> (<code>$0</code>)</li>
+          </ul>
+        </div>
+        <div class="btn-row">
+          <a class="btn green" href="https://www.agensi.io/r/GIANGTRNGTRNG?to=/creators/giang-tr-ng-tr-ng&amp;utm_source=wave7_storefront">Open Free Skills on Agensi</a>
+          <a class="btn" href="https://www.agensi.io/creators/giang-tr-ng-tr-ng">Direct Storefront</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="tag blue">Single Paid Skills ($5.00) &amp; 5-in-1 Pack ($7.99)</div>
+          <h3>Pick Individual Verticals or Grab All 16 Live Skills</h3>
+          <p>Includes <a href="https://www.agensi.io/skills/wordpress-woocommerce-plugin-churn-spy">WordPress &amp; WooCommerce Plugin Churn Spy (<code>$5.00</code>)</a>, <a href="https://www.agensi.io/skills/substack-viral-notes-outlier-hook-ghostwriter">Substack Viral Notes Ghostwriter (<code>$5.00</code>)</a>, and the <a href="https://www.agensi.io/skills/b2b-market-hiring-intelligence-5-in-1-pack">5-in-1 Pack (<code>$7.99</code> · Launch Deal <code>$6.39</code>)</a>.</p>
+        </div>
+        <div class="btn-row">
+          <a class="btn" href="https://www.agensi.io/r/GIANGTRNGTRNG?to=/creators/giang-tr-ng-tr-ng&amp;utm_source=wave7_storefront">Browse All 16 Skills</a>
+        </div>
+      </div>
+    </div>
+
+    <h2 id="tier-2-self-serve">Tier 2 — Self-Serve Apify Cloud Actors + Google Sheets &amp; <code>n8n</code> (<code>$5/mo</code> Free Apify Tier)</h2>
+    <p>Every Apify account includes <strong><code>$5/month</code> in built-in free credits</strong> with zero residential proxy fees required for our native API/GraphQL/RSS Actors. Connect via Pay-per-Event Cloud Actors, Google Sheets Apps Script, <code>n8n</code> workflows, or local zero-key MCP.</p>
+
+    <div class="grid">
+      <div class="card">
+        <div>
+          <div class="tag blue">Apify Cloud Store · Pay-per-Event</div>
+          <h3>Self-Serve Cloud Actors (<code>@ttyan0111</code>)</h3>
+          <p>Run <code>256 MB</code> zero-proxy Actors with <code>100</code> ready-to-run Tasks, JSON/CSV export, webhooks, and native <code>mcp.apify.com</code> streaming.</p>
+        </div>
+        <div class="btn-row">
+          <a class="btn primary" href="https://apify.com/ttyan0111">Open Apify Store (<code>$5/mo</code> Free)</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="tag">Google Sheets No-Code Add-on</div>
+          <h3>Zero-Key Formulas + 15-Actor Sidebar</h3>
+          <p>Drop <code>Code.gs</code> + <code>Sidebar.html</code> into <code>Extensions -&gt; Apps Script</code> to run <code>=UK_GOV_TENDERS()</code>, <code>=CLINICAL_TRIALS_LEADS()</code>, <code>=DECODE_GNEWS_URL()</code>, and batch Apify imports.</p>
+        </div>
+        <div class="btn-row">
+          <a class="btn" href="https://github.com/truonggiang0111/google-sheets-b2b-lead-scraper">GitHub Repo</a>
+          <a class="btn" href="/mcp/google-sheets-apify-b2b-lead-automation/">Setup Guide</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="tag">n8n Community Node + 16 Templates</div>
+          <h3><code>n8n-nodes-b2b-market-intel</code> &amp; Gallery</h3>
+          <p>Install <code>npm install github:truonggiang0111/n8n-nodes-b2b-market-intel</code> (<code>18</code> operations, <code>usableAsTool: true</code>) or copy all <code>16</code> ready-to-import <code>.n8n.json</code> workflows.</p>
+        </div>
+        <div class="btn-row">
+          <a class="btn" href="https://github.com/truonggiang0111/n8n-nodes-b2b-market-intel">n8n Node Repo</a>
+          <a class="btn" href="/mcp/n8n-b2b-lead-automation-workflows/">16 n8n Workflows</a>
+        </div>
+      </div>
+    </div>
+
+    <h3>Live Sanitized Dataset Preview (<code>b2b-sample-datasets-2026</code> — 150 Real Rows Across 6 Verticals)</h3>
+    <p>Inspect real production output before purchasing or running jobs. All <code>6</code> CSV + <code>6</code> JSON sample files (<code>25</code> rows each) are MIT-licensed and sanitized (zero personal emails/phones) in <a href="https://github.com/truonggiang0111/b2b-sample-datasets-2026"><code>truonggiang0111/b2b-sample-datasets-2026</code></a>:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Vertical Sample (<code>25</code> Rows Each)</th>
+            <th>Real Sanitized Output Sample (From Cloud Runs)</th>
+            <th>Key Signals Included</th>
+            <th>Download / Live Runner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>UK Direct Employer Hiring</strong></td>
+            <td><code>CMC Markets</code> — ML Ops Engineer (London, <code>£110k–£160k</code>) · <code>Foresters Financial</code> — Cyber Security Engineer (<code>£60k</code>)</td>
+            <td><code>isDirectEmployer=true</code>, <code>ir35Status</code>, GBP bands, agency spam stripped</td>
+            <td><a href="https://github.com/truonggiang0111/b2b-sample-datasets-2026/blob/main/datasets/uk-direct-employer-hiring-leads-sample.csv">CSV</a> · <a href="https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals">Apify</a></td>
+          </tr>
+          <tr>
+            <td><strong>AU &amp; NZ Direct Employers</strong></td>
+            <td><code>MVSI Onboard</code> (<code>mvsi.com</code>, <code>51-100</code> staff, <code>$120k–$150k</code>) · <code>Contour Education</code> (<code>contour.com.au</code>, <code>101-1,000</code>)</td>
+            <td><code>organizationDomain</code>, GraphQL <code>companySize</code>, <code>companyIndustry</code></td>
+            <td><a href="https://github.com/truonggiang0111/b2b-sample-datasets-2026/blob/main/datasets/au-nz-direct-employer-jobs-sample.csv">CSV</a> · <a href="https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals">Apify</a></td>
+          </tr>
+          <tr>
+            <td><strong>Google News Decoded RAG</strong></td>
+            <td><code>calcalistech.com</code> (<code>1,175</code> words, <code>funding_mna; layoff_risk</code>) · <code>news.crunchbase.com</code> (<code>1,037</code> words, <code>urlDecoded: true</code>)</td>
+            <td>Real canonical publisher URLs (<code>CBMi</code>/<code>AU_yqL</code> solved), <code>prSignalTag</code></td>
+            <td><a href="https://github.com/truonggiang0111/b2b-sample-datasets-2026/blob/main/datasets/google-news-decoded-articles-sample.csv">CSV</a> · <a href="https://apify.com/ttyan0111/google-news-ai-article-extractor">Apify</a></td>
+          </tr>
+          <tr>
+            <td><strong>iOS &amp; Play <code>1★–2★</code> Bug Spy</strong></td>
+            <td><code>Spotify</code> (<code>ios_14831303541</code>, <code>1★</code>, <code>billing_subscription</code>) · <code>Notion</code> (<code>android_852ded43...</code>, <code>crash_bug; performance_slow</code>)</td>
+            <td>Unified iOS + Android schema, <code>painCategory</code>, <code>appVersion</code></td>
+            <td><a href="https://github.com/truonggiang0111/b2b-sample-datasets-2026/blob/main/datasets/app-store-play-1-2-star-reviews-sample.csv">CSV</a> · <a href="https://apify.com/ttyan0111/app-store-play-reviews-spy">Apify</a></td>
+          </tr>
+          <tr>
+            <td><strong>Shopify App Churn Signals</strong></td>
+            <td><code>Klaviyo</code> (<code>developers.klaviyo.com</code>, <code>3,486</code> reviews) · <code>Appstle℠</code> (<code>appstle.com</code>, <code>9,387</code> reviews, <code>billing_subscription; crash_bug</code>)</td>
+            <td>Vendor domain, <code>painReviewsCount</code>, pricing tiers, merchant countries</td>
+            <td><a href="https://github.com/truonggiang0111/b2b-sample-datasets-2026/blob/main/datasets/shopify-app-churn-signals-sample.csv">CSV</a> · <a href="https://www.agensi.io/bundles/e-commerce-saas-churn-spy-bundle">Agensi</a></td>
+          </tr>
+          <tr>
+            <td><strong>UK Gov Tenders &amp; Awards</strong></td>
+            <td><code>YPO</code> (<code>ypo.co.uk</code>, <code>£500M</code>, CPV <code>35710000</code>) · <code>DVSA</code> (<code>dvsa.gov.uk</code>, <code>£38M</code> Software Licences) · <code>Hampshire CC</code> (<code>£800,910</code>)</td>
+            <td><code>buyerDepartment</code>, <code>tenderValueGbp</code>, <code>cpvCode</code>, <code>awardedSuppliers</code></td>
+            <td><a href="https://github.com/truonggiang0111/b2b-sample-datasets-2026/blob/main/datasets/uk-gov-tenders-procurement-sample.csv">CSV</a> · <a href="https://github.com/truonggiang0111/b2b-market-intel-mcp">Zero-Key MCP</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="tier-3-direct-orders">Tier 3 — Verified B2B CSV Lead Packs (<code>$29</code> Fixed) &amp; Custom Scraper / Bespoke Web Hub (<code>$199–$350</code> Fixed)</h2>
+    <p>Skip engineering setup altogether. Order freshly executed, deduplicated exports or commission a custom scraper / <code>$0/mo</code> static product hub with fixed pricing and fast <code>24–48h</code> turnaround.</p>
+
+    <div class="grid">
+      <div class="card highlight">
+        <div>
+          <div class="tag">Fresh Custom Export · &lt; 24h Delivery</div>
+          <h3>Verified B2B CSV / Google Sheets Lead Pack</h3>
+          <div class="price-row">
+            <span class="price">$29</span>
+            <span class="price-note">Fixed · 500–1,000 Fresh Rows</span>
+          </div>
+          <ul>
+            <li><strong>Podcast Hosts + Sponsors:</strong> <code>500</code> active shows with host emails &amp; sponsor cadence.</li>
+            <li><strong>UK &amp; AU Direct Employers:</strong> <code>500–1,000</code> direct-hiring companies (agencies stripped, salary/IR35).</li>
+            <li><strong>Substack Paid Creators:</strong> <code>500–1,000</code> monetization-active newsletters &amp; public emails.</li>
+            <li><strong>SaaS / E-Com Churn Leads:</strong> <code>500</code> Shopify / WooCommerce / Atlassian / Chrome <code>1★–2★</code> targets &amp; vendor contacts.</li>
+            <li><strong>GovTech &amp; Biotech Lists:</strong> <code>500</code> UK <code>.gov.uk</code>/NHS tenders or ClinicalTrials Phase 1–3 sponsors.</li>
+          </ul>
+        </div>
+        <div class="btn-row">
+          <a class="btn green" href="mailto:giang12aa3@gmail.com?subject=Order%3A%20Verified%20B2B%20CSV%20Lead%20Pack%20(%2429%20Fixed)&body=Hi%20Giang%2C%0A%0AI%20want%20to%20order%20a%20%2429%20Verified%20B2B%20CSV%20Lead%20Pack%20(500-1%2C000%20rows).%0A-%20Vertical%20%2F%20Keywords%3A%20%0A-%20Target%20Geography%20%2F%20Filters%3A%20%0A-%20Preferred%20Format%20(CSV%20%2F%20Google%20Sheets)%3A%20%0A-%20Payment%20Method%20(PayPal%20or%20Solana%20USDC)%3A%20">Order $29 CSV Pack via Email</a>
+        </div>
+      </div>
+
+      <div class="card highlight">
+        <div>
+          <div class="tag amber">Done-For-You Engineering · 24–48h Turnaround</div>
+          <h3>Custom Apify Scraper / Google Sheets &amp; <code>n8n</code> Pipeline</h3>
+          <div class="price-row">
+            <span class="price">$199 – $350</span>
+            <span class="price-note">Fixed One-Time Fee</span>
+          </div>
+          <ul>
+            <li>Reverse-engineered native JSON / GraphQL / REST API extraction (minimal proxy overhead).</li>
+            <li>Delivered as a private/public Apify Actor, Google Sheets Apps Script, Python CLI, or <code>n8n</code> workflow.</li>
+            <li>Schema normalization, deduplication, email/domain extraction, and sample test dataset verified.</li>
+            <li>Full source code handoff — zero monthly software retainer required.</li>
+          </ul>
+        </div>
+        <div class="btn-row">
+          <a class="btn primary" href="mailto:giang12aa3@gmail.com?subject=Order%3A%20Custom%20Scraper%20%2F%20Automation%20(%24199-%24350%20Fixed)&body=Hi%20Giang%2C%0A%0AI%20need%20a%20custom%20scraper%20%2F%20automation%20pipeline%20(24-48h%20turnaround).%0A-%20Target%20Website%20or%20API%3A%20%0A-%20Required%20Fields%20%2F%20Destination%20(Apify%20%2F%20Google%20Sheets%20%2F%20n8n%20%2F%20CSV)%3A%20%0A-%20Estimated%20Volume%3A%20%0A-%20Preferred%20Payment%20(PayPal%20or%20Solana%20USDC)%3A%20">Request Custom Scraper ($199–$350)</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="tag amber">Zero Monthly Hosting · 24–48h Turnaround</div>
+          <h3>Bespoke Product / Creator / Lead-Gen Web Hub</h3>
+          <div class="price-row">
+            <span class="price">$220 – $350</span>
+            <span class="price-note">Fixed · $0/mo Hosting</span>
+          </div>
+          <ul>
+            <li>Fast mobile-first static storefront or interactive landing page deployed to GitHub Pages or Vercel (<code>$0/mo</code>).</li>
+            <li>Pre-built Schema.org JSON-LD, SEO meta tags, interactive previews, and Google Sheets / email lead capture.</li>
+            <li>Built specifically for indie SaaS, newsletter/podcast creators, browser extensions, and agencies.</li>
+            <li>Clean static source ownership transferred on delivery.</li>
+          </ul>
+        </div>
+        <div class="btn-row">
+          <a class="btn" href="mailto:giang12aa3@gmail.com?subject=Order%3A%20Bespoke%20Web%20Hub%20(%24220-%24350%20Fixed)&body=Hi%20Giang%2C%0A%0AI%20want%20to%20order%20a%20bespoke%20%240%2Fmo%20web%20hub%20(24-48h%20turnaround).%0A-%20Product%20%2F%20Brand%20URL%3A%20%0A-%20Goal%20(Lead%20Gen%20%2F%20Storefront%20%2F%20Portfolio)%3A%20%0A-%20Preferred%20Payment%20(PayPal%20or%20Solana%20USDC)%3A%20">Order Bespoke Web Hub ($220–$350)</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pay-strip">
+      <div class="pay-item">
+        <strong>Direct Order Desk</strong>
+        <span>Email <a href="mailto:giang12aa3@gmail.com"><code>giang12aa3@gmail.com</code></a> with your target URL/niche. Receive a <code>20</code>-row live sample or mockup before final invoice.</span>
+      </div>
+      <div class="pay-item">
+        <strong>PayPal Checkout</strong>
+        <span>Accepted directly to <code>giang12aa3@gmail.com</code> for <code>$29</code> CSV Lead Packs and <code>$199–$350</code> custom scraper / web builds.</span>
+      </div>
+      <div class="pay-item">
+        <strong>Solana USDC Settlement</strong>
+        <span>Zero-fee direct USDC on Solana (wallet address issued per order) or instant native USDC/Card checkout via <a href="https://www.agensi.io/creators/giang-tr-ng-tr-ng">Agensi.io</a>.</span>
+      </div>
+    </div>
+
+    <div class="callout green">
+      <p><strong>Need a quick sample proof first?</strong> For any custom scraper request, email <code>giang12aa3@gmail.com</code> with your target website and required columns — we return a <code>15–20</code> row live proof sample and fixed quote (<code>$199–$350</code>) before you pay.</p>
+    </div>
+
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <h3>What is the fastest way to test the scrapers at $0 before ordering?</h3>
+      <p>Run any of the <a href="https://www.agensi.io/creators/giang-tr-ng-tr-ng">3 Free Starter Skills on Agensi</a>, inspect the <code>150</code> sanitized records in <a href="https://github.com/truonggiang0111/b2b-sample-datasets-2026"><code>b2b-sample-datasets-2026</code></a>, install our <a href="/mcp/google-sheets-apify-b2b-lead-automation/">Google Sheets zero-key Apps Script</a>, or run <code>npx -y github:truonggiang0111/b2b-market-intel-mcp</code> locally.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How fresh are the 500–1,000 row B2B CSV Lead Packs ($29)?</h3>
+      <p>Every <code>$29</code> CSV/Google Sheets pack is executed fresh on demand against your requested keywords, country, or niche filters rather than resold from stale static databases, and delivered within <code>24</code> hours.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Which payment methods do you accept?</h3>
+      <p>Agensi skills and bundles accept Card and Solana USDC natively at checkout. Direct <code>$29</code> CSV Packs and <code>$199–$350</code> custom scrapers or bespoke web hubs accept <strong>PayPal (<code>giang12aa3@gmail.com</code>)</strong> and <strong>Solana USDC</strong>.</p>
+    </div>
+
+    <footer>
+      Built by <a href="https://truonggiang0111.github.io/">Truong Truong Giang</a> · <a href="/mcp/">MCP Directory Hub</a> · <a href="/mcp/google-sheets-apify-b2b-lead-automation/">Google Sheets Scraper Guide</a> · <a href="/mcp/n8n-b2b-lead-automation-workflows/">16 n8n Workflows Gallery</a> · <a href="https://www.agensi.io/creators/giang-tr-ng-tr-ng">Agensi Storefront</a> · <a href="https://apify.com/ttyan0111">Apify Store</a> · <a href="/llms.txt">llms.txt</a>
+    </footer>
+  </main>
+</body>
+</html>
