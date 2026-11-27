@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Connect n8n AI Agents to Streamable HTTP &amp; STDIO MCP Servers for B2B Lead Generation (2026) | @ttyan0111</title>
+  <meta name="description" content="Architecture guide to wiring @n8n/n8n-nodes-langchain.mcpClientTool to Streamable HTTP (mcp.apify.com) and zero-key npx STDIO MCP servers, using n8n-nodes-b2b-market-intel (usableAsTool: true), and preventing LLM token bloat with agentSummary." />
+  <link rel="canonical" href="https://truonggiang0111.github.io/mcp/n8n-mcp-client-ai-agent-b2b-leads/" />
+  <link rel="alternate" type="text/plain" title="LLM Context Index" href="https://truonggiang0111.github.io/llms.txt" />
+  <link rel="alternate" type="text/plain" title="LLM Full Specification" href="https://truonggiang0111.github.io/llms-full.txt" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="How to Connect n8n AI Agents to Streamable HTTP &amp; STDIO MCP Servers for B2B Lead Generation (2026)" />
+  <meta property="og:description" content="Compare 3 production patterns for n8n AI Agents: Streamable HTTP mcpClientTool, zero-key npx STDIO MCP, and native n8n-nodes-b2b-market-intel (usableAsTool: true) with low-token agentSummary output." />
+  <meta property="og:url" content="https://truonggiang0111.github.io/mcp/n8n-mcp-client-ai-agent-b2b-leads/" />
+  <meta property="og:site_name" content="Truong Truong Giang — B2B &amp; AI MCP Hub" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Connect n8n AI Agents to Streamable HTTP &amp; STDIO MCP Servers (2026)" />
+  <meta name="twitter:description" content="Production guide for n8n mcpClientTool, zero-key npx STDIO MCP, usableAsTool community nodes, and low-token agentSummary schemas." />
+
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --card: #121826;
+      --card-alt: #0e1420;
+      --border: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --green: #10b981;
+      --amber: #f59e0b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .wrap { max-width: 1020px; margin: 0 auto; padding: 32px 20px 84px; }
+    .breadcrumb { font-size: 0.85rem; color: var(--muted); margin-bottom: 18px; }
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    h1 { font-size: 1.85rem; line-height: 1.28; margin: 0 0 12px; color: #f8fafc; }
+    h2 { font-size: 1.3rem; margin: 40px 0 14px; color: #f8fafc; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    h3 { font-size: 1.05rem; margin: 22px 0 8px; color: #f8fafc; }
+    p, li { color: var(--muted); }
+    strong { color: var(--text); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.86em;
+      background: #06090f;
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #e2e8f0;
+    }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; font-size: 0.84rem; color: var(--muted); margin-bottom: 20px; }
+    .pill {
+      display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 0.76rem; font-weight: 600;
+      background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); color: var(--green);
+    }
+    .badges { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 28px; }
+    .badge {
+      display: inline-block; padding: 6px 12px; border-radius: 6px; font-size: 0.84rem; font-weight: 600;
+      background: var(--card); border: 1px solid var(--border); color: var(--text);
+    }
+    .badge:hover { border-color: var(--accent); text-decoration: none; }
+    .callout {
+      background: var(--card); border-left: 4px solid var(--accent); border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      border-radius: 8px; padding: 16px 18px; margin: 20px 0;
+    }
+    .callout.warn { border-left-color: var(--amber); }
+    .callout p { margin: 0; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 18px 0; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+    .card h3 { margin-top: 0; }
+    .tag { display: inline-block; font-size: 0.75rem; color: var(--green); font-weight: 600; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.03em; }
+    .table-wrap { overflow-x: auto; margin: 16px 0 24px; border: 1px solid var(--border); border-radius: 10px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; background: var(--card-alt); }
+    th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { background: var(--card); color: #f8fafc; font-weight: 600; }
+    td { color: var(--muted); }
+    tr:last-child td { border-bottom: none; }
+    .code-block { position: relative; margin: 14px 0 22px; }
+    .code-header {
+      display: flex; justify-content: space-between; align-items: center;
+      background: #0d1320; border: 1px solid var(--border); border-bottom: none;
+      border-radius: 8px 8px 0 0; padding: 7px 12px; font-size: 0.78rem; color: var(--muted);
+    }
+    .copy-btn {
+      background: var(--card); color: var(--text); border: 1px solid var(--border);
+      border-radius: 5px; padding: 3px 9px; font-size: 0.75rem; cursor: pointer; font-weight: 600;
+    }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    pre {
+      margin: 0; background: #06090f; border: 1px solid var(--border); border-radius: 0 0 8px 8px;
+      padding: 14px; overflow-x: auto; font-size: 0.84rem; color: #cbd5e1; line-height: 1.55;
+    }
+    pre code { background: none; border: none; padding: 0; color: inherit; font-size: inherit; }
+    .cta-box {
+      background: linear-gradient(180deg, #121826 0%, #0d1524 100%);
+      border: 1px solid #26354d; border-radius: 12px; padding: 22px; margin: 34px 0;
+    }
+    .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
+    .btn {
+      display: inline-block; padding: 9px 16px; border-radius: 7px; font-weight: 600; font-size: 0.88rem;
+      border: 1px solid var(--border); background: var(--card); color: var(--text);
+    }
+    .btn.primary { background: var(--accent); color: #081018; border-color: var(--accent); }
+    .btn:hover { text-decoration: none; opacity: 0.93; }
+    .faq-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px; }
+    .faq-item h3 { margin: 0 0 6px; font-size: 1rem; }
+    .faq-item p { margin: 0; }
+    footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.84rem; color: var(--muted); }
+    @media (max-width: 640px) { h1 { font-size: 1.5rem; } }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Portfolio", "item": "https://truonggiang0111.github.io/" },
+          { "@type": "ListItem", "position": 2, "name": "MCP & AI Skills Hub", "item": "https://truonggiang0111.github.io/mcp/" },
+          { "@type": "ListItem", "position": 3, "name": "n8n AI Agent MCP Client Guide", "item": "https://truonggiang0111.github.io/mcp/n8n-mcp-client-ai-agent-b2b-leads/" }
+        ]
+      },
+      {
+        "@type": "TechArticle",
+        "headline": "How to Connect n8n AI Agents to Streamable HTTP & STDIO MCP Servers for B2B Lead Generation (2026)",
+        "description": "Engineering guide to wiring @n8n/n8n-nodes-langchain.mcpClientTool with Streamable HTTP (mcp.apify.com) and zero-key npx STDIO MCP servers, deploying n8n-nodes-b2b-market-intel with usableAsTool, and avoiding LLM context overflow via agentSummary.",
+        "datePublished": "2026-11-27",
+        "dateModified": "2026-11-27",
+        "proficiencyLevel": "Intermediate",
+        "author": {
+          "@type": "Person",
+          "name": "Truong Truong Giang",
+          "url": "https://truonggiang0111.github.io/"
+        },
+        "publisher": {
+          "@type": "Person",
+          "name": "Truong Truong Giang",
+          "url": "https://truonggiang0111.github.io/mcp/"
+        },
+        "mainEntityOfPage": "https://truonggiang0111.github.io/mcp/n8n-mcp-client-ai-agent-b2b-leads/",
+        "about": [
+          { "@type": "SoftwareApplication", "name": "n8n-nodes-b2b-market-intel", "url": "https://github.com/truonggiang0111/n8n-nodes-b2b-market-intel" },
+          { "@type": "SoftwareApplication", "name": "b2b-market-intel-mcp", "url": "https://github.com/truonggiang0111/b2b-market-intel-mcp" }
+        ]
+      },
+      {
+        "@type": "HowTo",
+        "name": "Wire an n8n AI Agent to Streamable HTTP, STDIO MCP & Native usableAsTool Nodes",
+        "totalTime": "PT3M",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Add chatTrigger, agent, and lmChatOpenAi nodes",
+            "text": "Connect @n8n/n8n-nodes-langchain.chatTrigger to @n8n/n8n-nodes-langchain.agent and attach an LLM via the ai_languageModel port."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Attach mcpClientTool over Streamable HTTP or npx STDIO",
+            "text": "Wire @n8n/n8n-nodes-langchain.mcpClientTool to the agent ai_tool port using either https://mcp.apify.com?actors=ttyan0111/... (Streamable HTTP) or command npx -y github:truonggiang0111/b2b-market-intel-mcp (STDIO)."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Or attach n8n-nodes-b2b-market-intel directly via usableAsTool",
+            "text": "Run npm install github:truonggiang0111/n8n-nodes-b2b-market-intel in ~/.n8n/nodes to expose 3 instantZeroKey operations and 15 apifyCloudBatch operations directly to the n8n AI Agent."
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "When should an n8n AI Agent use Streamable HTTP MCP vs npx STDIO MCP vs n8n-nodes-b2b-market-intel?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use Streamable HTTP (mcp.apify.com) on n8n Cloud or containers where spawning local child processes is restricted; use npx -y github:truonggiang0111/b2b-market-intel-mcp over STDIO on self-hosted n8n when you want 3 instant zero-key tools (Google News decoder, UK Gov Tenders, ClinicalTrials.gov); and install n8n-nodes-b2b-market-intel (usableAsTool: true) when you want deterministic credential management and zero MCP transport overhead across all 18 operations."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does agentSummary prevent LLM context window overflow in n8n AI Agents?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Raw marketplace and clinical APIs often emit thousands of tokens per item. Every dataset item across the ttyan0111 suite provides a single-line agentSummary string plus Key-Value Store RUN_SUMMARY totals so n8n AI Agents can score 10-25 prospects in one tool call without exceeding token limits."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does the zero-key STDIO MCP server work without an Apify API key?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Running npx -y github:truonggiang0111/b2b-market-intel-mcp exposes decode_google_news_url, preview_uk_gov_tenders, and preview_clinical_trials_leads immediately with zero API keys, while 5 scaled cloud batch tools activate automatically when APIFY_TOKEN is set."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="https://truonggiang0111.github.io/">Home</a> /
+      <a href="https://truonggiang0111.github.io/mcp/">MCP &amp; Skills Hub</a> /
+      <span>n8n AI Agent MCP Client Guide</span>
+    </nav>
+
+    <div class="meta-row">
+      <span class="pill">n8n AI Agent Architecture</span>
+      <span>Streamable HTTP · Zero-Key STDIO · <code>usableAsTool: true</code></span>
+      <span>Updated: Nov 27, 2026</span>
+    </div>
+
+    <h1>How to Connect <code>n8n</code> AI Agents to Streamable HTTP &amp; STDIO MCP Servers for B2B Lead Generation (2026)</h1>
+    <p>Most <code>n8n</code> lead-generation tutorials still chain brittle HTTP Request nodes with hardcoded JSON bodies. When building autonomous prospecting or research agents with <code>@n8n/n8n-nodes-langchain.agent</code>, you now have three clean integration paths: <strong>Streamable HTTP MCP</strong> via <code>@n8n/n8n-nodes-langchain.mcpClientTool</code>, <strong>Zero-Key <code>npx</code> STDIO MCP</strong> for instant local execution, and a native <strong><code>usableAsTool: true</code> Community Node</strong> (<code>n8n-nodes-b2b-market-intel</code>).</p>
+
+    <div class="badges">
+      <a class="badge" href="/mcp/n8n-b2b-lead-automation-workflows/">Browse 16 n8n Workflows Gallery</a>
+      <a class="badge" href="https://github.com/truonggiang0111/n8n-nodes-b2b-market-intel"><code>n8n-nodes-b2b-market-intel</code></a>
+      <a class="badge" href="https://github.com/truonggiang0111/b2b-market-intel-mcp">Zero-Key <code>npx</code> STDIO MCP</a>
+      <a class="badge" href="https://www.agensi.io/creators/giang-tr-ng-tr-ng">Agensi Storefront (16 Skills)</a>
+      <a class="badge" href="https://apify.com/ttyan0111">Apify Store (<code>$5/mo</code> Free Tier)</a>
+    </div>
+
+    <h2>1. Choosing the Right Transport for Your n8n AI Agent</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Pattern</th>
+            <th>Node / Transport</th>
+            <th>API Key Needed?</th>
+            <th>Best For</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Streamable HTTP MCP</strong></td>
+            <td><code>@n8n/n8n-nodes-langchain.mcpClientTool</code> -&gt; <code>https://mcp.apify.com?actors=...</code></td>
+            <td>Bearer <code>APIFY_TOKEN</code> (<code>$5/mo</code> free tier)</td>
+            <td>n8n Cloud &amp; multi-actor cloud pipelines (Reed UK, Shopify 1★ churn, Google News RAG)</td>
+          </tr>
+          <tr>
+            <td><strong>2. Zero-Key <code>npx</code> STDIO MCP</strong></td>
+            <td><code>@n8n/n8n-nodes-langchain.mcpClientTool</code> -&gt; <code>npx -y github:truonggiang0111/b2b-market-intel-mcp</code></td>
+            <td><strong>Zero keys</strong> for 3 instant tools; optional <code>APIFY_TOKEN</code> for 5 batch tools</td>
+            <td>Self-hosted / Docker n8n instances running instant live lookups with zero cloud setup</td>
+          </tr>
+          <tr>
+            <td><strong>3. Native <code>usableAsTool</code> Node</strong></td>
+            <td><code>n8n-nodes-b2b-market-intel</code> (<code>B2bMarketIntel</code>)</td>
+            <td><strong>Zero keys</strong> for 3 ops; optional credential for 15 Apify ops</td>
+            <td>Deterministic workflows + direct AI Agent <code>ai_tool</code> attachment without MCP subprocesses</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>2. Pattern A — Streamable HTTP <code>mcpClientTool</code> (Apify MCP)</h2>
+    <p>In hosted n8n Cloud or locked-down Docker deployments, <strong>Streamable HTTP</strong> connects <code>@n8n/n8n-nodes-langchain.mcpClientTool</code> directly to Apify's managed MCP gateway without spawning child processes. Query-string actor pinning (<code>?actors=...</code>) restricts the Agent's tool list strictly to the exact scrapers needed for prospecting:</p>
+
+    <div class="code-block">
+      <div class="code-header">
+        <span>mcpClientTool — Streamable HTTP Endpoint URL</span>
+        <button class="copy-btn" type="button" data-copy="http-url">Copy</button>
+      </div>
+      <pre id="http-url"><code>https://mcp.apify.com?actors=ttyan0111/reed-uk-jobs-hiring-signals,ttyan0111/shopify-app-store-churn-spy,ttyan0111/google-news-ai-article-extractor</code></pre>
+    </div>
+
+    <ul>
+      <li><strong>Auth Header:</strong> Set Bearer Token authentication using your Apify API token (every account receives <code>$5/mo</code> free platform credit at <a href="https://apify.com/ttyan0111">apify.com/ttyan0111</a>).</li>
+      <li><strong>Wiring:</strong> Connect <code>@n8n/n8n-nodes-langchain.chatTrigger</code> -&gt; <code>@n8n/n8n-nodes-langchain.agent</code>, connect <code>@n8n/n8n-nodes-langchain.lmChatOpenAi</code> to <code>ai_languageModel</code>, and connect <code>@n8n/n8n-nodes-langchain.mcpClientTool</code> to <code>ai_tool</code>.</li>
+      <li><strong>1-Click Template:</strong> Import <a href="https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/n8n-ai-agent-streamable-http-mcp-prospecting.n8n.json"><code>n8n-ai-agent-streamable-http-mcp-prospecting.n8n.json</code></a> or copy it from the <a href="/mcp/n8n-b2b-lead-automation-workflows/">Interactive n8n Gallery</a>.</li>
+    </ul>
+
+    <h2>3. Pattern B — Zero-Key <code>npx</code> STDIO MCP Server (Direct STDIO &amp; <code>supergateway</code> Bridge)</h2>
+    <p>On self-hosted n8n (Node 18+), you can launch <a href="https://github.com/truonggiang0111/b2b-market-intel-mcp"><code>b2b-market-intel-mcp</code></a> with zero external dependencies and zero API keys required. If your n8n node expects STDIO directly (e.g., community STDIO MCP clients), pass the <code>npx</code> command below; for n8n's built-in <code>@n8n/n8n-nodes-langchain.mcpClientTool</code> (which uses <code>httpStreamable</code>), bridge STDIO cleanly onto <code>http://localhost:8000/mcp</code> with <code>supergateway</code> as wired in <a href="https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/n8n-ai-agent-stdio-zero-key-mcp-research.n8n.json"><code>n8n-ai-agent-stdio-zero-key-mcp-research.n8n.json</code></a>:</p>
+
+    <div class="code-block">
+      <div class="code-header">
+        <span>Zero-Key STDIO MCP Command &amp; n8n Streamable HTTP Bridge</span>
+        <button class="copy-btn" type="button" data-copy="stdio-cmd">Copy</button>
+      </div>
+      <pre id="stdio-cmd"><code># 1. Direct STDIO MCP server (Claude Code / Cursor / STDIO MCP clients):
+npx -y github:truonggiang0111/b2b-market-intel-mcp
+
+# 2. Bridge STDIO -> Streamable HTTP for n8n built-in mcpClientTool (http://localhost:8000/mcp):
+npx -y supergateway --stdio "npx -y github:truonggiang0111/b2b-market-intel-mcp" --outputTransport streamableHttp --port 8000</code></pre>
+    </div>
+
+    <p>Out of the box (without setting <code>APIFY_TOKEN</code>), the n8n AI Agent discovers and executes <strong>3 zero-key tools</strong> immediately:</p>
+    <ul>
+      <li><code>decode_google_news_url</code> — Decodes legacy <code>CBMi</code> protobuf links offline or resolves modern <code>AU_yqL</code> Google News links via <code>DotsSplashUi</code> <code>Fbv4je</code>.</li>
+      <li><code>preview_uk_gov_tenders</code> — Queries official UK Contracts Finder OCDS API for open public-sector tenders, GBP values, deadlines, and <code>.gov.uk</code> buyer emails.</li>
+      <li><code>preview_clinical_trials_leads</code> — Queries ClinicalTrials.gov REST v2 for recruiting industry Biotech/Pharma trials and corporate clinical contact emails.</li>
+    </ul>
+    <p>Import the ready-wired STDIO workflow: <a href="https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/n8n-ai-agent-stdio-zero-key-mcp-research.n8n.json"><code>n8n-ai-agent-stdio-zero-key-mcp-research.n8n.json</code></a>.</p>
+
+    <h2>4. Pattern C — Native Community Node (<code>n8n-nodes-b2b-market-intel</code>, <code>usableAsTool: true</code>)</h2>
+    <p>If you prefer typed n8n node dropdowns, built-in credential encryption, and native AI Agent tool calling without managing STDIO subprocesses or raw HTTP JSON bodies, install the zero-runtime-dependency community package:</p>
+
+    <div class="code-block">
+      <div class="code-header">
+        <span>Install in ~/.n8n/nodes + Enable AI Tool Usage in n8n</span>
+        <button class="copy-btn" type="button" data-copy="npm-node">Copy</button>
+      </div>
+      <pre id="npm-node"><code>cd ~/.n8n/nodes
+npm install github:truonggiang0111/n8n-nodes-b2b-market-intel
+
+# Required for attaching community nodes to @n8n/n8n-nodes-langchain.agent Tools port:
+export N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE=true</code></pre>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="tag">Resource: instantZeroKey (3 Ops)</div>
+        <h3>Zero-Key Native Operations</h3>
+        <p><code>decodeGoogleNewsUrl</code>, <code>searchUkGovTenders</code>, and <code>searchClinicalTrials</code> run directly via native Node <code>fetch</code> with zero credentials configured — supporting <code>$fromAI(...)</code> expressions in Agent mode.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Resource: apifyCloudBatch (15 Ops)</div>
+        <h3>Full 15-Actor Cloud Suite</h3>
+        <p>Invokes any of the <code>15</code> <code>ttyan0111/*</code> Actors with an optional <code>apifyB2bApi</code> Bearer credential and exposes <code>usableAsTool: true</code> directly to <code>@n8n/n8n-nodes-langchain.agent</code>.</p>
+      </div>
+    </div>
+
+    <h2>5. <code>agentSummary</code> &amp; <code>RUN_SUMMARY</code>: Why Low-Token Design Matters</h2>
+    <div class="callout">
+      <p><strong>The n8n Agent Context Bottleneck:</strong> Passing 15 raw ClinicalTrials.gov study JSON documents or 50 full-text WordPress churn reviews into an n8n AI Agent's tool response can easily consume <code>40,000–120,000</code> tokens in a single turn — inflating OpenAI/Anthropic bills and triggering context truncation before the agent writes a single outreach draft.</p>
+    </div>
+    <p>Every tool across our stack follows a two-tier payload design verified on Apify Cloud (<code>256 MB</code> RAM, <code>$0</code> proxy cost):</p>
+    <ul>
+      <li><strong>Tier 1 — Aggregate <code>RUN_SUMMARY</code> (Key-Value Store):</strong> Compact JSON counters (<code>vendorEmailsFound</code>, <code>topPainCategories</code>, <code>highInstallVulnerablePlugins</code>, <code>corporateSponsorEmails</code>) let an Agent evaluate signal density first before iterating records.</li>
+      <li><strong>Tier 2 — Compact Per-Item <code>agentSummary</code>:</strong> Every dataset record includes a single-line summary string (typically <code>140–240</code> characters) packing title, scale, rating, verified email/domain, and top pain tags.</li>
+      <li><strong>Empirical Payload Hygiene:</strong> ClinicalTrials.gov 8-module <code>fields</code> projection trims <code>~96%</code> JSON bloat (extracting <code>24/25</code> central emails &amp; <code>183</code> unique Biotech + PI emails in <code>2.18s</code>), while WordPress.org <code>api.wordpress.org/plugins/info/1.2/</code> field selection cuts plugin metadata payload size by <code>~95%</code>.</li>
+    </ul>
+
+    <div class="cta-box">
+      <h3>Deploy Your First n8n AI Prospecting Workflow in 60 Seconds</h3>
+      <p>Browse all <code>16</code> verified <code>.n8n.json</code> templates in our interactive gallery, install the zero-runtime-dependency Community Node, or execute zero-key skills directly in chat via <a href="https://www.agensi.io/creators/giang-tr-ng-tr-ng">Agensi.io</a>.</p>
+      <div class="cta-actions">
+        <a class="btn primary" href="/mcp/n8n-b2b-lead-automation-workflows/">Open 16-Workflow n8n Gallery</a>
+        <a class="btn" href="https://github.com/truonggiang0111/n8n-nodes-b2b-market-intel">Install n8n Community Node</a>
+        <a class="btn" href="https://www.agensi.io/creators/giang-tr-ng-tr-ng">Try Hosted on Agensi (16 Skills)</a>
+        <a class="btn" href="https://apify.com/ttyan0111">Apify $5/mo Free Tier</a>
+      </div>
+    </div>
+
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <h3>When should an n8n AI Agent use Streamable HTTP MCP vs <code>npx</code> STDIO MCP vs <code>n8n-nodes-b2b-market-intel</code>?</h3>
+      <p>Use <strong>Streamable HTTP</strong> (<code>https://mcp.apify.com</code>) on n8n Cloud or restricted containers where subprocess execution is disabled; use <strong><code>npx</code> STDIO</strong> on self-hosted n8n for 3 instant zero-key tools; and install <a href="https://github.com/truonggiang0111/n8n-nodes-b2b-market-intel"><code>n8n-nodes-b2b-market-intel</code></a> (<code>usableAsTool: true</code>) when you want native credential storage and direct <code>ai_tool</code> wiring across all 18 operations.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How does <code>agentSummary</code> prevent LLM context window overflow in n8n AI Agents?</h3>
+      <p>Instead of dumping raw nested HTML or bloated REST documents into the Agent's prompt, each item carries a concise one-line <code>agentSummary</code> string alongside aggregate <code>RUN_SUMMARY</code> metrics so Agents can shortlist leads inside <code>&lt; 2,000</code> tokens.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Does the zero-key STDIO MCP server work without an Apify API key?</h3>
+      <p>Yes. <code>npx -y github:truonggiang0111/b2b-market-intel-mcp</code> starts immediately with no API key required for <code>decode_google_news_url</code>, <code>preview_uk_gov_tenders</code>, and <code>preview_clinical_trials_leads</code>, and unlocks 5 cloud batch tools when <code>APIFY_TOKEN</code> is present.</p>
+    </div>
+
+    <footer>
+      Built by <a href="https://truonggiang0111.github.io/">Truong Truong Giang</a> · <a href="/mcp/">MCP Directory Hub</a> · <a href="/mcp/n8n-b2b-lead-automation-workflows/">16 n8n Workflows Gallery</a> · <a href="/llms.txt">llms.txt</a> · <a href="/llms-full.txt">llms-full.txt</a>
+    </footer>
+  </main>
+
+  <script>
+    document.querySelectorAll('.copy-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var target = document.getElementById(btn.getAttribute('data-copy'));
+        if (!target) return;
+        navigator.clipboard.writeText(target.innerText).then(function () {
+          var prev = btn.textContent;
+          btn.textContent = 'Copied!';
+          setTimeout(function () { btn.textContent = prev; }, 1600);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

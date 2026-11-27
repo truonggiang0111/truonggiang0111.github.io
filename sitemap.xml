@@ -59,6 +59,24 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://truonggiang0111.github.io/mcp/n8n-b2b-lead-automation-workflows/</loc>
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://truonggiang0111.github.io/mcp/n8n-mcp-client-ai-agent-b2b-leads/</loc>
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://truonggiang0111.github.io/mcp/wordpress-woocommerce-1-star-churn-leads/</loc>
+    <lastmod>2026-11-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://truonggiang0111.github.io/llms.txt</loc>
     <lastmod>2026-11-27</lastmod>
     <changefreq>weekly</changefreq>

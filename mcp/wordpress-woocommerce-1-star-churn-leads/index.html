@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mining 1-Star WooCommerce &amp; Atlassian App Churn Signals with Public REST APIs, n8n &amp; MCP | @ttyan0111</title>
+  <meta name="description" content="Empirical teardown and zero-proxy REST/RSS benchmarks for mining 1-star WooCommerce plugin churn (PayPal Payments 2.9★ / 289×1★, Stripe Gateway 3.1★ / 94×1★) and Atlassian Marketplace REST v2 vendor contacts via n8n and MCP." />
+  <link rel="canonical" href="https://truonggiang0111.github.io/mcp/wordpress-woocommerce-1-star-churn-leads/" />
+  <link rel="alternate" type="text/plain" title="LLM Context Index" href="https://truonggiang0111.github.io/llms.txt" />
+  <link rel="alternate" type="text/plain" title="LLM Full Specification" href="https://truonggiang0111.github.io/llms-full.txt" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Mining 1-Star WooCommerce &amp; Atlassian App Churn Signals with Public REST APIs, n8n &amp; MCP" />
+  <meta property="og:description" content="Verified Apify Cloud benchmarks: WooCommerce PayPal Payments (2.9★, 289×1★, 26 unresolved threads), Stripe Gateway (3.1★, 94×1★), and Atlassian REST v2 10/10 vendor emails (sales@tempo.io, support@appfire.com) in 3.92s–7.36s." />
+  <meta property="og:url" content="https://truonggiang0111.github.io/mcp/wordpress-woocommerce-1-star-churn-leads/" />
+  <meta property="og:site_name" content="Truong Truong Giang — B2B &amp; AI MCP Hub" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Mining 1-Star WooCommerce &amp; Atlassian Churn Signals with Public REST APIs &amp; n8n" />
+  <meta name="twitter:description" content="Zero-proxy WordPress.org Plugins API 1.2 + RSS churn feeds and Atlassian Marketplace REST v2 partner telemetry in 256 MB RAM." />
+
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --card: #121826;
+      --card-alt: #0e1420;
+      --border: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --green: #10b981;
+      --amber: #f59e0b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .wrap { max-width: 1020px; margin: 0 auto; padding: 32px 20px 84px; }
+    .breadcrumb { font-size: 0.85rem; color: var(--muted); margin-bottom: 18px; }
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    h1 { font-size: 1.85rem; line-height: 1.28; margin: 0 0 12px; color: #f8fafc; }
+    h2 { font-size: 1.3rem; margin: 40px 0 14px; color: #f8fafc; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    h3 { font-size: 1.05rem; margin: 22px 0 8px; color: #f8fafc; }
+    p, li { color: var(--muted); }
+    strong { color: var(--text); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.86em;
+      background: #06090f;
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #e2e8f0;
+    }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; font-size: 0.84rem; color: var(--muted); margin-bottom: 20px; }
+    .pill {
+      display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 0.76rem; font-weight: 600;
+      background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); color: var(--green);
+    }
+    .badges { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 28px; }
+    .badge {
+      display: inline-block; padding: 6px 12px; border-radius: 6px; font-size: 0.84rem; font-weight: 600;
+      background: var(--card); border: 1px solid var(--border); color: var(--text);
+    }
+    .badge:hover { border-color: var(--accent); text-decoration: none; }
+    .callout {
+      background: var(--card); border-left: 4px solid var(--accent); border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      border-radius: 8px; padding: 16px 18px; margin: 20px 0;
+    }
+    .callout p { margin: 0; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 18px 0; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+    .card h3 { margin-top: 0; }
+    .tag { display: inline-block; font-size: 0.75rem; color: var(--green); font-weight: 600; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.03em; }
+    .stat-num { font-size: 1.48rem; font-weight: 700; color: #f8fafc; margin: 2px 0 4px; }
+    .table-wrap { overflow-x: auto; margin: 16px 0 24px; border: 1px solid var(--border); border-radius: 10px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; background: var(--card-alt); }
+    th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { background: var(--card); color: #f8fafc; font-weight: 600; }
+    td { color: var(--muted); }
+    tr:last-child td { border-bottom: none; }
+    .code-block { position: relative; margin: 14px 0 22px; }
+    .code-header {
+      display: flex; justify-content: space-between; align-items: center;
+      background: #0d1320; border: 1px solid var(--border); border-bottom: none;
+      border-radius: 8px 8px 0 0; padding: 7px 12px; font-size: 0.78rem; color: var(--muted);
+    }
+    .copy-btn {
+      background: var(--card); color: var(--text); border: 1px solid var(--border);
+      border-radius: 5px; padding: 3px 9px; font-size: 0.75rem; cursor: pointer; font-weight: 600;
+    }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    pre {
+      margin: 0; background: #06090f; border: 1px solid var(--border); border-radius: 0 0 8px 8px;
+      padding: 14px; overflow-x: auto; font-size: 0.84rem; color: #cbd5e1; line-height: 1.55;
+    }
+    pre code { background: none; border: none; padding: 0; color: inherit; font-size: inherit; }
+    .cta-box {
+      background: linear-gradient(180deg, #121826 0%, #0d1524 100%);
+      border: 1px solid #26354d; border-radius: 12px; padding: 22px; margin: 34px 0;
+    }
+    .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
+    .btn {
+      display: inline-block; padding: 9px 16px; border-radius: 7px; font-weight: 600; font-size: 0.88rem;
+      border: 1px solid var(--border); background: var(--card); color: var(--text);
+    }
+    .btn.primary { background: var(--accent); color: #081018; border-color: var(--accent); }
+    .btn:hover { text-decoration: none; opacity: 0.93; }
+    .faq-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px; }
+    .faq-item h3 { margin: 0 0 6px; font-size: 1rem; }
+    .faq-item p { margin: 0; }
+    footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.84rem; color: var(--muted); }
+    @media (max-width: 640px) { h1 { font-size: 1.5rem; } }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Portfolio", "item": "https://truonggiang0111.github.io/" },
+          { "@type": "ListItem", "position": 2, "name": "MCP & AI Skills Hub", "item": "https://truonggiang0111.github.io/mcp/" },
+          { "@type": "ListItem", "position": 3, "name": "WooCommerce & Atlassian 1-Star Churn Leads", "item": "https://truonggiang0111.github.io/mcp/wordpress-woocommerce-1-star-churn-leads/" }
+        ]
+      },
+      {
+        "@type": "TechArticle",
+        "headline": "Mining 1-Star WooCommerce & Atlassian App Churn Signals with Public REST APIs, n8n & MCP",
+        "description": "Empirical zero-proxy benchmark covering WordPress.org Plugins API 1.2, 1-star RSS churn feeds, unresolved merchant support threads (WooCommerce PayPal Payments 2.9★ / 289×1★, Stripe Gateway 3.1★ / 94×1★), and Atlassian Marketplace REST v2 vendor contacts.",
+        "datePublished": "2026-11-27",
+        "dateModified": "2026-11-27",
+        "proficiencyLevel": "Intermediate",
+        "author": {
+          "@type": "Person",
+          "name": "Truong Truong Giang",
+          "url": "https://truonggiang0111.github.io/"
+        },
+        "publisher": {
+          "@type": "Person",
+          "name": "Truong Truong Giang",
+          "url": "https://truonggiang0111.github.io/mcp/"
+        },
+        "mainEntityOfPage": "https://truonggiang0111.github.io/mcp/wordpress-woocommerce-1-star-churn-leads/",
+        "about": [
+          { "@type": "SoftwareApplication", "name": "WordPress & WooCommerce Plugin Churn Spy", "url": "https://www.agensi.io/skills/wordpress-woocommerce-plugin-churn-spy" },
+          { "@type": "SoftwareApplication", "name": "Atlassian Marketplace B2B App & Churn Spy", "url": "https://www.agensi.io/skills/atlassian-marketplace-b2b-app-churn-spy" }
+        ]
+      },
+      {
+        "@type": "HowTo",
+        "name": "Extract WooCommerce & Atlassian Marketplace 1-Star Churn Signals via Public REST APIs & n8n",
+        "totalTime": "PT2M",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Query WordPress.org Plugins API 1.2 with lightweight field projection",
+            "text": "Call api.wordpress.org/plugins/info/1.2/ with active_installs, ratings, support_threads, and support_threads_resolved enabled while disabling verbose description and changelog fields (~95% payload reduction)."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Pull full-text 1-star RSS reviews and unresolved support feeds",
+            "text": "Fetch /support/plugin/<slug>/reviews/feed/?filter=1 and /support/plugin/<slug>/unresolved/feed/ to classify checkout bugs, update regressions, and unresponsive support threads."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Query Atlassian Marketplace REST v2 and partner vendor contacts",
+            "text": "Request marketplace.atlassian.com/rest/2/addons for install/user telemetry, enterprise pricing tiers, 1-2 star churn reviews, and verified vendor contact records."
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Why use WordPress.org RSS feeds instead of scraping plugin HTML pages?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "WordPress.org exposes official filtered RSS feeds at /support/plugin/<slug>/reviews/feed/?filter=1 and /support/plugin/<slug>/unresolved/feed/. Combining those feeds with api.wordpress.org/plugins/info/1.2/ telemetry eliminates HTML pagination and runs in 4.75s-7.36s at $0 proxy cost."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which high-install WooCommerce plugins showed the highest 1-star churn density in verified cloud runs?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Across verified runs thg26jK7dxnTjvrGp and wcj29abQGhACPzseh, WooCommerce PayPal Payments (700,000+ active installs) scored 2.9 stars with 289 one-star reviews and 26 unresolved 60-day threads, while WooCommerce Stripe Payment Gateway (700,000+ installs) scored 3.1 stars with 94 one-star reviews."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I run these WooCommerce and Atlassian churn pipelines inside n8n or Agensi?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Import weekly-wordpress-woocommerce-plugin-churn-leads.n8n.json or weekly-atlassian-jira-app-churn-leads.n8n.json (zero-key REST calls + optional Apify enrichment), use n8n-nodes-b2b-market-intel, or run hosted skills via E-Commerce & SaaS Churn Spy Bundle on Agensi.io."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="https://truonggiang0111.github.io/">Home</a> /
+      <a href="https://truonggiang0111.github.io/mcp/">MCP &amp; Skills Hub</a> /
+      <span>WooCommerce &amp; Atlassian 1-Star Churn Leads</span>
+    </nav>
+
+    <div class="meta-row">
+      <span class="pill">Public REST + RSS Churn Intelligence</span>
+      <span>Verified Apify Cloud Runs (<code>256 MB</code> RAM · <code>$0</code> Proxy)</span>
+      <span>Updated: Nov 27, 2026</span>
+    </div>
+
+    <h1>Mining 1-Star WooCommerce &amp; Atlassian App Churn Signals with Public REST APIs, <code>n8n</code> &amp; MCP</h1>
+    <p>High-install plugins and enterprise Jira apps with hundreds of thousands of active installs frequently sit on <code>2.9★–3.6★</code> ratings — meaning active merchants and engineering teams are actively searching for alternatives, migration agencies, or integration fixes. Both <strong>WordPress.org / WooCommerce</strong> and <strong>Atlassian Marketplace</strong> expose rich public REST and RSS endpoints that require <strong>zero headless browsers and <code>$0</code> residential proxies</strong>.</p>
+
+    <div class="badges">
+      <a class="badge" href="https://www.agensi.io/skills/wordpress-woocommerce-plugin-churn-spy">WordPress &amp; WooCommerce Agensi Skill (<code>$5</code>)</a>
+      <a class="badge" href="https://www.agensi.io/skills/atlassian-marketplace-b2b-app-churn-spy">Atlassian Marketplace Agensi Skill (<code>$5</code>)</a>
+      <a class="badge" href="https://www.agensi.io/bundles/e-commerce-saas-churn-spy-bundle">Bundle #2: 4-Platform Churn Spy (<code>-35%</code>)</a>
+      <a class="badge" href="/mcp/n8n-b2b-lead-automation-workflows/">16 <code>n8n</code> Workflow Gallery</a>
+      <a class="badge" href="https://apify.com/ttyan0111">Apify Profile (<code>@ttyan0111</code>)</a>
+    </div>
+
+    <h2>1. Verified Cloud Benchmarks (WordPress/WooCommerce &amp; Atlassian)</h2>
+    <p>All metrics below were measured directly from production Apify Cloud runs executing inside <code>256 MB</code> Node.js containers at <code>$0</code> proxy cost:</p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="tag">WordPress Run #1 (<code>thg26jK7dxnTjvrGp</code>)</div>
+        <div class="stat-num">7.36s · 152 Signals</div>
+        <p>Queried <code>["woocommerce stripe", "checkout upsell"]</code> at <code>110.5 MB</code> RAM: <code>10</code> plugins (<code>18.83M</code> combined installs), <code>99</code> <code>1★–2★</code> reviews + <code>53</code> unresolved forum tickets, <code>6</code> vendor emails across <code>9</code> domains (<code>support@funnelkit.com</code>, <code>support@cartflows.com</code>, <code>team@upsellwp.com</code>).</p>
+      </div>
+      <div class="card">
+        <div class="tag">WordPress Run #2 (<code>wcj29abQGhACPzseh</code>)</div>
+        <div class="stat-num">4.75s · 88 Signals</div>
+        <p>Targeted WooCommerce checkout/compliance slugs at <code>75.6 MB</code> RAM: <code>5</code> plugins (<code>8.77M</code> installs), <code>50</code> <code>1★–2★</code> reviews + <code>38</code> unresolved tickets, and <code>4/5</code> (<code>80%</code>) vendor emails (<code>support@wpovernight.com</code>, <code>info@vendidero.de</code>).</p>
+      </div>
+      <div class="card">
+        <div class="tag">Atlassian Run #1 (<code>YyJHC3SeNmHN2iZld</code>)</div>
+        <div class="stat-num">3.92s · 10/10 Vendors</div>
+        <p>Queried <code>["time tracking", "workflow automation"]</code> at <code>76.5 MB</code> RAM: <code>10</code> apps (<code>62,130</code> installs, <code>8</code> Cloud Fortified), <strong><code>10/10</code> (<code>100%</code>) vendor emails</strong> (<code>sales@tempo.io</code>, <code>support@appfire.com</code>, <code>apps-support@soldevelo.com</code>), and <code>41</code> <code>1★–2★</code> churn reviews.</p>
+      </div>
+    </div>
+
+    <h3>WooCommerce High-Install Churn Matrix (Runs <code>thg26jK7dxnTjvrGp</code> &amp; <code>wcj29abQGhACPzseh</code>)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Plugin (Slug)</th>
+            <th>Active Installs</th>
+            <th>Rating &amp; <code>1★</code> Count</th>
+            <th>Unresolved (60d) &amp; Verified Sample Signals</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>WooCommerce PayPal Payments</strong> (<code>woocommerce-paypal-payments</code>)</td>
+            <td><code>700,000+</code></td>
+            <td><strong><code>2.9★</code></strong> · <strong><code>289×1★</code></strong> (<code>16×2★</code>)</td>
+            <td><code>26 / 52</code> unresolved · <code>woocommerce.com</code> · Live threads include <em>"Apple Pay and Google Pay missing from existing PayPal integration"</em></td>
+          </tr>
+          <tr>
+            <td><strong>WooCommerce Stripe Payment Gateway</strong> (<code>woocommerce-gateway-stripe</code>)</td>
+            <td><code>700,000+</code></td>
+            <td><strong><code>3.1★</code></strong> · <strong><code>94×1★</code></strong> (<code>13×2★</code>)</td>
+            <td><code>6 / 32</code> unresolved · Live alerts: <em>"Card Testing Attack – Existing Stripe Customers Charged Without WooCommerce Order"</em> &amp; forced feature updates</td>
+          </tr>
+          <tr>
+            <td><strong>WooPayments</strong> (<code>woocommerce-payments</code>)</td>
+            <td><code>800,000+</code></td>
+            <td><code>3.5★</code> · <code>62×1★</code> (<code>5×2★</code>)</td>
+            <td><code>3 / 9</code> unresolved · Payout hold &amp; business verification friction</td>
+          </tr>
+          <tr>
+            <td><strong>WooCommerce</strong> (<code>woocommerce</code>)</td>
+            <td><code>7,000,000+</code></td>
+            <td><code>4.5★</code> · <code>410×1★</code> (<code>108×2★</code>)</td>
+            <td><code>41 / 125</code> unresolved · <code>woocommerce.com</code> · Bulk editing gateway timeouts &amp; update regressions</td>
+          </tr>
+          <tr>
+            <td><strong>Germanized for WooCommerce</strong> (<code>woocommerce-germanized</code>)</td>
+            <td><code>70,000+</code></td>
+            <td><code>4.8★</code> · <code>16×1★</code> (<code>5×2★</code>)</td>
+            <td><code>1 / 10</code> unresolved · <code>info@vendidero.de</code> (<code>vendidero.de</code>)</td>
+          </tr>
+          <tr>
+            <td><strong>PDF Invoices &amp; Packing Slips</strong> (<code>woocommerce-pdf-invoices-packing-slips</code>)</td>
+            <td><code>300,000+</code></td>
+            <td><code>5.0★</code> · <code>8×1★</code> (<code>6×2★</code>)</td>
+            <td><code>8 / 32</code> unresolved · <code>support@wpovernight.com</code> (<code>wpovernight.com</code>)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Atlassian Marketplace Enterprise Churn &amp; Vendor Contacts (Run <code>YyJHC3SeNmHN2iZld</code>)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Atlassian App (<code>addonKey</code>)</th>
+            <th>Installs &amp; Active Users</th>
+            <th>Rating &amp; Pricing Tier</th>
+            <th>Verified Vendor Contact &amp; Top Churn Tags</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Timesheets by Tempo</strong> (<code>is.origo.jira.tempo-plugin</code>)</td>
+            <td><code>25,850</code> installs · <code>6,011,237</code> users</td>
+            <td><strong><code>3.23★</code></strong> (<code>939</code> reviews) · <code>$10/mo</code> start / <code>$5,990/yr</code> (100 users)</td>
+            <td><code>Tempo Software</code> (<code>Platinum</code>) · <code>sales@tempo.io</code> · <code>15</code> churn reviews (<code>cloud_migration_bug</code>, <code>missing_enterprise_feature</code>, <code>billing_pricing</code>)</td>
+          </tr>
+          <tr>
+            <td><strong>Jira Misc Workflow Extensions (JMWE)</strong> (<code>com.innovalog.jmwe.jira-misc-workflow-extensions</code>)</td>
+            <td><code>16,358</code> installs · <code>8,714,894</code> users</td>
+            <td><code>3.76★</code> (<code>552</code> reviews) · <code>$300</code> start / <code>$2,000/yr</code> (100 users)</td>
+            <td><code>Appfire</code> (<code>Platinum</code>) · <code>support@appfire.com</code> · <code>billing_pricing</code>, <code>cloud_migration_bug</code></td>
+          </tr>
+          <tr>
+            <td><strong>JSU Automation Suite</strong> (<code>com.googlecode.jira-suite-utilities</code>)</td>
+            <td><code>11,892</code> installs · <code>10,813,082</code> users</td>
+            <td><code>3.60★</code> (<code>309</code> reviews) · <code>$202.50</code> start / <code>$1,350/yr</code> (100 users)</td>
+            <td><code>Appfire</code> (<code>Platinum</code>) · <code>support@appfire.com</code> · <code>cloud_migration_bug</code>, <code>support_sla</code>, <code>billing_pricing</code></td>
+          </tr>
+          <tr>
+            <td><strong>Worklogs - Time Tracking</strong> (<code>com.soldevelo.apps.worklogs</code>)</td>
+            <td><code>5,255</code> installs · <code>699,376</code> users</td>
+            <td><code>3.40★</code> (<code>118</code> reviews) · <code>$60</code> start / <code>$400/yr</code> (100 users)</td>
+            <td><code>SolDevelo</code> (<code>Gold</code>) · <code>apps-support@soldevelo.com</code> · <code>soldevelo.com</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>2. Public REST + RSS Pipeline Architecture (Zero Proxies)</h2>
+    <ol>
+      <li><strong>WordPress.org Field-Projected REST API (<code>api.wordpress.org/plugins/info/1.2/</code>):</strong> Requesting only <code>active_installs</code>, <code>downloaded</code>, <code>ratings</code>, <code>support_threads</code>, <code>support_threads_resolved</code>, <code>homepage</code>, <code>tested</code>, and <code>requires_php</code> while disabling <code>description</code>, <code>sections</code>, and <code>versions</code> shrinks response payloads by <strong><code>~95%</code></strong>.</li>
+      <li><strong>Direct <code>1★–2★</code> Review &amp; Unresolved Ticket RSS Feeds:</strong> WordPress.org exposes clean XML feeds at <code>/support/plugin/&lt;slug&gt;/reviews/feed/?filter=1</code>, <code>?filter=2</code>, and <code>/support/plugin/&lt;slug&gt;/unresolved/feed/</code> — removing fragile HTML pagination completely.</li>
+      <li><strong>Atlassian Marketplace REST v2 (<code>/rest/2/addons</code>):</strong> Returns install counts, active user footprints, Cloud Fortified &amp; Partner Tier metadata, pricing tables, and <code>1★–2★</code> customer complaints. Note that <code>/rest/2/vendors/{vendorId}</code> returns <code>HTTP 410</code>, so partner contact enrichment pairs REST v2 addon records with live Marketplace partner listings.</li>
+    </ol>
+
+    <h3>Quick Zero-Key Python Probe (WordPress.org + Atlassian REST v2)</h3>
+    <div class="code-block">
+      <div class="code-header">
+        <span>probe_wp_atlassian_churn.py</span>
+        <button class="copy-btn" type="button" data-copy="py-wp-atl">Copy</button>
+      </div>
+      <pre id="py-wp-atl"><code>import json, urllib.request
+
+# 1. WordPress.org Plugins API 1.2 (WooCommerce PayPal Payments)
+wp_url = (
+    "https://api.wordpress.org/plugins/info/1.2/?action=plugin_information"
+    "&request[slug]=woocommerce-paypal-payments"
+    "&request[fields][description]=0&request[fields][sections]=0"
+    "&request[fields][active_installs]=1&request[fields][ratings]=1"
+    "&request[fields][support_threads]=1&request[fields][support_threads_resolved]=1"
+)
+wp = json.loads(urllib.request.urlopen(wp_url, timeout=15).read())
+print("WP:", wp["slug"], "installs:", wp["active_installs"], "1-star:", wp["ratings"]["1"])
+
+# 2. Atlassian Marketplace REST v2 (public Jira Cloud time-tracking addons)
+atl_url = "https://marketplace.atlassian.com/rest/2/addons?text=time+tracking&hosting=cloud&limit=3"
+atl = json.loads(urllib.request.urlopen(atl_url, timeout=15).read())
+for addon in atl.get("_embedded", {}).get("addons", []):
+    print("Atlassian:", addon["key"], "|", addon["name"])</code></pre>
+    </div>
+
+    <div class="callout">
+      <p><strong>n8n Automation Templates Included:</strong> Both <a href="https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/weekly-wordpress-woocommerce-plugin-churn-leads.n8n.json"><code>weekly-wordpress-woocommerce-plugin-churn-leads.n8n.json</code></a> and <a href="https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/weekly-atlassian-jira-app-churn-leads.n8n.json"><code>weekly-atlassian-jira-app-churn-leads.n8n.json</code></a> start with a zero-key public REST node and optionally chain into <code>ttyan0111~wordpress-plugin-churn-spy</code> / <code>ttyan0111~atlassian-marketplace-b2b-spy</code> for vendor email enrichment and 5-bucket pain classification.</p>
+    </div>
+
+    <div class="cta-box">
+      <h3>Monitor WooCommerce, Atlassian, Shopify &amp; VS Code Churn Automatically</h3>
+      <p>Run standalone zero-key skills on <strong>Agensi.io</strong>, bundle all 4 marketplace churn spies in <strong>Bundle #2</strong> (<code>$12.99</code> vs <code>$20.00</code>, save <code>35%</code>), install <a href="https://github.com/truonggiang0111/n8n-nodes-b2b-market-intel"><code>n8n-nodes-b2b-market-intel</code></a>, or browse all 16 templates in our n8n Gallery.</p>
+      <div class="cta-actions">
+        <a class="btn primary" href="https://www.agensi.io/skills/wordpress-woocommerce-plugin-churn-spy">WooCommerce Churn Skill ($5)</a>
+        <a class="btn" href="https://www.agensi.io/skills/atlassian-marketplace-b2b-app-churn-spy">Atlassian Churn Skill ($5)</a>
+        <a class="btn" href="https://www.agensi.io/bundles/e-commerce-saas-churn-spy-bundle">Bundle #2: Save 35% ($12.99)</a>
+        <a class="btn" href="/mcp/n8n-b2b-lead-automation-workflows/">16 n8n Workflows Gallery</a>
+      </div>
+    </div>
+
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <h3>Why use WordPress.org RSS feeds instead of scraping plugin HTML pages?</h3>
+      <p>WordPress.org publishes structured RSS feeds at <code>/support/plugin/&lt;slug&gt;/reviews/feed/?filter=1</code> and <code>/support/plugin/&lt;slug&gt;/unresolved/feed/</code>. Pairing those feeds with <code>api.wordpress.org/plugins/info/1.2/</code> avoids HTML pagination and executes in <code>4.75s–7.36s</code> at <code>$0</code> proxy cost.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Which high-install WooCommerce plugins showed the highest 1-star churn density in verified runs?</h3>
+      <p>Across verified cloud runs <code>thg26jK7dxnTjvrGp</code> and <code>wcj29abQGhACPzseh</code>, <strong>WooCommerce PayPal Payments</strong> (<code>700,000+</code> installs) averaged <code>2.9★</code> with <code>289×1★</code> reviews and <code>26/52</code> unresolved 60d threads, while <strong>WooCommerce Stripe Payment Gateway</strong> (<code>700,000+</code> installs) averaged <code>3.1★</code> with <code>94×1★</code> reviews.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How can I run these WooCommerce and Atlassian churn pipelines inside <code>n8n</code> or Agensi?</h3>
+      <p>Copy either template from the <a href="/mcp/n8n-b2b-lead-automation-workflows/">n8n Workflow Gallery</a>, install <a href="https://github.com/truonggiang0111/n8n-nodes-b2b-market-intel"><code>n8n-nodes-b2b-market-intel</code></a>, or run zero-key managed skills via <a href="https://www.agensi.io/bundles/e-commerce-saas-churn-spy-bundle">Agensi Bundle #2</a> and <a href="https://apify.com/ttyan0111">Apify (<code>$5/mo</code> free tier)</a>.</p>
+    </div>
+
+    <footer>
+      Built by <a href="https://truonggiang0111.github.io/">Truong Truong Giang</a> · <a href="/mcp/">MCP Directory Hub</a> · <a href="/mcp/shopify-app-store-1-star-churn-teardown/">Shopify &amp; App Churn Teardown</a> · <a href="/mcp/n8n-b2b-lead-automation-workflows/">16 n8n Workflows Gallery</a> · <a href="/llms.txt">llms.txt</a>
+    </footer>
+  </main>
+
+  <script>
+    document.querySelectorAll('.copy-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var target = document.getElementById(btn.getAttribute('data-copy'));
+        if (!target) return;
+        navigator.clipboard.writeText(target.innerText).then(function () {
+          var prev = btn.textContent;
+          btn.textContent = 'Copied!';
+          setTimeout(function () { btn.textContent = prev; }, 1600);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
