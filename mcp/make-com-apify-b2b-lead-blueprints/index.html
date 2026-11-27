@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Make.com B2B Lead &amp; Zero-Key Apify Blueprints (8 Importable .make.json) | @ttyan0111</title>
+  <meta name="description" content="Download and preview 8 importable Make.com Blueprint JSON (.make.json) templates for B2B lead generation, zero-key ClinicalTrials &amp; UK Gov Tenders, WooCommerce/Atlassian/Shopify 1-star churn, Reed/Seek hiring, Substack creators &amp; Google News Real-URL RAG." />
+  <link rel="canonical" href="https://truonggiang0111.github.io/mcp/make-com-apify-b2b-lead-blueprints/" />
+  <link rel="alternate" type="text/plain" title="LLM Context Index" href="https://truonggiang0111.github.io/llms.txt" />
+  <link rel="alternate" type="text/plain" title="LLM Full Specification" href="https://truonggiang0111.github.io/llms-full.txt" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Make.com B2B Lead &amp; Zero-Key Apify Blueprints (8 Importable .make.json)" />
+  <meta property="og:description" content="Interactive Make.com blueprint previewer and 1-click .make.json downloader calling Apify /run-sync-get-dataset-items and zero-key public REST APIs." />
+  <meta property="og:url" content="https://truonggiang0111.github.io/mcp/make-com-apify-b2b-lead-blueprints/" />
+  <meta property="og:site_name" content="Truong Truong Giang — B2B &amp; AI MCP Hub" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Make.com B2B Lead Blueprints &amp; Zero-Key Scenarios (8 .make.json)" />
+  <meta name="twitter:description" content="Preview, copy, or download 8 importable Make.com blueprints for B2B leads, churn spy, hiring signals, tenders, biotech trials, and RAG." />
+
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --card: #121826;
+      --card-alt: #0e1420;
+      --border: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --green: #10b981;
+      --amber: #f59e0b;
+      --purple: #a855f7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.62;
+    }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 32px 20px 84px; }
+    .breadcrumb { font-size: 0.85rem; color: var(--muted); margin-bottom: 18px; }
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    h1 { font-size: 1.9rem; line-height: 1.26; margin: 0 0 12px; color: #f8fafc; }
+    h2 { font-size: 1.28rem; margin: 38px 0 14px; color: #f8fafc; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    h3 { font-size: 1.03rem; margin: 0 0 8px; color: #f8fafc; }
+    p, li { color: var(--muted); }
+    strong { color: var(--text); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.85em;
+      background: #06090f;
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #e2e8f0;
+    }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; font-size: 0.84rem; color: var(--muted); margin-bottom: 18px; }
+    .pill {
+      display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 0.76rem; font-weight: 600;
+      background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); color: var(--green);
+    }
+    .pill.purple {
+      background: rgba(168, 85, 247, 0.14); border-color: rgba(168, 85, 247, 0.4); color: #d8b4fe;
+    }
+    .pill.blue {
+      background: rgba(56, 189, 248, 0.12); border-color: rgba(56, 189, 248, 0.35); color: var(--accent);
+    }
+    .badges { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 26px; }
+    .badge {
+      display: inline-block; padding: 6px 12px; border-radius: 6px; font-size: 0.84rem; font-weight: 600;
+      background: var(--card); border: 1px solid var(--border); color: var(--text);
+    }
+    .badge:hover { border-color: var(--accent); text-decoration: none; }
+
+    .cta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px; margin: 18px 0 28px; }
+    .cta-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px;
+      display: flex; flex-direction: column; justify-content: space-between; gap: 12px;
+    }
+    .cta-card.highlight { border-color: #27446b; background: linear-gradient(180deg, #131c2e 0%, #101624 100%); }
+    .cta-card .tag { display: inline-block; font-size: 0.73rem; color: var(--green); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px; }
+    .cta-card .tag.amber { color: var(--amber); }
+    .cta-card .tag.blue { color: var(--accent); }
+    .cta-card p { margin: 0; font-size: 0.89rem; }
+    .cmd-box {
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      background: #06090f; border: 1px solid var(--border); border-radius: 7px; padding: 8px 10px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.78rem; color: #cbd5e1;
+      overflow-x: auto;
+    }
+    .cmd-text { white-space: nowrap; overflow-x: auto; }
+    .copy-mini {
+      flex-shrink: 0; background: var(--card); color: var(--text); border: 1px solid var(--border);
+      border-radius: 5px; padding: 4px 9px; font-size: 0.74rem; font-weight: 600; cursor: pointer;
+    }
+    .copy-mini:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .btn {
+      display: inline-block; padding: 8px 12px; border-radius: 7px; font-size: 0.82rem; font-weight: 600;
+      border: 1px solid var(--border); background: #0d1524; color: var(--text); cursor: pointer; text-align: center;
+    }
+    .btn.primary { background: var(--accent); color: #081018; border-color: var(--accent); }
+    .btn.green { background: var(--green); color: #06120e; border-color: var(--green); }
+    .btn:hover { opacity: 0.92; border-color: var(--accent); text-decoration: none; }
+
+    .filter-bar {
+      display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+      margin: 18px 0 18px; padding: 12px; background: var(--card-alt);
+      border: 1px solid var(--border); border-radius: 10px;
+    }
+    .tab-btn {
+      background: var(--card); color: var(--muted); border: 1px solid var(--border);
+      border-radius: 999px; padding: 7px 14px; font-size: 0.84rem; font-weight: 600; cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .tab-btn:hover { color: var(--text); border-color: var(--accent); }
+    .tab-btn.active { background: var(--accent); color: #081018; border-color: var(--accent); }
+    .filter-status { font-size: 0.84rem; color: var(--muted); margin-bottom: 14px; }
+
+    .bp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+    .bp-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 11px; padding: 18px;
+      display: flex; flex-direction: column; justify-content: space-between; gap: 14px;
+    }
+    .bp-card.hidden { display: none; }
+    .bp-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .bp-mode {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+      padding: 3px 8px; border-radius: 999px;
+      background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); color: var(--green);
+    }
+    .bp-mode.apify {
+      background: rgba(56, 189, 248, 0.12); border-color: rgba(56, 189, 248, 0.35); color: var(--accent);
+    }
+    .bp-source { font-size: 0.78rem; color: var(--muted); font-weight: 600; }
+    .bp-card p { margin: 0 0 10px; font-size: 0.9rem; }
+    .bp-file {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.76rem; color: #cbd5e1; background: #06090f; border: 1px solid var(--border);
+      padding: 5px 8px; border-radius: 6px; word-break: break-all;
+    }
+    .bp-actions { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 4px; }
+    .bp-btn {
+      flex: 1 1 115px; padding: 8px 10px; border-radius: 7px; font-size: 0.8rem; font-weight: 600;
+      border: 1px solid var(--border); background: #0d1524; color: var(--text); cursor: pointer; text-align: center;
+    }
+    .bp-btn.primary { background: var(--accent); color: #081018; border-color: var(--accent); }
+    .bp-btn:hover { opacity: 0.92; border-color: var(--accent); }
+    .bp-btn.copied { background: var(--green); color: #06120e; border-color: var(--green); }
+    .bp-link { font-size: 0.78rem; color: var(--muted); align-self: center; padding: 4px 6px; }
+    .bp-link:hover { color: var(--accent); }
+
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin: 16px 0; }
+    .step-box { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+    .step-num { font-size: 0.74rem; font-weight: 700; color: var(--purple); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px; }
+    .step-box p { margin: 6px 0 0; font-size: 0.88rem; }
+
+    .callout {
+      background: var(--card); border-left: 4px solid var(--accent); border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      border-radius: 8px; padding: 15px 18px; margin: 24px 0;
+    }
+    .callout.green { border-left-color: var(--green); }
+    .callout p { margin: 0; }
+
+    .faq-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px; }
+    .faq-item h3 { margin: 0 0 6px; font-size: 1rem; }
+    .faq-item p { margin: 0; }
+
+    .modal-backdrop {
+      display: none; position: fixed; inset: 0; background: rgba(6, 9, 15, 0.84); z-index: 60;
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-panel {
+      width: 100%; max-width: 820px; background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 18px; max-height: 90vh; display: flex; flex-direction: column;
+    }
+    .modal-meta { font-size: 0.82rem; color: var(--green); margin: 6px 0 10px; font-weight: 600; }
+    .modal-panel textarea {
+      width: 100%; height: 340px; background: #06090f; color: #cbd5e1; border: 1px solid var(--border);
+      border-radius: 8px; padding: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.8rem; line-height: 1.48; resize: vertical;
+    }
+    footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.84rem; color: var(--muted); }
+    @media (max-width: 640px) { h1 { font-size: 1.5rem; } }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Portfolio", "item": "https://truonggiang0111.github.io/" },
+          { "@type": "ListItem", "position": 2, "name": "MCP & AI Skills Hub", "item": "https://truonggiang0111.github.io/mcp/" },
+          { "@type": "ListItem", "position": 3, "name": "Make.com B2B Lead Blueprints", "item": "https://truonggiang0111.github.io/mcp/make-com-apify-b2b-lead-blueprints/" }
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Make.com B2B Lead & Zero-Key Automation Blueprints Suite",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Make.com / HTTP / Zero-Key REST APIs",
+        "softwareVersion": "1.4.0",
+        "url": "https://truonggiang0111.github.io/mcp/make-com-apify-b2b-lead-blueprints/",
+        "sameAs": [
+          "https://github.com/truonggiang0111/b2b-ai-mcp-skills",
+          "https://github.com/truonggiang0111/b2b-market-intel-mcp",
+          "https://www.agensi.io/r/GIANGTRNGTRNG",
+          "https://truonggiang0111.github.io/mcp/b2b-leads-datasets-and-custom-scrapers/",
+          "https://apify.com/ttyan0111"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "description": "8 MIT-licensed importable .make.json Make.com blueprints calling Apify /run-sync-get-dataset-items ($5/month free Apify tier) and zero-key public REST endpoints."
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Truong Truong Giang",
+          "url": "https://truonggiang0111.github.io/"
+        }
+      },
+      {
+        "@type": "ItemList",
+        "name": "8 Importable Make.com B2B Lead Blueprints (.make.json)",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "google-news-real-url-rag.make.json", "url": "https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/google-news-real-url-rag.make.json" },
+          { "@type": "ListItem", "position": 2, "name": "shopify-1star-churn-leads.make.json", "url": "https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/shopify-1star-churn-leads.make.json" },
+          { "@type": "ListItem", "position": 3, "name": "clinicaltrials-biotech-pi-leads.make.json", "url": "https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/clinicaltrials-biotech-pi-leads.make.json" },
+          { "@type": "ListItem", "position": 4, "name": "uk-gov-tenders-buyer-emails.make.json", "url": "https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/uk-gov-tenders-buyer-emails.make.json" },
+          { "@type": "ListItem", "position": 5, "name": "reed-seek-direct-hiring-leads.make.json", "url": "https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/reed-seek-direct-hiring-leads.make.json" },
+          { "@type": "ListItem", "position": 6, "name": "substack-creator-sponsor-leads.make.json", "url": "https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/substack-creator-sponsor-leads.make.json" },
+          { "@type": "ListItem", "position": 7, "name": "vscode-chrome-competitor-bug-spy.make.json", "url": "https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/vscode-chrome-competitor-bug-spy.make.json" },
+          { "@type": "ListItem", "position": 8, "name": "wordpress-atlassian-churn-leads.make.json", "url": "https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/wordpress-atlassian-churn-leads.make.json" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I import a .make.json blueprint into Make.com?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Click Download .make.json (or Preview & Copy JSON) on any card above, open Make.com Scenarios -> Create a new scenario, click the bottom toolbar More (...) menu -> Import Blueprint, select the .make.json file, and save."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which Make.com blueprints run immediately with zero API keys?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Three blueprints run immediately at $0 without any API key on Route 1: clinicaltrials-biotech-pi-leads.make.json (ClinicalTrials.gov API v2), uk-gov-tenders-buyer-emails.make.json (UK Contracts Finder OCDS Search), and wordpress-atlassian-churn-leads.make.json (WordPress.org Plugins API 1.2 plus Atlassian Marketplace REST v2). Each includes an optional gated Route 2 for deep Apify enrichment."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I run these without managing Make scenarios or Apify keys?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use any of the 3 Free Skills or discounted Bundles via https://www.agensi.io/r/GIANGTRNGTRNG inside Claude, Cursor, or ChatGPT, run zero-key local tools with npx -y github:truonggiang0111/b2b-market-intel-mcp, or order $29 freshly exported 500-1,000 row CSV lead packs and $199-$350 custom scrapers at https://truonggiang0111.github.io/mcp/b2b-leads-datasets-and-custom-scrapers/."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="https://truonggiang0111.github.io/">Home</a> /
+      <a href="https://truonggiang0111.github.io/mcp/">MCP &amp; Skills Hub</a> /
+      <span>Make.com B2B Lead Blueprints</span>
+    </nav>
+
+    <div class="meta-row">
+      <span class="pill purple">8 Importable .make.json Blueprints</span>
+      <span class="pill">Zero-Key Instant + Apify /run-sync-get-dataset-items</span>
+      <span>MIT Licensed · Zero Embedded Secrets</span>
+    </div>
+
+    <h1>Make.com B2B Lead &amp; Zero-Key Automation Blueprints (8 <code>.make.json</code>)</h1>
+    <p>Preview, copy, or download <strong>8 production Make.com scenario blueprints</strong> pre-wired with <code>util:SetVariables</code>, <code>http:ActionSendData</code>, <code>builtin:BasicRouter</code>, <code>builtin:BasicFeeder</code>, and <code>util:TextAggregator</code>. Import straight into Make.com to automate <strong>ClinicalTrials.gov biotech sponsors</strong>, <strong>UK Gov Contracts Finder tenders</strong>, <strong>Shopify/WooCommerce/Atlassian 1-star churn leads</strong>, <strong>Reed UK &amp; Seek AU direct hiring</strong>, <strong>Substack creators</strong>, <strong>VS Code/Chrome bugs</strong>, and <strong>Google News Real-URL RAG</strong>.</p>
+
+    <div class="badges">
+      <a class="badge" href="https://www.agensi.io/r/GIANGTRNGTRNG?to=/creators/giang-tr-ng-tr-ng&amp;utm_source=wave8_make">Agensi Storefront (3 Free Skills + Bundles)</a>
+      <a class="badge" href="/mcp/b2b-leads-datasets-and-custom-scrapers/">Order <code>$29</code> CSV Packs &amp; <code>$199–$350</code> Custom Scrapers</a>
+      <a class="badge" href="https://apify.com/ttyan0111">Apify Store (<code>$5/mo</code> Free Tier)</a>
+      <a class="badge" href="/mcp/n8n-b2b-lead-automation-workflows/">Need <code>n8n</code>? View 16 <code>n8n</code> Templates</a>
+      <a class="badge" href="https://github.com/truonggiang0111/b2b-ai-mcp-skills/tree/main/workflows/make">GitHub <code>workflows/make/</code></a>
+    </div>
+
+    <h2>Fastest Ways to Launch (Make.com, Agensi Free Skills, Done-For-You CSV &amp; Zero-Key MCP)</h2>
+    <div class="cta-grid">
+      <div class="cta-card highlight">
+        <div>
+          <div class="tag">Zero-Key Hosted AI Skills · 3 Free</div>
+          <h3>Run Inside Claude / Cursor via Agensi.io</h3>
+          <p>Skip API keys completely with <strong>3 Free Skills</strong> (Google News Decoder, Reed UK Hiring, App Store Bug Spy) or save up to <strong>35%</strong> on paid Bundles (Card / Solana USDC).</p>
+        </div>
+        <div class="btn-row">
+          <a class="btn green" href="https://www.agensi.io/r/GIANGTRNGTRNG?to=/creators/giang-tr-ng-tr-ng&amp;utm_source=wave8_make">Open Agensi (Affiliate Partner)</a>
+          <a class="btn" href="https://www.agensi.io/r/GIANGTRNGTRNG">Start with 3 Free Skills</a>
+        </div>
+      </div>
+
+      <div class="cta-card highlight">
+        <div>
+          <div class="tag amber">Done-For-You Data &amp; Custom Pipelines</div>
+          <h3><code>$29</code> CSV Lead Packs &amp; <code>$199–$350</code> Custom Builds</h3>
+          <p>Want clean <code>500–1,000</code> row B2B CSV/Google Sheets exports (<code>$29</code>) or a bespoke Make.com / Apify / Sheets pipeline built in <code>24–48h</code> (<code>$199–$350</code> fixed)?</p>
+        </div>
+        <div class="btn-row">
+          <a class="btn primary" href="https://truonggiang0111.github.io/mcp/b2b-leads-datasets-and-custom-scrapers/">Visit Direct B2B Storefront</a>
+        </div>
+      </div>
+
+      <div class="cta-card">
+        <div>
+          <div class="tag blue">Zero-Key STDIO MCP Server (Node 18+)</div>
+          <h3><code>b2b-market-intel-mcp</code></h3>
+          <p>Run Google News real-URL decoding, UK Gov Tenders &amp; ClinicalTrials.gov locally with zero API keys inside Claude Code, Cursor, or VS Code.</p>
+        </div>
+        <div class="cmd-box">
+          <span class="cmd-text">npx -y github:truonggiang0111/b2b-market-intel-mcp</span>
+          <button class="copy-mini" type="button" data-copy-text="npx -y github:truonggiang0111/b2b-market-intel-mcp">Copy</button>
+        </div>
+      </div>
+    </div>
+
+    <h2>10-Second Make.com Blueprint Import</h2>
+    <div class="steps-grid">
+      <div class="step-box">
+        <div class="step-num">Step 1 · Download or Copy</div>
+        <h3>Pick Any Blueprint Below</h3>
+        <p>Click <strong>Preview JSON</strong> to inspect modules live, or click <strong>Download <code>.make.json</code></strong> to save a clean scenario file.</p>
+      </div>
+      <div class="step-box">
+        <div class="step-num">Step 2 · Import Blueprint</div>
+        <h3>Load Into Make.com Canvas</h3>
+        <p>Open <strong>Scenarios &rarr; Create a new scenario</strong>, click <strong><code>...</code> &rarr; Import Blueprint</strong>, and upload the <code>.make.json</code> file.</p>
+      </div>
+      <div class="step-box">
+        <div class="step-num">Step 3 · Zero-Key or Free Apify</div>
+        <h3>Run Route 1 or Add Free Token</h3>
+        <p>Blueprints <code>#3</code>, <code>#4</code>, and <code>#8</code> run immediately at <code>$0</code>. For Apify routes, paste your free <code>$5/mo</code> token in <strong>Module 1</strong>.</p>
+      </div>
+    </div>
+
+    <h2>Browse &amp; Preview All 8 Make.com Blueprints</h2>
+    <div class="filter-bar" role="tablist" aria-label="Blueprint categories">
+      <button class="tab-btn active" type="button" data-filter="all">All (8)</button>
+      <button class="tab-btn" type="button" data-filter="zero-key">Zero-Key Instant (3)</button>
+      <button class="tab-btn" type="button" data-filter="churn">E-Commerce &amp; DevTools Churn (3)</button>
+      <button class="tab-btn" type="button" data-filter="hiring">Hiring, Gov &amp; Biotech (3)</button>
+      <button class="tab-btn" type="button" data-filter="creators-rag">Creators &amp; RAG News (2)</button>
+    </div>
+    <div class="filter-status" id="filter-status">Showing <strong>8</strong> of 8 blueprints</div>
+
+    <div class="bp-grid" id="bp-grid">
+      <article class="bp-card" data-cats="creators-rag">
+        <div>
+          <div class="bp-top">
+            <span class="bp-mode apify">Apify $5/mo Free Tier</span>
+            <span class="bp-source">Google News RAG</span>
+          </div>
+          <h3>Google News Real-URL RAG &amp; PR Digest</h3>
+          <p>Calls <code>ttyan0111~google-news-ai-article-extractor/run-sync-get-dataset-items</code>, iterates decoded articles via <code>BasicFeeder</code>, and compiles Markdown RAG digests with real publisher URLs.</p>
+          <div class="bp-file">google-news-real-url-rag.make.json</div>
+        </div>
+        <div class="bp-actions">
+          <button class="bp-btn primary" type="button" data-preview="google-news-real-url-rag.make.json">Preview JSON</button>
+          <button class="bp-btn" type="button" data-download="google-news-real-url-rag.make.json">Download .make.json</button>
+          <button class="bp-btn" type="button" data-copy-url="google-news-real-url-rag.make.json">Copy Raw URL</button>
+          <a class="bp-link" href="https://github.com/truonggiang0111/b2b-ai-mcp-skills/blob/main/workflows/make/google-news-real-url-rag.make.json">Source</a>
+        </div>
+      </article>
+
+      <article class="bp-card" data-cats="churn">
+        <div>
+          <div class="bp-top">
+            <span class="bp-mode apify">Apify $5/mo Free Tier</span>
+            <span class="bp-source">Shopify App Store</span>
+          </div>
+          <h3>Shopify App Store 1-Star Churn &amp; Dev Leads</h3>
+          <p>Queries <code>shopify-app-store-churn-spy</code> for <code>1★–2★</code> merchant complaints, filters for active reviews or <code>developerEmail</code>, and aggregates outreach-ready churn briefs.</p>
+          <div class="bp-file">shopify-1star-churn-leads.make.json</div>
+        </div>
+        <div class="bp-actions">
+          <button class="bp-btn primary" type="button" data-preview="shopify-1star-churn-leads.make.json">Preview JSON</button>
+          <button class="bp-btn" type="button" data-download="shopify-1star-churn-leads.make.json">Download .make.json</button>
+          <button class="bp-btn" type="button" data-copy-url="shopify-1star-churn-leads.make.json">Copy Raw URL</button>
+          <a class="bp-link" href="https://github.com/truonggiang0111/b2b-ai-mcp-skills/blob/main/workflows/make/shopify-1star-churn-leads.make.json">Source</a>
+        </div>
+      </article>
+
+      <article class="bp-card" data-cats="zero-key hiring">
+        <div>
+          <div class="bp-top">
+            <span class="bp-mode">Zero-Key Instant + Apify</span>
+            <span class="bp-source">ClinicalTrials.gov v2</span>
+          </div>
+          <h3>ClinicalTrials.gov Biotech Sponsor &amp; PI Leads</h3>
+          <p>Route 1 pulls recruiting Phase 1–3 Industry trials directly from <code>clinicaltrials.gov/api/v2/studies</code> at <code>$0</code>; Route 2 enriches deduplicated site PIs via Apify when a token is provided.</p>
+          <div class="bp-file">clinicaltrials-biotech-pi-leads.make.json</div>
+        </div>
+        <div class="bp-actions">
+          <button class="bp-btn primary" type="button" data-preview="clinicaltrials-biotech-pi-leads.make.json">Preview JSON</button>
+          <button class="bp-btn" type="button" data-download="clinicaltrials-biotech-pi-leads.make.json">Download .make.json</button>
+          <button class="bp-btn" type="button" data-copy-url="clinicaltrials-biotech-pi-leads.make.json">Copy Raw URL</button>
+          <a class="bp-link" href="https://github.com/truonggiang0111/b2b-ai-mcp-skills/blob/main/workflows/make/clinicaltrials-biotech-pi-leads.make.json">Source</a>
+        </div>
+      </article>
+
+      <article class="bp-card" data-cats="zero-key hiring">
+        <div>
+          <div class="bp-top">
+            <span class="bp-mode">Zero-Key Instant + Apify</span>
+            <span class="bp-source">UK Contracts Finder OCDS</span>
+          </div>
+          <h3>UK Gov Tenders &amp; Direct Buyer Email Leads</h3>
+          <p>Route 1 queries <code>contractsfinder.service.gov.uk/Published/Notices/OCDS/Search</code> with zero keys and keyword filtering; Route 2 enriches verified <code>.gov.uk</code>/NHS buyer emails.</p>
+          <div class="bp-file">uk-gov-tenders-buyer-emails.make.json</div>
+        </div>
+        <div class="bp-actions">
+          <button class="bp-btn primary" type="button" data-preview="uk-gov-tenders-buyer-emails.make.json">Preview JSON</button>
+          <button class="bp-btn" type="button" data-download="uk-gov-tenders-buyer-emails.make.json">Download .make.json</button>
+          <button class="bp-btn" type="button" data-copy-url="uk-gov-tenders-buyer-emails.make.json">Copy Raw URL</button>
+          <a class="bp-link" href="https://github.com/truonggiang0111/b2b-ai-mcp-skills/blob/main/workflows/make/uk-gov-tenders-buyer-emails.make.json">Source</a>
+        </div>
+      </article>
+
+      <article class="bp-card" data-cats="hiring">
+        <div>
+          <div class="bp-top">
+            <span class="bp-mode apify">Apify $5/mo Free Tier</span>
+            <span class="bp-source">Reed UK + Seek AU/NZ</span>
+          </div>
+          <h3>Reed UK &amp; Seek AU/NZ Direct-Employer Hiring Leads</h3>
+          <p>Parallel <code>BasicRouter</code> scenario pulling Reed UK (<code>directEmployerOnly</code>, Outside IR35, <code>~48%</code> bootcamp spam removed) alongside Seek AU/NZ GraphQL company signals.</p>
+          <div class="bp-file">reed-seek-direct-hiring-leads.make.json</div>
+        </div>
+        <div class="bp-actions">
+          <button class="bp-btn primary" type="button" data-preview="reed-seek-direct-hiring-leads.make.json">Preview JSON</button>
+          <button class="bp-btn" type="button" data-download="reed-seek-direct-hiring-leads.make.json">Download .make.json</button>
+          <button class="bp-btn" type="button" data-copy-url="reed-seek-direct-hiring-leads.make.json">Copy Raw URL</button>
+          <a class="bp-link" href="https://github.com/truonggiang0111/b2b-ai-mcp-skills/blob/main/workflows/make/reed-seek-direct-hiring-leads.make.json">Source</a>
+        </div>
+      </article>
+
+      <article class="bp-card" data-cats="creators-rag">
+        <div>
+          <div class="bp-top">
+            <span class="bp-mode apify">Apify $5/mo Free Tier</span>
+            <span class="bp-source">Substack Newsletters</span>
+          </div>
+          <h3>Substack Paid Creator &amp; Sponsor Leads</h3>
+          <p>Targets monetized B2B Substack publications with <code>paidNewslettersOnly</code> + <code>withContactEmailOnly</code>, filtering verified emails into a sponsor-outreach feed.</p>
+          <div class="bp-file">substack-creator-sponsor-leads.make.json</div>
+        </div>
+        <div class="bp-actions">
+          <button class="bp-btn primary" type="button" data-preview="substack-creator-sponsor-leads.make.json">Preview JSON</button>
+          <button class="bp-btn" type="button" data-download="substack-creator-sponsor-leads.make.json">Download .make.json</button>
+          <button class="bp-btn" type="button" data-copy-url="substack-creator-sponsor-leads.make.json">Copy Raw URL</button>
+          <a class="bp-link" href="https://github.com/truonggiang0111/b2b-ai-mcp-skills/blob/main/workflows/make/substack-creator-sponsor-leads.make.json">Source</a>
+        </div>
+      </article>
+
+      <article class="bp-card" data-cats="churn">
+        <div>
+          <div class="bp-top">
+            <span class="bp-mode apify">Apify $5/mo Free Tier</span>
+            <span class="bp-source">VS Code + Open-VSX + Chrome</span>
+          </div>
+          <h3>VS Code, Cursor &amp; Chrome Extension Bug Spy</h3>
+          <p>Splits execution between VS Code + Open-VSX Cursor/Windsurf extension bug reviews and Chrome Web Store developer email + install-count leads.</p>
+          <div class="bp-file">vscode-chrome-competitor-bug-spy.make.json</div>
+        </div>
+        <div class="bp-actions">
+          <button class="bp-btn primary" type="button" data-preview="vscode-chrome-competitor-bug-spy.make.json">Preview JSON</button>
+          <button class="bp-btn" type="button" data-download="vscode-chrome-competitor-bug-spy.make.json">Download .make.json</button>
+          <button class="bp-btn" type="button" data-copy-url="vscode-chrome-competitor-bug-spy.make.json">Copy Raw URL</button>
+          <a class="bp-link" href="https://github.com/truonggiang0111/b2b-ai-mcp-skills/blob/main/workflows/make/vscode-chrome-competitor-bug-spy.make.json">Source</a>
+        </div>
+      </article>
+
+      <article class="bp-card" data-cats="zero-key churn">
+        <div>
+          <div class="bp-top">
+            <span class="bp-mode">Zero-Key Instant + Apify</span>
+            <span class="bp-source">WordPress.org + Atlassian</span>
+          </div>
+          <h3>WordPress, WooCommerce &amp; Atlassian Churn Leads</h3>
+          <p>3-route router querying zero-key <code>api.wordpress.org/plugins/info/1.2/</code> + <code>marketplace.atlassian.com/rest/2/addons</code> immediately, with optional Route 3 Apify vendor email &amp; <code>1★–2★</code> enrichment.</p>
+          <div class="bp-file">wordpress-atlassian-churn-leads.make.json</div>
+        </div>
+        <div class="bp-actions">
+          <button class="bp-btn primary" type="button" data-preview="wordpress-atlassian-churn-leads.make.json">Preview JSON</button>
+          <button class="bp-btn" type="button" data-download="wordpress-atlassian-churn-leads.make.json">Download .make.json</button>
+          <button class="bp-btn" type="button" data-copy-url="wordpress-atlassian-churn-leads.make.json">Copy Raw URL</button>
+          <a class="bp-link" href="https://github.com/truonggiang0111/b2b-ai-mcp-skills/blob/main/workflows/make/wordpress-atlassian-churn-leads.make.json">Source</a>
+        </div>
+      </article>
+    </div>
+
+    <div class="callout green">
+      <p><strong>Need instant zero-key execution or pre-cleaned B2B lead CSVs?</strong> Run our <strong>3 Free Skills</strong> or grab 20%–35% off bundles via <a href="https://www.agensi.io/r/GIANGTRNGTRNG?to=/creators/giang-tr-ng-tr-ng&amp;utm_source=wave8_make">Agensi Partner Link (<code>agensi.io/r/GIANGTRNGTRNG</code>)</a>, or order freshly compiled <strong><code>$29</code> B2B CSV packs</strong> and <strong><code>$199–$350</code> custom scrapers</strong> at the <a href="https://truonggiang0111.github.io/mcp/b2b-leads-datasets-and-custom-scrapers/">Direct Storefront Hub</a>.</p>
+    </div>
+
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <h3>How do I import a <code>.make.json</code> blueprint into Make.com?</h3>
+      <p>Click <strong>Download <code>.make.json</code></strong> (or <strong>Preview JSON</strong> &rarr; <strong>Copy JSON</strong>) on any card above. Inside Make.com, open <strong>Scenarios &rarr; Create a new scenario</strong>, click <strong><code>...</code> (More) &rarr; Import Blueprint</strong>, upload the file, and save.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Which Make.com blueprints run immediately with zero API keys?</h3>
+      <p>Three blueprints work out of the box at <code>$0</code> without any token on Route 1: <code>clinicaltrials-biotech-pi-leads.make.json</code> (ClinicalTrials.gov v2), <code>uk-gov-tenders-buyer-emails.make.json</code> (UK Contracts Finder OCDS), and <code>wordpress-atlassian-churn-leads.make.json</code> (WordPress.org Plugins 1.2 + Atlassian Marketplace REST v2). Whenever you paste an Apify token in Module 1, their gated enrichment routes unlock automatically using Apify's built-in <code>$5/month</code> free credit.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Can I run these tools without Make.com or Apify keys?</h3>
+      <p>Yes. Run the local zero-key STDIO MCP server via <code>npx -y github:truonggiang0111/b2b-market-intel-mcp</code>, connect the <strong>3 Free Skills</strong> on <a href="https://www.agensi.io/r/GIANGTRNGTRNG">Agensi.io</a> inside Claude/Cursor, use our <a href="/mcp/google-sheets-apify-b2b-lead-automation/">Google Sheets Add-on</a>, or order <a href="/mcp/b2b-leads-datasets-and-custom-scrapers/"><code>$29</code> CSV Lead Packs &amp; <code>$199–$350</code> custom builds</a>.</p>
+    </div>
+
+    <footer>
+      Built by <a href="https://truonggiang0111.github.io/">Truong Truong Giang</a> · <a href="/mcp/">MCP Directory Hub</a> · <a href="/mcp/b2b-leads-datasets-and-custom-scrapers/">Direct B2B Storefront</a> · <a href="/mcp/n8n-b2b-lead-automation-workflows/">n8n Gallery (16)</a> · <a href="/llms.txt">llms.txt</a> · <a href="/llms-full.txt">llms-full.txt</a>
+    </footer>
+  </main>
+
+  <div class="modal-backdrop" id="preview-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-panel">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+        <h3 id="modal-title" style="margin:0;">Make.com Blueprint Preview</h3>
+        <button class="copy-mini" type="button" id="modal-close">Close</button>
+      </div>
+      <div class="modal-meta" id="modal-meta">Loading blueprint...</div>
+      <textarea id="modal-json" readonly></textarea>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end;margin-top:12px;">
+        <button class="bp-btn" type="button" id="modal-download" style="flex:0 0 auto;padding:8px 16px;">Download .make.json</button>
+        <button class="bp-btn primary" type="button" id="modal-copy" style="flex:0 0 auto;padding:8px 16px;">Copy Blueprint JSON</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var RAW_BASE = 'https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/';
+      var cache = {};
+      var currentFile = '';
+      var cards = Array.prototype.slice.call(document.querySelectorAll('.bp-card'));
+      var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab-btn'));
+      var statusEl = document.getElementById('filter-status');
+      var modal = document.getElementById('preview-modal');
+      var modalTitle = document.getElementById('modal-title');
+      var modalMeta = document.getElementById('modal-meta');
+      var modalJson = document.getElementById('modal-json');
+
+      function applyFilter(cat) {
+        var visible = 0;
+        cards.forEach(function (card) {
+          var cats = (card.getAttribute('data-cats') || '').split(/\s+/);
+          var show = cat === 'all' || cats.indexOf(cat) !== -1;
+          card.classList.toggle('hidden', !show);
+          if (show) visible += 1;
+        });
+        statusEl.innerHTML = 'Showing <strong>' + visible + '</strong> of ' + cards.length + ' blueprints';
+      }
+
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          tabs.forEach(function (t) { t.classList.remove('active'); });
+          tab.classList.add('active');
+          applyFilter(tab.getAttribute('data-filter'));
+        });
+      });
+
+      function flashCopied(btn, label) {
+        var prev = btn.getAttribute('data-orig') || btn.textContent;
+        btn.setAttribute('data-orig', prev);
+        btn.textContent = label;
+        btn.classList.add('copied');
+        setTimeout(function () {
+          btn.textContent = prev;
+          btn.classList.remove('copied');
+        }, 1600);
+      }
+
+      function countModules(flow) {
+        var total = 0;
+        (flow || []).forEach(function (m) {
+          total += 1;
+          if (Array.isArray(m.routes)) {
+            m.routes.forEach(function (r) { total += countModules(r.flow); });
+          }
+        });
+        return total;
+      }
+
+      function loadBlueprint(file) {
+        if (cache[file]) return Promise.resolve(cache[file]);
+        return fetch(RAW_BASE + file)
+          .then(function (res) {
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return res.text();
+          })
+          .then(function (txt) {
+            var parsed = JSON.parse(txt);
+            var pretty = JSON.stringify(parsed, null, 2);
+            cache[file] = { text: pretty, parsed: parsed };
+            return cache[file];
+          });
+      }
+
+      function triggerDownload(file, content) {
+        var blob = new Blob([content], { type: 'application/json;charset=utf-8' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = file;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      }
+
+      document.querySelectorAll('[data-copy-text]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var txt = btn.getAttribute('data-copy-text');
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(txt).then(function () { flashCopied(btn, 'Copied!'); });
+          }
+        });
+      });
+
+      document.querySelectorAll('[data-copy-url]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var file = btn.getAttribute('data-copy-url');
+          var rawUrl = RAW_BASE + file;
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(rawUrl).then(function () { flashCopied(btn, 'URL Copied!'); });
+          } else {
+            currentFile = file;
+            modalTitle.textContent = 'Raw Blueprint URL: ' + file;
+            modalMeta.textContent = 'Copy URL to fetch or import';
+            modalJson.value = rawUrl;
+            modal.classList.add('open');
+          }
+        });
+      });
+
+      document.querySelectorAll('[data-download]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var file = btn.getAttribute('data-download');
+          var orig = btn.getAttribute('data-orig') || btn.textContent;
+          btn.setAttribute('data-orig', orig);
+          btn.textContent = 'Downloading...';
+          loadBlueprint(file)
+            .then(function (item) {
+              triggerDownload(file, item.text);
+              flashCopied(btn, 'Downloaded!');
+            })
+            .catch(function () {
+              btn.textContent = orig;
+              window.open(RAW_BASE + file, '_blank', 'noopener');
+            });
+        });
+      });
+
+      document.querySelectorAll('[data-preview]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var file = btn.getAttribute('data-preview');
+          currentFile = file;
+          modalTitle.textContent = file;
+          modalMeta.textContent = 'Fetching raw Make.com blueprint JSON...';
+          modalJson.value = '';
+          modal.classList.add('open');
+          loadBlueprint(file)
+            .then(function (item) {
+              var modCount = countModules(item.parsed.flow);
+              modalMeta.textContent = (item.parsed.name || file) + ' · ' + modCount + ' modules · Valid Make.com v' + (item.parsed.metadata ? item.parsed.metadata.version : 1);
+              modalJson.value = item.text;
+            })
+            .catch(function (err) {
+              modalMeta.textContent = 'Unable to fetch live preview (' + err.message + '). Raw URL below:';
+              modalJson.value = RAW_BASE + file;
+            });
+        });
+      });
+
+      document.getElementById('modal-close').addEventListener('click', function () {
+        modal.classList.remove('open');
+      });
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) modal.classList.remove('open');
+      });
+      document.getElementById('modal-copy').addEventListener('click', function () {
+        var btn = this;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(modalJson.value).then(function () { flashCopied(btn, 'Copied!'); });
+        } else {
+          modalJson.select();
+          document.execCommand('copy');
+          flashCopied(btn, 'Copied!');
+        }
+      });
+      document.getElementById('modal-download').addEventListener('click', function () {
+        if (!currentFile || !modalJson.value) return;
+        triggerDownload(currentFile, modalJson.value);
+      });
+    })();
+  </script>
+</body>
+</html>

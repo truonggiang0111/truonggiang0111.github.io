@@ -1,12 +1,13 @@
 # b2b-ai-mcp-skills (`ttyan0111` / `truonggiang0111`)
 
-> Zero-proxy B2B Hiring Intelligence, Public Tenders, ClinicalTrials Biotech Leads, Competitor Ad Spend Spy, Multi-Store Review Churn Spy & Google News Real-URL RAG tools (`15` Agent Skills, `16` `n8n` Workflows, `n8n` Community Node `18` Ops, Google Sheets Add-on `18` Ops, `100` AI `.md` Tasks, `16` Live Agensi Skills + `3` Bundles, Node STDIO MCP + Python SDK + Sample Datasets).
+> Zero-proxy B2B Hiring Intelligence, Public Tenders, ClinicalTrials Biotech Leads, Competitor Ad Spend Spy, Multi-Store Review Churn Spy & Google News Real-URL RAG tools (`15` Agent Skills, `16` `n8n` Workflows, `8` `Make.com` Blueprints, `n8n` Community Node `18` Ops, Google Sheets Add-on `18` Ops, `100` AI `.md` Tasks, `16` Live Agensi Skills + `3` Bundles, Node STDIO MCP + Python SDK + Sample Datasets).
 > Hosted serverless on Apify (`$5/month` free credit included) and distributed on Agensi.io (`https://mcp.agensi.io/mcp/auth`).
 > Full single-file spec: [llms-full.txt](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/llms-full.txt)
 
 ## Technical Guides, Storefront, Open-Source SDKs & Sample Datasets
 
 - [Direct B2B Data Storefront ($29 Lead Packs, Custom Scrapers $199–$350, Agensi Bundles & Free Samples)](https://truonggiang0111.github.io/mcp/b2b-leads-datasets-and-custom-scrapers/)
+- [Interactive Make.com B2B Lead & Zero-Key Automation Blueprints (8 .make.json Scenarios)](https://truonggiang0111.github.io/mcp/make-com-apify-b2b-lead-blueprints/)
 - [Interactive 1-Click n8n Workflow & MCP Gallery (16 Workflows)](https://truonggiang0111.github.io/mcp/n8n-b2b-lead-automation-workflows/)
 - [How to Connect n8n AI Agents to Streamable HTTP & STDIO MCP Servers for B2B Lead Generation (2026)](https://truonggiang0111.github.io/mcp/n8n-mcp-client-ai-agent-b2b-leads/)
 - [How to Pull Live UK Gov Tenders, ClinicalTrials & Competitor Churn Leads Into Google Sheets (Zero-Key Apps Script + Apify)](https://truonggiang0111.github.io/mcp/google-sheets-apify-b2b-lead-automation/)
@@ -107,6 +108,19 @@
 - [workflows/n8n/n8n-ai-agent-streamable-http-mcp-prospecting.n8n.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/n8n-ai-agent-streamable-http-mcp-prospecting.n8n.json)
 - [workflows/n8n/n8n-ai-agent-stdio-zero-key-mcp-research.n8n.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/n8n-ai-agent-stdio-zero-key-mcp-research.n8n.json)
 - [workflows/n8n/weekly-competitor-review-databait-outreach-drafter.n8n.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/weekly-competitor-review-databait-outreach-drafter.n8n.json)
+
+## `8` Automation Blueprints (`Make.com` `.make.json`)
+
+- Interactive Gallery & Downloader: https://truonggiang0111.github.io/mcp/make-com-apify-b2b-lead-blueprints/
+- Blueprint Index: [workflows/make/README.md](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/README.md)
+- [workflows/make/google-news-real-url-rag.make.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/google-news-real-url-rag.make.json)
+- [workflows/make/shopify-1star-churn-leads.make.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/shopify-1star-churn-leads.make.json)
+- [workflows/make/clinicaltrials-biotech-pi-leads.make.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/clinicaltrials-biotech-pi-leads.make.json)
+- [workflows/make/uk-gov-tenders-buyer-emails.make.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/uk-gov-tenders-buyer-emails.make.json)
+- [workflows/make/reed-seek-direct-hiring-leads.make.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/reed-seek-direct-hiring-leads.make.json)
+- [workflows/make/substack-creator-sponsor-leads.make.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/substack-creator-sponsor-leads.make.json)
+- [workflows/make/vscode-chrome-competitor-bug-spy.make.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/vscode-chrome-competitor-bug-spy.make.json)
+- [workflows/make/wordpress-atlassian-churn-leads.make.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/wordpress-atlassian-churn-leads.make.json)
 
 ## `100` Ready-to-Run Published Use-Case Tasks (Web + `.md`)
 

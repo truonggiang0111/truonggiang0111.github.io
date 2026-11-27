@@ -1,7 +1,7 @@
 # b2b-ai-mcp-skills — Full AI Agent Ingestion Specification (`@ttyan0111` / `@truonggiang0111`)
 
 > Single-file complete technical specification for LLMs, AI coding agents (Claude Code, Cursor, Codex, VS Code, Copilot, ChatGPT), MCP clients, and search indexers.
-> Updated: 2026-11-27 | Publisher: Truong Truong Giang (`https://truonggiang0111.github.io/mcp/`)
+> Updated: 2026-11-28 | Publisher: Truong Truong Giang (`https://truonggiang0111.github.io/mcp/`)
 
 ## Quick Invocation Summary
 
@@ -9,7 +9,8 @@
    `https://mcp.apify.com?actors=ttyan0111/reed-uk-jobs-hiring-signals,ttyan0111/seek-au-nz-jobs-hiring-signals,ttyan0111/app-store-play-reviews-spy,ttyan0111/google-ads-transparency-spy,ttyan0111/google-news-ai-article-extractor,ttyan0111/substack-newsletter-creator-leads,ttyan0111/chrome-web-store-extension-spy,ttyan0111/shopify-app-store-churn-spy,ttyan0111/podcast-host-email-sponsor-spy,ttyan0111/vscode-cursor-extension-spy`
 2. **CLI Skill Install (`skills.sh` — `15` Portable Skills):**
    `npx skills add truonggiang0111/b2b-ai-mcp-skills`
-3. **Standalone Open-Source SDKs, `n8n` Node, CLIs & Sample Datasets:**
+3. **Standalone Open-Source SDKs, `n8n` Node, `Make.com` Blueprints, CLIs & Sample Datasets:**
+   - Make.com Blueprints (`8` `.make.json` scenarios, Zero-Key + Apify `/run-sync-get-dataset-items`): `https://truonggiang0111.github.io/mcp/make-com-apify-b2b-lead-blueprints/` · `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/README.md`
    - n8n Community Node (`npm install github:truonggiang0111/n8n-nodes-b2b-market-intel`, `usableAsTool: true`, `18` ops): `https://github.com/truonggiang0111/n8n-nodes-b2b-market-intel` (`v1.0.0`)
    - `16` Ready-to-Import `n8n` Workflows (`workflows/n8n/README.md`): `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/README.md`
    - Node STDIO MCP Server (`npx -y github:truonggiang0111/b2b-market-intel-mcp`): `https://github.com/truonggiang0111/b2b-market-intel-mcp` (`v1.0.0`)
@@ -464,6 +465,18 @@
 - 14. `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/n8n-ai-agent-streamable-http-mcp-prospecting.n8n.json`
 - 15. `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/n8n-ai-agent-stdio-zero-key-mcp-research.n8n.json`
 - 16. `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/weekly-competitor-review-databait-outreach-drafter.n8n.json`
+
+### `8` Ready-to-Import `Make.com` Blueprints (`workflows/make/README.md`)
+- Interactive Gallery & Downloader: `https://truonggiang0111.github.io/mcp/make-com-apify-b2b-lead-blueprints/`
+- Index: `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/README.md`
+- 1. `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/google-news-real-url-rag.make.json`
+- 2. `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/shopify-1star-churn-leads.make.json`
+- 3. `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/clinicaltrials-biotech-pi-leads.make.json`
+- 4. `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/uk-gov-tenders-buyer-emails.make.json`
+- 5. `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/reed-seek-direct-hiring-leads.make.json`
+- 6. `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/substack-creator-sponsor-leads.make.json`
+- 7. `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/vscode-chrome-competitor-bug-spy.make.json`
+- 8. `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/wordpress-atlassian-churn-leads.make.json`
 
 ### Google Sheets No-Code Apps Script Add-on & Custom Formulas (`google-sheets-b2b-lead-scraper`)
 - **Repo:** `https://github.com/truonggiang0111/google-sheets-b2b-lead-scraper` (`v1.0.0`) · **Single-File Gist:** `https://gist.github.com/truonggiang0111/e219e0531b5e28969da0a112f64cdb10`
