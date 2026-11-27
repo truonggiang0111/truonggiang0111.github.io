@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UK Contracts Finder OCDS API: Extract Direct .gov.uk, NHS &amp; Council Buyer Emails (2026) | @ttyan0111</title>
+  <meta name="description" content="Technical guide to extracting direct .gov.uk, NHS, university, and council procurement buyer emails, GBP budgets, CPV codes, and contract awards from the UK Contracts Finder OCDS and REST v2 APIs at $0 proxy cost." />
+  <link rel="canonical" href="https://truonggiang0111.github.io/mcp/uk-gov-contracts-finder-buyer-emails/" />
+  <link rel="alternate" type="text/plain" title="LLM Context Index" href="https://truonggiang0111.github.io/llms.txt" />
+  <link rel="alternate" type="text/plain" title="LLM Full Specification" href="https://truonggiang0111.github.io/llms-full.txt" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="UK Contracts Finder OCDS API: Extract Direct .gov.uk, NHS &amp; Council Buyer Emails (2026)" />
+  <meta property="og:description" content="Verified cloud benchmarks: 25/25 direct buyer emails in 14.13s and 15/15 software/cloud buyer emails (11 .gov.uk/.ac.uk) in 6.48s at $0 proxy cost, plus zero-key npx STDIO MCP." />
+  <meta property="og:url" content="https://truonggiang0111.github.io/mcp/uk-gov-contracts-finder-buyer-emails/" />
+  <meta property="og:site_name" content="Truong Truong Giang — B2B &amp; AI MCP Hub" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="UK Contracts Finder OCDS API: Extract Direct .gov.uk &amp; NHS Buyer Emails" />
+  <meta name="twitter:description" content="Dual-engine UK OCDS + REST v2 procurement lead pipeline with verified .gov.uk buyer emails, GBP budgets, and zero-key MCP integration." />
+
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --card: #121826;
+      --card-alt: #0e1420;
+      --border: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --green: #10b981;
+      --amber: #f59e0b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .wrap { max-width: 1020px; margin: 0 auto; padding: 32px 20px 84px; }
+    .breadcrumb { font-size: 0.85rem; color: var(--muted); margin-bottom: 18px; }
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    h1 { font-size: 1.85rem; line-height: 1.28; margin: 0 0 12px; color: #f8fafc; }
+    h2 { font-size: 1.3rem; margin: 40px 0 14px; color: #f8fafc; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    h3 { font-size: 1.05rem; margin: 22px 0 8px; color: #f8fafc; }
+    p, li { color: var(--muted); }
+    strong { color: var(--text); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.86em;
+      background: #06090f;
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #e2e8f0;
+    }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; font-size: 0.84rem; color: var(--muted); margin-bottom: 20px; }
+    .pill {
+      display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 0.76rem; font-weight: 600;
+      background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); color: var(--green);
+    }
+    .badges { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 28px; }
+    .badge {
+      display: inline-block; padding: 6px 12px; border-radius: 6px; font-size: 0.84rem; font-weight: 600;
+      background: var(--card); border: 1px solid var(--border); color: var(--text);
+    }
+    .badge:hover { border-color: var(--accent); text-decoration: none; }
+    .callout {
+      background: var(--card); border-left: 4px solid var(--accent); border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      border-radius: 8px; padding: 16px 18px; margin: 20px 0;
+    }
+    .callout.warn { border-left-color: var(--amber); }
+    .callout p { margin: 0; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 18px 0; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+    .card h3 { margin-top: 0; }
+    .tag { display: inline-block; font-size: 0.75rem; color: var(--green); font-weight: 600; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.03em; }
+    .stat-num { font-size: 1.5rem; font-weight: 700; color: #f8fafc; margin: 2px 0 4px; }
+    .table-wrap { overflow-x: auto; margin: 16px 0 24px; border: 1px solid var(--border); border-radius: 10px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; background: var(--card-alt); }
+    th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { background: var(--card); color: #f8fafc; font-weight: 600; }
+    td { color: var(--muted); }
+    tr:last-child td { border-bottom: none; }
+    .code-block { position: relative; margin: 14px 0 22px; }
+    .code-header {
+      display: flex; justify-content: space-between; align-items: center;
+      background: #0d1320; border: 1px solid var(--border); border-bottom: none;
+      border-radius: 8px 8px 0 0; padding: 7px 12px; font-size: 0.78rem; color: var(--muted);
+    }
+    .copy-btn {
+      background: var(--card); color: var(--text); border: 1px solid var(--border);
+      border-radius: 5px; padding: 3px 9px; font-size: 0.75rem; cursor: pointer; font-weight: 600;
+    }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    pre {
+      margin: 0; background: #06090f; border: 1px solid var(--border); border-radius: 0 0 8px 8px;
+      padding: 14px; overflow-x: auto; font-size: 0.84rem; color: #cbd5e1; line-height: 1.55;
+    }
+    pre code { background: none; border: none; padding: 0; color: inherit; font-size: inherit; }
+    .cta-box {
+      background: linear-gradient(180deg, #121826 0%, #0d1524 100%);
+      border: 1px solid #26354d; border-radius: 12px; padding: 22px; margin: 34px 0;
+    }
+    .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
+    .btn {
+      display: inline-block; padding: 9px 16px; border-radius: 7px; font-weight: 600; font-size: 0.88rem;
+      border: 1px solid var(--border); background: var(--card); color: var(--text);
+    }
+    .btn.primary { background: var(--accent); color: #081018; border-color: var(--accent); }
+    .btn:hover { text-decoration: none; opacity: 0.93; }
+    .faq-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px; }
+    .faq-item h3 { margin: 0 0 6px; font-size: 1rem; }
+    .faq-item p { margin: 0; }
+    footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.84rem; color: var(--muted); }
+    @media (max-width: 640px) { h1 { font-size: 1.5rem; } }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Portfolio", "item": "https://truonggiang0111.github.io/" },
+          { "@type": "ListItem", "position": 2, "name": "MCP & AI Skills Hub", "item": "https://truonggiang0111.github.io/mcp/" },
+          { "@type": "ListItem", "position": 3, "name": "UK Contracts Finder OCDS Buyer Emails", "item": "https://truonggiang0111.github.io/mcp/uk-gov-contracts-finder-buyer-emails/" }
+        ]
+      },
+      {
+        "@type": "TechArticle",
+        "headline": "UK Contracts Finder OCDS API: Extract Direct .gov.uk, NHS & Council Buyer Emails (2026)",
+        "description": "Engineering guide to extracting direct .gov.uk, NHS, university, and local council procurement buyer emails, GBP budgets, CPV codes, and contract award incumbents from UK Contracts Finder OCDS and REST v2 endpoints.",
+        "datePublished": "2026-11-27",
+        "dateModified": "2026-11-27",
+        "proficiencyLevel": "Intermediate",
+        "author": {
+          "@type": "Person",
+          "name": "Truong Truong Giang",
+          "url": "https://truonggiang0111.github.io/"
+        },
+        "publisher": {
+          "@type": "Person",
+          "name": "Truong Truong Giang",
+          "url": "https://truonggiang0111.github.io/mcp/"
+        },
+        "mainEntityOfPage": "https://truonggiang0111.github.io/mcp/uk-gov-contracts-finder-buyer-emails/",
+        "about": [
+          { "@type": "SoftwareApplication", "name": "UK Gov Tenders & Direct Buyer Emails Skill", "url": "https://www.agensi.io/skills/uk-gov-tenders-direct-buyer-emails" },
+          { "@type": "SoftwareSourceCode", "name": "b2b-market-intel-mcp", "codeRepository": "https://github.com/truonggiang0111/b2b-market-intel-mcp" }
+        ]
+      },
+      {
+        "@type": "HowTo",
+        "name": "Extract Verified UK Public-Sector Buyer Emails from Contracts Finder OCDS",
+        "totalTime": "PT2M",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Query OCDS Release Search or REST v2 search_notices/json",
+            "text": "Browse the latest public notices with GET /Published/Notices/OCDS/Search or run filtered keyword and stage searches via POST /api/rest/2/search_notices/json."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Resolve buyer parties and handle HTTP 429 fallbacks",
+            "text": "Inspect parties[] for buyer or procuringEntity roles to capture contactPoint.email, contactPoint.name, and contactPoint.telephone, falling back to /api/rest/2/get_published_notice/json/{id} when /Published/* throttles."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Connect via zero-key npx MCP, Agensi, or n8n",
+            "text": "Run npx -y github:truonggiang0111/b2b-market-intel-mcp (preview_uk_gov_tenders), activate uk-gov-tenders-direct-buyer-emails on Agensi, or import daily-uk-gov-tenders-alert.n8n.json."
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does the UK Contracts Finder OCDS API include direct procurement officer email addresses?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Public UK tender and award notices expose buyer contactPoint.name, contactPoint.email, and contactPoint.telephone inside OCDS parties[] (and contactDetails in REST v2). In verified cloud run Njadc1HylXqfinPN7, 25/25 notices returned buyer emails in 14.13s, including 10 .gov.uk and local council addresses."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I preview UK government tenders with zero API keys inside Claude Desktop or Cursor?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Run the zero-dependency STDIO MCP server via npx -y github:truonggiang0111/b2b-market-intel-mcp and invoke preview_uk_gov_tenders, or use the managed skill at https://www.agensi.io/skills/uk-gov-tenders-direct-buyer-emails."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens when Contracts Finder rate-limits /Published/Notice/releases requests?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "When /Published/* returns HTTP 429 during concurrent release lookups, switching to the unthrottled REST v2 detail endpoint (/api/rest/2/get_published_notice/json/{id}) resolves identical buyer contacts, GBP budgets, CPV codes, and awarded suppliers cleanly. Filtered run qXuQMEViTBxABbLzG returned 15/15 software/cloud buyer emails in 6.48s."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="https://truonggiang0111.github.io/">Home</a> /
+      <a href="https://truonggiang0111.github.io/mcp/">MCP &amp; Skills Hub</a> /
+      <span>UK Contracts Finder OCDS Buyer Emails</span>
+    </nav>
+
+    <div class="meta-row">
+      <span class="pill">UK GovTech &amp; Procurement Engineering</span>
+      <span>Verified on Apify Cloud (<code>256 MB</code> RAM · <code>$0</code> Proxy)</span>
+      <span>Updated: Nov 27, 2026</span>
+    </div>
+
+    <h1>UK Contracts Finder OCDS API: Extract Direct <code>.gov.uk</code>, NHS &amp; Council Buyer Emails (2026)</h1>
+    <p>Most B2B teams pay thousands per year for UK tender aggregators that wrap publicly accessible Open Contracting Data Standard (OCDS) notices from <strong>Contracts Finder</strong> (<code>contractsfinder.service.gov.uk</code>). Beneath the web portal, two official JSON APIs expose named procurement officers, direct <code>.gov.uk</code> / NHS / university / local council email addresses, exact GBP budgets, CPV classifications, SME suitability flags, and incumbent award winners — all accessible at <code>$0</code> proxy cost.</p>
+
+    <div class="badges">
+      <a class="badge" href="https://www.agensi.io/skills/uk-gov-tenders-direct-buyer-emails">Agensi Skill (<code>uk-gov-tenders-direct-buyer-emails</code>)</a>
+      <a class="badge" href="https://www.agensi.io/bundles/b2b-biotech-gov-tenders-creator-leads-bundle">Bundle #3: Biotech, Gov &amp; Creators (<code>-35%</code>)</a>
+      <a class="badge" href="https://github.com/truonggiang0111/b2b-market-intel-mcp">Zero-Key <code>npx</code> STDIO MCP</a>
+      <a class="badge" href="https://github.com/truonggiang0111/b2b-ai-mcp-skills/blob/main/skills/uk-gov-tenders-buyer-leads/SKILL.md">GitHub <code>SKILL.md</code></a>
+      <a class="badge" href="https://github.com/truonggiang0111/b2b-sample-datasets-2026">Sanitised Sample CSV/JSON</a>
+      <a class="badge" href="https://apify.com/ttyan0111">Apify Profile (<code>@ttyan0111</code>)</a>
+    </div>
+
+    <h2>1. Where Direct Buyer Emails Live in the UK OCDS Schema</h2>
+    <p>In UK Contracts Finder OCDS releases, buyer contact details sit inside the <code>parties[]</code> array rather than the top-level <code>tender</code> object. Resolving the right party requires inspecting <code>roles</code> in priority order:</p>
+
+    <ol>
+      <li><strong>Buyer Role Resolution:</strong> Match <code>parties[]</code> entries containing <code>roles.includes("buyer")</code> first, then <code>"procuringEntity"</code>, and finally any non-<code>"supplier"</code> party. Extract <code>contactPoint.name</code>, <code>contactPoint.email</code>, <code>contactPoint.telephone</code>, <code>contactPoint.url</code>, and <code>address.postalCode</code>.</li>
+      <li><strong>Public-Sector Domain Verification (<code>isPublicSectorDomain</code>):</strong> Classify extracted emails against institutional UK suffixes (<code>.gov.uk</code>, <code>.nhs.uk</code>, <code>.nhs.net</code>, <code>.police.uk</code>, <code>.mod.uk</code>, <code>.ac.uk</code>, <code>.parliament.uk</code>, <code>.sch.uk</code>, <code>.org.uk</code>) and fall back to scanning <code>tender.description</code> if <code>contactPoint.email</code> is blank.</li>
+      <li><strong>Incumbent &amp; Renewal Intelligence (<code>award</code> Stage):</strong> Cross-reference <code>awards[].suppliers[]</code> against <code>parties[]</code> where <code>roles.includes("supplier")</code> to capture winning vendor names, SME status (<code>details.scale === "sme"</code>), and contract end dates for upcoming framework renewals.</li>
+    </ol>
+
+    <div class="callout warn">
+      <p><strong>Rate-Limit Pitfall on <code>/Published/*</code> Endpoints:</strong> Sending concurrent bursts to <code>/Published/Notice/releases/{id}.json</code> frequently triggers <code>HTTP 429</code> throttling. A resilient extractor queries <code>/Published/Notices/OCDS/Search</code> as a single bulk call when browsing latest notices, and pairs <code>POST /api/rest/2/search_notices/json</code> with <code>GET /api/rest/2/get_published_notice/json/{id}</code> fallback whenever <code>/Published/*</code> returns <code>429</code> or <code>404</code>.</p>
+    </div>
+
+    <h2>2. Verified Cloud Benchmarks (<code>Njadc1HylXqfinPN7</code> &amp; <code>qXuQMEViTBxABbLzG</code>)</h2>
+    <p>Both benchmarks below executed on <code>256 MB</code> Apify Cloud containers for <code>ttyan0111/uk-gov-tenders-buyer-leads</code> with zero proxies enabled:</p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="tag">Default Latest Feed (<code>Njadc1HylXqfinPN7</code>)</div>
+        <div class="stat-num">14.13s · 25 / 25 Emails</div>
+        <p>Returned <code>25/25</code> buyer emails at <code>62.5 / 256 MB</code> RAM, including <code>10</code> direct <code>.gov.uk</code>/council addresses, <code>23</code> SME-suitable notices, and <code>£35,245,699</code> GBP in total tender value.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Software &amp; Cloud Filter (<code>qXuQMEViTBxABbLzG</code>)</div>
+        <div class="stat-num">6.48s · 15 / 15 Emails</div>
+        <p>Filtered <code>["software", "cloud"]</code> with <code>onlyWithEmail: true</code> at <code>67.8 / 256 MB</code> RAM: <code>15/15</code> buyer emails (<code>11</code> <code>.gov.uk</code>/<code>.ac.uk</code>), <code>5</code> open tenders + <code>10</code> contract awards, totaling <code>£2,845,749,885</code> GBP.</p>
+      </div>
+    </div>
+
+    <h3>Sample Verified Public-Sector Buyer Records (From Cloud <code>RUN_SUMMARY</code>)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Run ID</th>
+            <th>UK Public Buyer Organization</th>
+            <th>Verified Contact Email</th>
+            <th>Contract Scope &amp; Budget</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>qXuQMEViTBxABbLzG</code></td>
+            <td>Lincolnshire County Council</td>
+            <td><code>samantha.flacks@lincolnshire.gov.uk</code></td>
+            <td>LCC Transport DPS (Open Tender · <code>£1,680,000,000</code> GBP)</td>
+          </tr>
+          <tr>
+            <td><code>qXuQMEViTBxABbLzG</code></td>
+            <td>Crown Commercial Service</td>
+            <td><code>hscndps@crowncommercial.gov.uk</code></td>
+            <td>HSCN Access Services Extension (<code>£500,000,000</code> GBP)</td>
+          </tr>
+          <tr>
+            <td><code>qXuQMEViTBxABbLzG</code></td>
+            <td>East Suffolk Council</td>
+            <td><code>mark.fisher@eastsuffolk.gov.uk</code></td>
+            <td>Coastal Management DPS (<code>£50,000,000</code> GBP)</td>
+          </tr>
+          <tr>
+            <td><code>qXuQMEViTBxABbLzG</code></td>
+            <td>DSIT, DVSA, Barnet, Hants, City of London, Chester &amp; SHU</td>
+            <td><code>commissioning-digital@dsit.gov.uk</code> · <code>commercialenquiries@dvsa.gov.uk</code> · <code>procurement@chester.ac.uk</code></td>
+            <td><code>software</code> + <code>cloud</code> tenders &amp; awards (<code>11/15</code> <code>.gov.uk</code> / <code>.ac.uk</code>)</td>
+          </tr>
+          <tr>
+            <td><code>Njadc1HylXqfinPN7</code></td>
+            <td>Mayor's Office for Policing &amp; Crime (MOPAC)</td>
+            <td><code>mopacprocurement@mopac.london.gov.uk</code></td>
+            <td>MOPAC Victim &amp; Adult Services (<code>£5,500,000</code> &amp; <code>£5,438,000</code> GBP)</td>
+          </tr>
+          <tr>
+            <td><code>Njadc1HylXqfinPN7</code></td>
+            <td>Colchester City Council / East Sussex / Hull CC</td>
+            <td><code>matthew.howe@colchester.gov.uk</code> · <code>procurement@eastsussex.gov.uk</code> · <code>israel.adepoju@hullcc.gov.uk</code></td>
+            <td>Housing &amp; municipal tenders (Colchester notice <code>£5,000,000</code> GBP)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Pay-per-Event Metric (Cloud Batch)</th>
+            <th>Unit Price (USD)</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>actor-start</code></td>
+            <td><code>$0.008</code> / run</td>
+            <td>Zero proxy surcharge; runs in <code>256 MB</code> RAM container</td>
+          </tr>
+          <tr>
+            <td><code>tender-scraped</code></td>
+            <td><code>$2.00</code> / 1,000 notices</td>
+            <td>Normalized OCDS + REST v2 fields with CPV &amp; SME flags</td>
+          </tr>
+          <tr>
+            <td><code>buyer-email-enriched</code></td>
+            <td><code>$2.50</code> / 1,000 verified emails</td>
+            <td>Charged only when a verified buyer email is returned</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>3. Copy-Paste Integration: Zero-Key <code>npx</code> MCP, <code>skills.sh</code>, Python &amp; <code>n8n</code></h2>
+
+    <h3>Option A — Instant Zero-Key STDIO MCP Server (<code>preview_uk_gov_tenders</code>)</h3>
+    <p>Test live UK Contracts Finder OCDS notices right now with <strong>no API key</strong> using <a href="https://github.com/truonggiang0111/b2b-market-intel-mcp"><code>truonggiang0111/b2b-market-intel-mcp</code></a> inside Claude Code, Claude Desktop, or Cursor:</p>
+    <div class="code-block">
+      <div class="code-header">
+        <span>Claude Code CLI &amp; mcp.json</span>
+        <button class="copy-btn" type="button" data-copy="mcp-ukgov">Copy</button>
+      </div>
+      <pre id="mcp-ukgov"><code># 1-command install in Claude Code (zero API key required for preview_uk_gov_tenders)
+claude mcp add b2b-market-intel -- npx -y github:truonggiang0111/b2b-market-intel-mcp
+
+# Or paste into claude_desktop_config.json / .cursor/mcp.json:
+{
+  "mcpServers": {
+    "b2b-market-intel": {
+      "command": "npx",
+      "args": ["-y", "github:truonggiang0111/b2b-market-intel-mcp"]
+    }
+  }
+}</code></pre>
+    </div>
+
+    <h3>Option B — Portable <code>skills.sh</code> Playbook &amp; Managed Agensi Skill</h3>
+    <p>Install the <a href="https://github.com/truonggiang0111/b2b-ai-mcp-skills/blob/main/skills/uk-gov-tenders-buyer-leads/SKILL.md"><code>uk-gov-tenders-buyer-leads</code> skill</a> or run zero-key cloud queries via <a href="https://www.agensi.io/skills/uk-gov-tenders-direct-buyer-emails">Agensi (<code>uk-gov-tenders-direct-buyer-emails</code>)</a>:</p>
+    <div class="code-block">
+      <div class="code-header">
+        <span>Terminal — skills.sh</span>
+        <button class="copy-btn" type="button" data-copy="cli-ukgov">Copy</button>
+      </div>
+      <pre id="cli-ukgov"><code>npx skills add truonggiang0111/b2b-ai-mcp-skills --skill uk-gov-tenders-buyer-leads</code></pre>
+    </div>
+
+    <h3>Option C — Direct OCDS Query in Python (<code>requests</code>) + Scheduled <code>n8n</code> Workflow</h3>
+    <p>Query the public OCDS endpoint directly in Python or import <a href="https://github.com/truonggiang0111/b2b-ai-mcp-skills/blob/main/workflows/n8n/daily-uk-gov-tenders-alert.n8n.json"><code>daily-uk-gov-tenders-alert.n8n.json</code></a> into <code>n8n</code>:</p>
+    <div class="code-block">
+      <div class="code-header">
+        <span>uk_gov_ocds_buyer_emails.py</span>
+        <button class="copy-btn" type="button" data-copy="py-ukgov">Copy</button>
+      </div>
+      <pre id="py-ukgov"><code>import requests
+
+resp = requests.get(
+    "https://www.contractsfinder.service.gov.uk/Published/Notices/OCDS/Search",
+    params={"limit": 10, "stages": "tender"},
+    headers={"Accept": "application/json"},
+    timeout=20,
+)
+resp.raise_for_status()
+
+for rel in resp.json().get("releases", []):
+    parties = rel.get("parties", [])
+    buyer = next(
+        (p for p in parties if any(r in ("buyer", "procuringEntity") for r in p.get("roles", []))),
+        {},
+    )
+    cp = buyer.get("contactPoint", {})
+    tender = rel.get("tender", {})
+    print({
+        "ocid": rel.get("ocid"),
+        "title": tender.get("title"),
+        "buyer": buyer.get("name"),
+        "email": cp.get("email"),
+        "valueGBP": (tender.get("value") or {}).get("amount"),
+        "deadline": (tender.get("tenderPeriod") or {}).get("endDate"),
+    })</code></pre>
+    </div>
+
+    <div class="cta-box">
+      <h3>Turn UK Public Tenders Into Direct Procurement Conversations</h3>
+      <p>Start free with <code>npx -y github:truonggiang0111/b2b-market-intel-mcp</code> and our <a href="https://www.agensi.io/creators/giang-tr-ng-tr-ng">3 Free Starter Skills on Agensi</a>, unlock one-click cloud execution with <strong>UK Gov Tenders &amp; Direct Buyer Emails</strong>, or save <strong>35%</strong> in <strong>Bundle #3</strong> alongside ClinicalTrials.gov &amp; Creator Leads.</p>
+      <div class="cta-actions">
+        <a class="btn primary" href="https://www.agensi.io/skills/uk-gov-tenders-direct-buyer-emails">Open Skill on Agensi</a>
+        <a class="btn" href="https://www.agensi.io/bundles/b2b-biotech-gov-tenders-creator-leads-bundle">Bundle #3: Save 35% ($12.99)</a>
+        <a class="btn" href="https://github.com/truonggiang0111/b2b-market-intel-mcp">Zero-Key <code>npx</code> MCP Repo</a>
+        <a class="btn" href="https://www.agensi.io/creators/giang-tr-ng-tr-ng">Agensi Storefront (Free Starter Skills)</a>
+      </div>
+    </div>
+
+    <h2>4. Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <h3>Does the UK Contracts Finder OCDS API include direct procurement officer email addresses?</h3>
+      <p>Yes. Public UK tender and award notices expose buyer <code>contactPoint.name</code>, <code>contactPoint.email</code>, and <code>contactPoint.telephone</code> inside OCDS <code>parties[]</code> (and <code>contactDetails</code> in REST v2). In verified cloud run <code>Njadc1HylXqfinPN7</code>, <code>25/25</code> notices returned buyer emails in <code>14.13s</code>, including <code>10</code> <code>.gov.uk</code> and local council addresses.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How can I preview UK government tenders with zero API keys inside Claude Desktop or Cursor?</h3>
+      <p>Run the zero-dependency STDIO MCP server via <code>npx -y github:truonggiang0111/b2b-market-intel-mcp</code> and invoke <code>preview_uk_gov_tenders</code>, or install the managed skill at <a href="https://www.agensi.io/skills/uk-gov-tenders-direct-buyer-emails"><code>uk-gov-tenders-direct-buyer-emails</code></a>.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What happens when Contracts Finder rate-limits <code>/Published/Notice/releases</code> requests?</h3>
+      <p>When <code>/Published/*</code> returns <code>HTTP 429</code> during concurrent release lookups, falling back to the unthrottled REST v2 detail endpoint (<code>/api/rest/2/get_published_notice/json/{id}</code>) resolves identical buyer contacts, GBP budgets, CPV codes, and awarded suppliers. Filtered run <code>qXuQMEViTBxABbLzG</code> returned <code>15/15</code> software/cloud buyer emails in <code>6.48s</code>.</p>
+    </div>
+
+    <h2>More Technical Guides &amp; Real-Data Teardowns</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="tag">Biotech &amp; Pharma Leads</div>
+        <h3><a href="/mcp/clinicaltrials-gov-biotech-sponsor-leads/">ClinicalTrials.gov REST v2: Biotech Sponsor &amp; PI Emails</a></h3>
+        <p>Trim <code>~96%</code> JSON payload bloat and extract <code>24/25</code> central sponsor emails + <code>183</code> total Biotech &amp; PI emails in <code>2.18s</code>.</p>
+      </div>
+      <div class="card">
+        <div class="tag">UK &amp; ANZ Hiring Signals</div>
+        <h3><a href="/mcp/direct-employer-hiring-leads-uk-au/">Filter Recruitment Agency &amp; Bootcamp Spam on Reed &amp; Seek</a></h3>
+        <p>Combine UK public-sector tender triggers with private-sector direct hiring signals (<code>direct=True</code>, Outside IR35).</p>
+      </div>
+    </div>
+
+    <footer>
+      Built by <a href="https://truonggiang0111.github.io/">Truong Truong Giang</a> · <a href="/mcp/">MCP Directory Hub</a> · <a href="/llms.txt">llms.txt</a> · <a href="/llms-full.txt">llms-full.txt</a>
+    </footer>
+  </main>
+
+  <script>
+    document.querySelectorAll('.copy-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var target = document.getElementById(btn.getAttribute('data-copy'));
+        if (!target) return;
+        navigator.clipboard.writeText(target.innerText).then(function () {
+          var prev = btn.textContent;
+          btn.textContent = 'Copied!';
+          setTimeout(function () { btn.textContent = prev; }, 1600);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
