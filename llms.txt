@@ -1,7 +1,13 @@
 # Truong Truong Giang (@truonggiang0111 / @ttyan0111) — AI & B2B Market Intel Tools
 
-> Agent-First MCP Servers, Apify Actors, Agensi.io Managed Skills, skills.sh Playbooks, and n8n Workflows for B2B Hiring Signals (Reed UK, Seek AU/NZ), Google Ads Transparency EU DSA Spend, Unified iOS + Android App Bug Spy, and Google News Real-URL RAG.
+> Agent-First MCP Servers, Apify Actors, Agensi.io Managed Skills (11 Live + Bundle), skills.sh Playbooks, and n8n Workflows for B2B Hiring Signals (Reed UK, Seek AU/NZ), Google Ads Transparency EU DSA Spend, Multi-Store Review Churn & Dev Email Spy, and Google News Real-URL RAG.
 > Full single-file technical spec: https://truonggiang0111.github.io/llms-full.txt
+
+## Technical Guides & Real-Data Benchmarks (2026)
+
+- [How to Decode Opaque news.google.com/rss CBMi Links Into Real Publisher URLs & Clean Markdown for AI RAG (2026)](https://truonggiang0111.github.io/mcp/google-news-rss-url-decoder/): 4-stage `DotsSplashUi` `Fbv4je` RPC resolution (`20/20` real publisher URLs decoded in `6.47s`, `15/20` clean full text, `$0` proxy).
+- [Mining 1-Star & 2-Star App, Extension & SaaS Reviews for B2B Churn Leads](https://truonggiang0111.github.io/mcp/shopify-app-store-1-star-churn-teardown/): Verified cloud benchmarks across Shopify App Store (`2.7s`, Klaviyo `3,485` reviews + `20` `1★–2★` churn reviews), iOS/Play (`3.02s`, `60` Spotify reviews), VS Code + Open-VSX (`anthropic.claude-code` `100.1M` installs + `121` bug reviews), and Chrome Web Store (`4.70s`, `15/15` dev emails).
+- [Filtering Out Recruitment Agency & Bootcamp Spam (~48% Noise) on Reed.co.uk & Seek.com.au via MCP & n8n](https://truonggiang0111.github.io/mcp/direct-employer-hiring-leads-uk-au/): Reed `direct=True` + bootcamp exclusion + Outside/Inside IR35 flags paired with Seek JobSearch v5 JSON + GraphQL `companyProfile` enrichment + daily `n8n` pipeline.
 
 ## Direct MCP Servers (Streamable HTTP via Apify MCP)
 
@@ -14,12 +20,17 @@
 
 ## Zero-Key Managed Marketplace (Agensi.io — `https://mcp.agensi.io/mcp/auth`)
 
-- **Creator Storefront (`Start here` pinned):** https://www.agensi.io/creators/giang-tr-ng-tr-ng
+- **Creator Storefront (`Start here` pinned — 11 Live Skills + Bundle):** https://www.agensi.io/creators/giang-tr-ng-tr-ng
 - **Google News Real URL Decoder for AI RAG (`Free`):** https://www.agensi.io/skills/google-news-real-url-decoder-for-ai-rag
 - **UK Direct Employer Hiring Signals — Reed UK (`Free`):** https://www.agensi.io/skills/uk-direct-employer-hiring-signals-reed-uk
 - **Competitor App Bug & Review Spy — iOS & Play (`Free`):** https://www.agensi.io/skills/competitor-app-bug-review-spy-ios-play
 - **AU/NZ Direct Employer Hiring Signals — Seek (`$5.00`):** https://www.agensi.io/skills/au-nz-direct-employer-hiring-signals-seek
 - **Competitor Google Ads Transparency & Funnel Spy (`$5.00`):** https://www.agensi.io/skills/competitor-google-ads-transparency-funnel-spy
+- **Substack Newsletter Creator & Email Leads (`$5.00`):** https://www.agensi.io/skills/substack-newsletter-creator-email-leads
+- **VS Code & Cursor Extension Install & Bug Spy (`$5.00`):** https://www.agensi.io/skills/vs-code-cursor-extension-install-bug-spy
+- **Podcast Host Direct Email & Sponsor Finder (`$5.00`):** https://www.agensi.io/skills/podcast-host-direct-email-sponsor-finder
+- **Chrome Web Store Extension & Dev Email Spy (`$5.00`):** https://www.agensi.io/skills/chrome-web-store-extension-dev-email-spy
+- **Substack Viral Notes Outlier & Hook Ghostwriter (`$5.00`):** https://www.agensi.io/skills/substack-viral-notes-outlier-hook-ghostwriter
 - **B2B Market & Hiring Intelligence 5-in-1 Pack (`$7.99`, `-20%` Launch Deal `$6.39`):** https://www.agensi.io/skills/b2b-market-hiring-intelligence-5-in-1-pack
 - **Bundle — B2B Hiring & Competitor Ad Spy Bundle (`$7.99`, Save `20%`):** https://www.agensi.io/bundles/b2b-hiring-competitor-ad-spy-bundle
 

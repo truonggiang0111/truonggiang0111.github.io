@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Filtering Out Recruitment Agency &amp; Bootcamp Spam (~48% Noise) on Reed.co.uk &amp; Seek.com.au via MCP &amp; n8n | @ttyan0111</title>
+  <meta name="description" content="How to strip ~48% bootcamp and recruitment agency noise on Reed.co.uk (direct=True, Outside/Inside IR35) and bypass Seek.com.au HTML 403 blocks via native GraphQL company enrichment + n8n." />
+  <link rel="canonical" href="https://truonggiang0111.github.io/mcp/direct-employer-hiring-leads-uk-au/" />
+  <link rel="alternate" type="text/plain" title="LLM Context Index" href="https://truonggiang0111.github.io/llms.txt" />
+  <link rel="alternate" type="text/plain" title="LLM Full Specification" href="https://truonggiang0111.github.io/llms-full.txt" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Filtering Out Recruitment Agency &amp; Bootcamp Spam (~48% Noise) on Reed.co.uk &amp; Seek.com.au via MCP &amp; n8n" />
+  <meta property="og:description" content="Isolate verified UK &amp; ANZ companies hiring in-house using Reed direct=True + IR35 detection and Seek v5 JSON + GraphQL company profiles at $0 proxy cost." />
+  <meta property="og:url" content="https://truonggiang0111.github.io/mcp/direct-employer-hiring-leads-uk-au/" />
+  <meta property="og:site_name" content="Truong Truong Giang — B2B &amp; AI MCP Hub" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Filter Agency &amp; Bootcamp Spam (~48% Noise) on Reed.co.uk &amp; Seek.com.au" />
+  <meta name="twitter:description" content="Zero-proxy UK &amp; AU/NZ direct-employer hiring signals via Apify MCP, skills.sh, Agensi.io, and daily n8n workflows." />
+
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --card: #121826;
+      --card-alt: #0e1420;
+      --border: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --green: #10b981;
+      --amber: #f59e0b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .wrap { max-width: 1020px; margin: 0 auto; padding: 32px 20px 84px; }
+    .breadcrumb { font-size: 0.85rem; color: var(--muted); margin-bottom: 18px; }
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    h1 { font-size: 1.85rem; line-height: 1.28; margin: 0 0 12px; color: #f8fafc; }
+    h2 { font-size: 1.3rem; margin: 40px 0 14px; color: #f8fafc; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    h3 { font-size: 1.05rem; margin: 22px 0 8px; color: #f8fafc; }
+    p, li { color: var(--muted); }
+    strong { color: var(--text); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.86em;
+      background: #06090f;
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #e2e8f0;
+    }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; font-size: 0.84rem; color: var(--muted); margin-bottom: 20px; }
+    .pill {
+      display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 0.76rem; font-weight: 600;
+      background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); color: var(--green);
+    }
+    .badges { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 28px; }
+    .badge {
+      display: inline-block; padding: 6px 12px; border-radius: 6px; font-size: 0.84rem; font-weight: 600;
+      background: var(--card); border: 1px solid var(--border); color: var(--text);
+    }
+    .badge:hover { border-color: var(--accent); text-decoration: none; }
+    .callout {
+      background: var(--card); border-left: 4px solid var(--accent); border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      border-radius: 8px; padding: 16px 18px; margin: 20px 0;
+    }
+    .callout.warn { border-left-color: var(--amber); }
+    .callout p { margin: 0; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 18px 0; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+    .card h3 { margin-top: 0; }
+    .tag { display: inline-block; font-size: 0.75rem; color: var(--green); font-weight: 600; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.03em; }
+    .stat-num { font-size: 1.48rem; font-weight: 700; color: #f8fafc; margin: 2px 0 4px; }
+    .table-wrap { overflow-x: auto; margin: 16px 0 24px; border: 1px solid var(--border); border-radius: 10px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; background: var(--card-alt); }
+    th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { background: var(--card); color: #f8fafc; font-weight: 600; }
+    td { color: var(--muted); }
+    tr:last-child td { border-bottom: none; }
+    .code-block { position: relative; margin: 14px 0 22px; }
+    .code-header {
+      display: flex; justify-content: space-between; align-items: center;
+      background: #0d1320; border: 1px solid var(--border); border-bottom: none;
+      border-radius: 8px 8px 0 0; padding: 7px 12px; font-size: 0.78rem; color: var(--muted);
+    }
+    .copy-btn {
+      background: var(--card); color: var(--text); border: 1px solid var(--border);
+      border-radius: 5px; padding: 3px 9px; font-size: 0.75rem; cursor: pointer; font-weight: 600;
+    }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    pre {
+      margin: 0; background: #06090f; border: 1px solid var(--border); border-radius: 0 0 8px 8px;
+      padding: 14px; overflow-x: auto; font-size: 0.84rem; color: #cbd5e1; line-height: 1.55;
+    }
+    pre code { background: none; border: none; padding: 0; color: inherit; font-size: inherit; }
+    .cta-box {
+      background: linear-gradient(180deg, #121826 0%, #0d1524 100%);
+      border: 1px solid #26354d; border-radius: 12px; padding: 22px; margin: 34px 0;
+    }
+    .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
+    .btn {
+      display: inline-block; padding: 9px 16px; border-radius: 7px; font-weight: 600; font-size: 0.88rem;
+      border: 1px solid var(--border); background: var(--card); color: var(--text);
+    }
+    .btn.primary { background: var(--accent); color: #081018; border-color: var(--accent); }
+    .btn:hover { text-decoration: none; opacity: 0.93; }
+    .faq-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px; }
+    .faq-item h3 { margin: 0 0 6px; font-size: 1rem; }
+    .faq-item p { margin: 0; }
+    ul.two-col { padding-left: 18px; columns: 2; column-gap: 24px; }
+    footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.84rem; color: var(--muted); }
+    @media (max-width: 720px) { ul.two-col { columns: 1; } h1 { font-size: 1.5rem; } }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Portfolio", "item": "https://truonggiang0111.github.io/" },
+          { "@type": "ListItem", "position": 2, "name": "MCP & AI Skills Hub", "item": "https://truonggiang0111.github.io/mcp/" },
+          { "@type": "ListItem", "position": 3, "name": "Direct-Employer Hiring Leads (UK & AU/NZ)", "item": "https://truonggiang0111.github.io/mcp/direct-employer-hiring-leads-uk-au/" }
+        ]
+      },
+      {
+        "@type": "TechArticle",
+        "headline": "Filtering Out Recruitment Agency & Bootcamp Spam (~48% Noise) on Reed.co.uk & Seek.com.au via MCP & n8n",
+        "description": "Engineering guide to isolating verified UK and Australian/NZ direct employers by combining Reed.co.uk direct=True + hideTrainingJobs=true + IR35 parsing with Seek JobSearch v5 JSON + GraphQL companyProfile enrichment.",
+        "datePublished": "2026-11-27",
+        "dateModified": "2026-11-27",
+        "proficiencyLevel": "Intermediate",
+        "author": {
+          "@type": "Person",
+          "name": "Truong Truong Giang",
+          "url": "https://truonggiang0111.github.io/"
+        },
+        "publisher": {
+          "@type": "Person",
+          "name": "Truong Truong Giang",
+          "url": "https://truonggiang0111.github.io/mcp/"
+        },
+        "mainEntityOfPage": "https://truonggiang0111.github.io/mcp/direct-employer-hiring-leads-uk-au/",
+        "about": [
+          { "@type": "SoftwareApplication", "name": "Reed.co.uk Jobs & Direct IR35 Signals", "url": "https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals" },
+          { "@type": "SoftwareApplication", "name": "Seek AU & NZ Jobs GraphQL Signals", "url": "https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals" }
+        ]
+      },
+      {
+        "@type": "HowTo",
+        "name": "Automate Daily UK & Australia Direct-Employer B2B Hiring Leads",
+        "totalTime": "PT3M",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Enable Reed.co.uk direct=True and bootcamp exclusion",
+            "text": "Call ttyan0111/reed-uk-jobs-hiring-signals with directEmployerOnly: true and excludeTrainingCourses: true to strip staffing agencies and disguised isTrainingJob bootcamp ads (~48% of unfiltered direct listings)."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Enrich Seek AU/NZ listings via native v5 JSON + GraphQL",
+            "text": "Call ttyan0111/seek-au-nz-jobs-hiring-signals with directEmployerOnly: true and includeCompanyDetails: true to bypass /job/<id> HTML 403 Kasada blocks and retrieve companyWebsite, companySize, and companyIndustry."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Schedule daily merge in n8n or connect via MCP",
+            "text": "Import daily-uk-au-direct-employer-leads.n8n.json or connect both MCP servers in Claude Desktop / Cursor."
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Why do unfiltered Reed.co.uk job scrapes contain ~48% training and agency noise?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Third-party staffing agencies dominate general Reed searches, and even when filtering by direct postings, disguised paid career bootcamps (isTrainingJob) pollute roughly 48% of unfiltered direct results. Combining direct=True, hideTrainingJobs=true, and detail-page intermediary checks isolates real UK companies hiring in-house."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does seek-au-nz-jobs-hiring-signals bypass Seek HTML 403 Kasada blocks without proxies?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Instead of scraping https://www.seek.com.au/job/<id> HTML pages (which return HTTP 403 Kasada challenges), the Actor queries Seek's JobSearch v5 JSON API and POSTs to /graphql for jobDetails and companyProfile(zone: \"anz-1\"), finishing 25 AU jobs in 5.49s at 63.7 MB RAM with $0 proxy cost."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does the Reed UK scraper detect Outside IR35 vs Inside IR35 contract status?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Each enriched UK job record exposes boolean outsideIr35 and insideIr35 flags alongside normalized GBP salaryMin, salaryMax, salaryPeriod, required skills, and externalApplyUrl."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="https://truonggiang0111.github.io/">Home</a> /
+      <a href="https://truonggiang0111.github.io/mcp/">MCP &amp; Skills Hub</a> /
+      <span>UK &amp; AU Direct-Employer Hiring Leads</span>
+    </nav>
+
+    <div class="meta-row">
+      <span class="pill">B2B Hiring Signal Engineering</span>
+      <span>Verified Zero-Proxy (`256 MB` RAM · UK + AU/NZ)</span>
+      <span>Updated: Nov 27, 2026</span>
+    </div>
+
+    <h1>Filtering Out Recruitment Agency &amp; Bootcamp Spam (~48% Noise) on Reed.co.uk &amp; Seek.com.au via MCP &amp; n8n</h1>
+    <p>Active job postings are one of the strongest B2B buying-intent triggers for outbound agencies, DevTools vendors, and fractional consultants. Yet raw scrapes of <strong>Reed.co.uk</strong> and <strong>Seek.com.au / Seek.co.nz</strong> fail B2B teams for two structural reasons: <strong>nearly half of unfiltered "direct" postings on Reed are disguised paid bootcamps or staffing intermediaries</strong>, while <strong>Seek blocks HTML job detail pages behind Kasada <code>HTTP 403</code> walls</strong>.</p>
+
+    <div class="badges">
+      <a class="badge" href="https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals">Reed UK Actor (`reed-uk-jobs-hiring-signals`)</a>
+      <a class="badge" href="https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals">Seek AU/NZ Actor (`seek-au-nz-jobs-hiring-signals`)</a>
+      <a class="badge" href="https://www.agensi.io/skills/uk-direct-employer-hiring-signals-reed-uk">Free Reed UK Agensi Skill (`$0`)</a>
+      <a class="badge" href="https://www.agensi.io/skills/au-nz-direct-employer-hiring-signals-seek">Seek AU/NZ Agensi Skill (`$5`)</a>
+      <a class="badge" href="https://www.agensi.io/bundles/b2b-hiring-competitor-ad-spy-bundle">Agensi Hiring + Ad Spy Bundle (`-20%`)</a>
+    </div>
+
+    <h2>1. Reed.co.uk: Stripping `~48%` Bootcamp Pollution + Detecting Outside IR35</h2>
+    <p>When B2B lead-gen pipelines scrape Reed.co.uk without strict server and detail-level hygiene, outreach lists fill up with recruitment agencies and paid "guaranteed job placement" training courses:</p>
+
+    <ul>
+      <li><strong><code>directEmployerOnly: true</code> (<code>direct=True</code> + Detail Verification):</strong> Enforces Reed's server-side direct-employer parameter and verifies detail-page advertiser metadata to strip third-party staffing agencies.</li>
+      <li><strong><code>excludeTrainingCourses: true</code> (<code>hideTrainingJobs=true</code>):</strong> Rejects paid bootcamp/course listings flagged via <code>isTrainingJob</code> — which pollute <strong><code>~48%</code> of unfiltered direct postings</strong> on Reed.</li>
+      <li><strong>UK Contractor Tax &amp; Compensation Signals:</strong> Extracts structured <code>outsideIr35</code> and <code>insideIr35</code> boolean flags, normalizes GBP hourly/daily/annual pay (<code>salaryMin</code>, <code>salaryMax</code>, <code>salaryPeriod</code>), preserves <code>C#</code> / <code>.NET</code> / <code>C++</code> symbols in search URLs, and parses <code>__NEXT_DATA__</code> for <code>externalApplyUrl</code>.</li>
+    </ul>
+
+    <h2>2. Seek.com.au &amp; Seek.co.nz: Bypassing HTML `403` Blocks via v5 JSON + GraphQL</h2>
+    <div class="callout warn">
+      <p><strong>Why HTML scrapers fail on Seek:</strong> Fetching <code>https://www.seek.com.au/job/&lt;id&gt;</code> HTML triggers Kasada anti-bot challenges (<code>HTTP 403</code>), forcing traditional scrapers to rent expensive residential proxies and headless browsers.</p>
+    </div>
+    <p><a href="https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals"><code>ttyan0111/seek-au-nz-jobs-hiring-signals</code></a> eliminates browser overhead completely by chaining two native first-party endpoints over <code>got-scraping</code>:</p>
+    <ol>
+      <li><strong>Search Layer (<code>GET /api/jobsearch/v5/search</code>):</strong> Queries <code>AU-Main</code> (<code>seek.com.au</code>) or <code>NZ-Main</code> (<code>seek.co.nz</code>) with native server-side remote filtering (<code>workarrangement=3</code> when <code>remoteOnly: true</code>).</li>
+      <li><strong>Company Signal Enrichment (<code>POST /graphql</code>):</strong> Queries <code>jobDetails(id: $id)</code> and <code>companyProfile(zone: "anz-1")</code> to extract <code>companyWebsite</code>, <code>companySize</code> (headcount bracket), <code>companyIndustry</code>, <code>isVerifiedAdvertiser</code>, and clean plain-text job descriptions.</li>
+      <li><strong>Multi-Signal Agency Rejection (<code>directEmployerOnly: true</code>):</strong> Flags and removes staffing agencies by checking <code>companyProfile.overview.industry</code> (<code>Employment Services</code>), Seek classifications (<code>Recruitment - Agency</code>), advertiser brand heuristics, and "on behalf of our client" copy.</li>
+    </ol>
+
+    <h2>3. Verified Cloud Benchmarks (Real Apify &amp; MCP Runs)</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="tag">Reed UK Cloud (`fnX3PVQQnKHKRfaU9`)</div>
+        <div class="stat-num">7.58s · 25/25 Jobs</div>
+        <p>Full <code>__NEXT_DATA__</code> detail enrichment at <code>84.3 / 256 MB</code> RAM (`$0` proxy). Live MCP run (<code>Nu3bn7BReQhTV5S4l</code>) completed in <strong><code>4.404s</code></strong> (<code>74.2 MB</code>).</p>
+      </div>
+      <div class="card">
+        <div class="tag">Seek AU &amp; NZ (`FYhkkeIknKpJO7rn0`)</div>
+        <div class="stat-num">5.49s · 25/25 AU</div>
+        <p>GraphQL company enrichment at <code>63.7 / 256 MB</code> RAM (`$0` proxy); NZ run (<code>RZSNN84lTNZuqHf3s</code>) finished <code>5/5</code> jobs in <strong><code>3.41s</code></strong>; live MCP in <strong><code>2.548s</code></strong>.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Pay-per-Event Pricing</div>
+        <div class="stat-num">$0.008 + $1.50/1k</div>
+        <p><code>$0.008</code> start + <code>$1.50/1k</code> jobs + <code>$2.00/1k</code> enriched company/detail profiles — Apify's free <code>$5/mo</code> credit covers ~1,400 fully enriched leads/month.</p>
+      </div>
+    </div>
+
+    <h2>4. Copy-Paste Integration: Remote MCP, <code>skills.sh</code>, Python, cURL &amp; <code>n8n</code></h2>
+
+    <h3>Option A — Dual UK + AU/NZ MCP Config (Claude Desktop, Cursor, VS Code)</h3>
+    <p>Registered on the Official MCP Registry as <code>io.github.truonggiang0111/reed-uk-jobs-mcp</code> (<a href="https://glama.ai/mcp/connectors/io.github.truonggiang0111/reed-uk-jobs-mcp">Glama</a>) and <code>io.github.truonggiang0111/seek-au-nz-jobs-mcp</code> (<a href="https://glama.ai/mcp/connectors/io.github.truonggiang0111/seek-au-nz-jobs-mcp">Glama</a>):</p>
+    <div class="code-block">
+      <div class="code-header">
+        <span>mcp.json</span>
+        <button class="copy-btn" type="button" data-copy="mcp-jobs">Copy</button>
+      </div>
+      <pre id="mcp-jobs"><code>{
+  "mcpServers": {
+    "uk-au-direct-hiring-leads": {
+      "url": "https://mcp.apify.com?actors=ttyan0111/reed-uk-jobs-hiring-signals,ttyan0111/seek-au-nz-jobs-hiring-signals",
+      "headers": {
+        "Authorization": "Bearer YOUR_APIFY_API_TOKEN"
+      }
+    }
+  }
+}</code></pre>
+    </div>
+
+    <h3>Option B — Portable Agent Skills (<code>skills.sh</code>)</h3>
+    <div class="code-block">
+      <div class="code-header">
+        <span>Terminal — Claude Code / Cursor / Codex</span>
+        <button class="copy-btn" type="button" data-copy="cli-jobs">Copy</button>
+      </div>
+      <pre id="cli-jobs"><code># Install UK (Reed) and AU/NZ (Seek) direct-employer hiring playbooks
+npx skills add truonggiang0111/b2b-ai-mcp-skills --skill reed-uk-hiring-signals
+npx skills add truonggiang0111/b2b-ai-mcp-skills --skill seek-au-nz-hiring-signals</code></pre>
+    </div>
+
+    <h3>Option C — Python (<code>requests</code>): UK Direct Employers + AU Company Websites</h3>
+    <div class="code-block">
+      <div class="code-header">
+        <span>fetch_uk_au_direct_employers.py</span>
+        <button class="copy-btn" type="button" data-copy="py-jobs">Copy</button>
+      </div>
+      <pre id="py-jobs"><code>import os
+import requests
+
+TOKEN = os.environ["APIFY_TOKEN"]
+
+# 1) Reed.co.uk: Direct UK employers, zero bootcamps, IR35 flags
+reed_jobs = requests.post(
+    "https://api.apify.com/v2/acts/ttyan0111~reed-uk-jobs-hiring-signals/run-sync-get-dataset-items",
+    params={"token": TOKEN},
+    json={
+        "keywords": "Python Developer",
+        "location": "London",
+        "directEmployerOnly": True,
+        "excludeTrainingCourses": True,
+        "includeFullDescription": True,
+        "maxJobs": 15,
+    },
+    timeout=60,
+).json()
+
+# 2) Seek.com.au: Direct Australian employers + GraphQL companyWebsite &amp; size
+seek_jobs = requests.post(
+    "https://api.apify.com/v2/acts/ttyan0111~seek-au-nz-jobs-hiring-signals/run-sync-get-dataset-items",
+    params={"token": TOKEN},
+    json={
+        "keywords": "Software Engineer",
+        "location": "Sydney",
+        "country": "AU",
+        "directEmployerOnly": True,
+        "includeCompanyDetails": True,
+        "maxJobs": 15,
+    },
+    timeout=60,
+).json()
+
+for job in reed_jobs[:3] + seek_jobs[:3]:
+    print(job["agentSummary"], "-&gt;", job.get("companyWebsite") or job["jobUrl"])</code></pre>
+    </div>
+
+    <h3>Option D — One-Line cURL &amp; Daily 8:00 AM <code>n8n</code> Workflow</h3>
+    <p>Import <a href="https://github.com/truonggiang0111/b2b-ai-mcp-skills/blob/main/workflows/n8n/daily-uk-au-direct-employer-leads.n8n.json"><code>workflows/n8n/daily-uk-au-direct-employer-leads.n8n.json</code></a> into <code>n8n</code> to run both Reed UK and Seek AU in parallel every morning at 08:00 and merge clean direct-employer leads into Clay, HubSpot, Slack, or Google Sheets:</p>
+    <div class="code-block">
+      <div class="code-header">
+        <span>cURL — Seek AU Direct Employers + GraphQL Company Signals</span>
+        <button class="copy-btn" type="button" data-copy="curl-jobs">Copy</button>
+      </div>
+      <pre id="curl-jobs"><code>curl -sS -X POST \
+  "https://api.apify.com/v2/acts/ttyan0111~seek-au-nz-jobs-hiring-signals/run-sync-get-dataset-items" \
+  -H "Authorization: Bearer $APIFY_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "keywords": "Software Engineer",
+    "location": "Sydney",
+    "country": "AU",
+    "directEmployerOnly": true,
+    "includeCompanyDetails": true,
+    "maxJobs": 10
+  }'</code></pre>
+    </div>
+
+    <h2>5. 12 Pre-Built UK &amp; ANZ Hiring Task Endpoints (Web &amp; AI <code>.md</code>)</h2>
+    <ul class="two-col">
+      <li><a href="https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/uk-direct-employer-python-jobs">UK Direct-Employer Python Jobs</a> (<a href="https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/uk-direct-employer-python-jobs.md">.md</a>)</li>
+      <li><a href="https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/outside-ir35-uk-contract-tech-jobs">Outside IR35 UK Tech Contracts</a> (<a href="https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/outside-ir35-uk-contract-tech-jobs.md">.md</a>)</li>
+      <li><a href="https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/uk-remote-software-engineer-hiring-leads">Remote UK Direct Tech Employers</a> (<a href="https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/uk-remote-software-engineer-hiring-leads.md">.md</a>)</li>
+      <li><a href="https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/uk-ai-machine-learning-direct-employer-jobs">UK Direct AI &amp; ML Jobs</a> (<a href="https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/uk-ai-machine-learning-direct-employer-jobs.md">.md</a>)</li>
+      <li><a href="https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/uk-cybersecurity-contract-outside-ir35-jobs">UK Cybersecurity Outside IR35</a> (<a href="https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/uk-cybersecurity-contract-outside-ir35-jobs.md">.md</a>)</li>
+      <li><a href="https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/manchester-birmingham-uk-tech-hiring-signals">Manchester &amp; Regional Direct Tech</a> (<a href="https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals/examples/manchester-birmingham-uk-tech-hiring-signals.md">.md</a>)</li>
+      <li><a href="https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/sydney-direct-employer-software-jobs">Sydney Direct Software Jobs (Seek)</a> (<a href="https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/sydney-direct-employer-software-jobs.md">.md</a>)</li>
+      <li><a href="https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/australia-remote-tech-jobs-company-signals">Remote AU Jobs + Company Signals</a> (<a href="https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/australia-remote-tech-jobs-company-signals.md">.md</a>)</li>
+      <li><a href="https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/new-zealand-direct-employer-hiring-leads">New Zealand Direct-Employer Leads</a> (<a href="https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/new-zealand-direct-employer-hiring-leads.md">.md</a>)</li>
+      <li><a href="https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/melbourne-brisbane-direct-employer-tech-jobs">Melbourne &amp; Brisbane Direct Tech</a> (<a href="https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/melbourne-brisbane-direct-employer-tech-jobs.md">.md</a>)</li>
+      <li><a href="https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/australia-data-ai-engineer-hiring-signals">Australia Data &amp; AI Hiring Signals</a> (<a href="https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/australia-data-ai-engineer-hiring-signals.md">.md</a>)</li>
+      <li><a href="https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/australia-mining-engineering-direct-hiring-leads">AU Mining &amp; Engineering Direct</a> (<a href="https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals/examples/australia-mining-engineering-direct-hiring-leads.md">.md</a>)</li>
+    </ul>
+
+    <div class="cta-box">
+      <h3>Build Clean Direct-Employer Outbound Feeds at `$0` Proxy Cost</h3>
+      <p>Start with Apify's built-in <strong>`$5/month` free credit</strong>, import the ready-made <code>n8n</code> daily pipeline from GitHub, or connect zero-key managed skills on Agensi.io (Free UK skill + `$5.00` Seek AU/NZ skill + `-20%` Bundle).</p>
+      <div class="cta-actions">
+        <a class="btn primary" href="https://apify.com/ttyan0111/reed-uk-jobs-hiring-signals">Reed UK on Apify (`$5/mo` Free)</a>
+        <a class="btn primary" href="https://apify.com/ttyan0111/seek-au-nz-jobs-hiring-signals">Seek AU/NZ on Apify (`$5/mo` Free)</a>
+        <a class="btn" href="https://www.agensi.io/creators/giang-tr-ng-tr-ng">Agensi Creator Storefront</a>
+        <a class="btn" href="https://github.com/truonggiang0111/b2b-ai-mcp-skills">GitHub (`SKILL.md` + `n8n` JSON)</a>
+      </div>
+    </div>
+
+    <h2>6. Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <h3>Why do unfiltered Reed.co.uk job scrapes contain ~48% training and agency noise?</h3>
+      <p>Staffing agencies dominate unfiltered searches, and disguised paid bootcamps (<code>isTrainingJob</code>) pollute roughly <code>48%</code> of raw direct postings on Reed. Enabling both <code>directEmployerOnly: true</code> and <code>excludeTrainingCourses: true</code> removes both layers server-side and during detail verification.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How does <code>seek-au-nz-jobs-hiring-signals</code> enrich company websites without triggering HTTP 403?</h3>
+      <p>Instead of requesting <code>/job/&lt;id&gt;</code> HTML pages protected by Kasada, it queries Seek's JobSearch v5 JSON API and sends structured GraphQL queries for <code>jobDetails</code> and <code>companyProfile(zone: "anz-1")</code>, completing 25 AU jobs in <code>5.49s</code> with zero proxies.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Does Seek support New Zealand (<code>seek.co.nz</code>) in the same Actor?</h3>
+      <p>Yes — pass <code>country: "NZ"</code> to switch automatically to <code>seek.co.nz</code> (<code>NZ-Main</code>, locale <code>en-NZ</code>) with full GraphQL company profile enrichment.</p>
+    </div>
+
+    <h2>More Technical Guides &amp; Real-Data Teardowns</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="tag">AI RAG &amp; News Intelligence</div>
+        <h3><a href="/mcp/google-news-rss-url-decoder/">How to Decode Opaque news.google.com/rss CBMi Links Into Real Publisher URLs &amp; Clean Markdown</a></h3>
+        <p>Resolve 2026 `AU_yqL` splash links via `DotsSplashUi` `Fbv4je` batchexecute (`20/20` URLs decoded in `6.47s`).</p>
+      </div>
+      <div class="card">
+        <div class="tag">B2B Churn &amp; Review Spy</div>
+        <h3><a href="/mcp/shopify-app-store-1-star-churn-teardown/">Mining 1-Star &amp; 2-Star App, Extension &amp; SaaS Reviews for B2B Churn Leads</a></h3>
+        <p>Extract `1★–2★` churn signals &amp; developer emails across Shopify, iOS/Play, VS Code/Open-VSX, and Chrome Web Store.</p>
+      </div>
+    </div>
+
+    <footer>
+      Built by <a href="https://truonggiang0111.github.io/">Truong Truong Giang</a> · <a href="/mcp/">MCP Directory Hub</a> · <a href="/llms.txt">llms.txt</a> · <a href="/llms-full.txt">llms-full.txt</a>
+    </footer>
+  </main>
+
+  <script>
+    document.querySelectorAll('.copy-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var target = document.getElementById(btn.getAttribute('data-copy'));
+        if (!target) return;
+        navigator.clipboard.writeText(target.innerText).then(function () {
+          var prev = btn.textContent;
+          btn.textContent = 'Copied!';
+          setTimeout(function () { btn.textContent = prev; }, 1600);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
