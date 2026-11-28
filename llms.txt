@@ -46,6 +46,13 @@
   - `io.github.truonggiang0111/vscode-cursor-extension-mcp`: VS Code & Open-VSX (Cursor/Windsurf) Extension Spy (`https://apify.com/ttyan0111/vscode-cursor-extension-spy`, `servers/vscode-extension-spy/server.json`)
   - `io.github.truonggiang0111/b2b-market-intel-mcp`: Multi-tool B2B Market Intel suite combining all 10 live endpoints above (`v1.1.0`)
 
+## Independent Registry & Security Verification
+
+- **Official MCP Registry (`https://registry.modelcontextprotocol.io`):** `11` published servers / `12` active entries under `io.github.truonggiang0111/*` (`https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.truonggiang0111`)
+- **Hashgraph Online HOL Guard (`https://hol.org/guard/plugins/truonggiang0111%2Fb2b-market-intel-mcp`):** Owner Verified, Security Score `100/100 A - Excellent` (`0` findings on `v1.1.0`; live HOL Guard badge `https://img.shields.io/endpoint?url=https%3A%2F%2Fhol.org%2Fapi%2Fregistry%2Fbadges%2Fplugin%3Fslug%3Dtruonggiang0111%252Fb2b-market-intel-mcp%26metric%3Drelease`)
+- **Glama.ai (`https://glama.ai/mcp/servers?query=truonggiang0111`):** `6` remote Streamable HTTP connectors (`https://glama.ai/mcp/connectors/io.github.truonggiang0111/b2b-market-intel-mcp`) + containerized `Dockerfile` STDIO server (`https://glama.ai/mcp/servers/truonggiang0111/b2b-market-intel-mcp`)
+- **MCPTry (`11` live health-checked Official Registry listings):** `https://mcptry.com/servers/io.github.truonggiang0111/b2b-market-intel-mcp` · `https://mcptry.com/servers/io.github.truonggiang0111/app-reviews-bug-spy-mcp`
+
 ## Agensi.io Live Skills & Bundles (`16` Live Skills + `3` Bundles — `HTTP 200`)
 
 - Creator Storefront (`Start here` pinned): https://www.agensi.io/creators/giang-tr-ng-tr-ng

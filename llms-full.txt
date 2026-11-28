@@ -53,6 +53,13 @@
 6. **Low-Token Agent Protocol (Critical):**
    After running any Actor, ALWAYS inspect Key-Value Store record `RUN_SUMMARY` (`application/json`) first before paging full dataset items, then query dataset items selecting compact projection fields including `agentSummary`.
 
+## Independent Registry & Security Verification
+
+- **Official MCP Registry (`https://registry.modelcontextprotocol.io`):** `11` published servers / `12` active entries under verified `io.github.truonggiang0111/*` namespace (`https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.truonggiang0111`).
+- **Hashgraph Online HOL Guard (`https://hol.org/guard/plugins/truonggiang0111%2Fb2b-market-intel-mcp`):** Owner Verified, Security Score `100/100 A - Excellent` (`0` findings on `truonggiang0111/b2b-market-intel-mcp` `v1.1.0`; live HOL Guard badge `https://img.shields.io/endpoint?url=https%3A%2F%2Fhol.org%2Fapi%2Fregistry%2Fbadges%2Fplugin%3Fslug%3Dtruonggiang0111%252Fb2b-market-intel-mcp%26metric%3Drelease`).
+- **Glama.ai (`https://glama.ai/mcp/servers?query=truonggiang0111`):** `6` remote Streamable HTTP connectors (`https://glama.ai/mcp/connectors/io.github.truonggiang0111/b2b-market-intel-mcp`) + containerized `Dockerfile` STDIO server (`https://glama.ai/mcp/servers/truonggiang0111/b2b-market-intel-mcp`).
+- **MCPTry (`11` live health-checked Official Registry listings):** `https://mcptry.com/servers/io.github.truonggiang0111/b2b-market-intel-mcp` · `https://mcptry.com/servers/io.github.truonggiang0111/app-reviews-bug-spy-mcp`.
+
 ---
 
 ## Tool 1: Reed.co.uk Jobs & Direct IR35 Signals
