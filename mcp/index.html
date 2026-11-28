@@ -59,8 +59,10 @@
     .trust-badges { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 12px 0 16px; }
     .trust-badges a { display: inline-flex; align-items: center; }
     .trust-badges img { height: 20px; width: auto; display: block; border-radius: 4px; }
-    .trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 16px; }
-    @media (max-width: 720px) { ul.tasks { columns: 1; } }
+    .trust-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .trust-grid .card { min-width: 0; }
+    .trust-grid code { overflow-wrap: anywhere; }
+    @media (max-width: 720px) { ul.tasks { columns: 1; } .trust-grid { grid-template-columns: 1fr; } }
   </style>
   <script type="application/ld+json">
   {
@@ -255,7 +257,7 @@
       <div class="trust-badges">
         <a href="https://hol.org/guard/plugins/truonggiang0111%2Fb2b-market-intel-mcp" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fhol.org%2Fapi%2Fregistry%2Fbadges%2Fplugin%3Fslug%3Dtruonggiang0111%252Fb2b-market-intel-mcp%26metric%3Drelease" alt="HOL Guard Owner Verified Badge" /></a>
         <a href="https://hol.org/guard/plugins/truonggiang0111%2Fb2b-market-intel-mcp" target="_blank" rel="noopener noreferrer"><img src="https://github.com/truonggiang0111/b2b-market-intel-mcp/actions/workflows/hol-plugin-scanner.yml/badge.svg" alt="HOL Plugin Scanner 100/100 A - Excellent" /></a>
-        <a href="https://glama.ai/mcp/servers?query=truonggiang0111" target="_blank" rel="noopener noreferrer"><img src="https://glama.ai/mcp/connectors/io.github.truonggiang0111/b2b-market-intel-mcp/badges/score.svg" alt="Glama MCP Connector Score" /></a>
+        <a href="https://glama.ai/mcp/servers?query=truonggiang0111" target="_blank" rel="noopener noreferrer"><img src="https://glama.ai/mcp/servers/truonggiang0111/b2b-market-intel-mcp/badges/score.svg" alt="Glama MCP Server Score B" /></a>
         <a href="https://github.com/Sagargupta16/awesome-mcp-servers" target="_blank" rel="noopener noreferrer"><img src="https://sagargupta.online/awesome-mcp-servers/badge.svg" alt="Listed in Awesome MCP Servers" /></a>
       </div>
       <div class="trust-grid">
