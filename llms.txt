@@ -1,12 +1,13 @@
 # b2b-ai-mcp-skills (`ttyan0111` / `truonggiang0111`)
 
-> Zero-proxy B2B Hiring Intelligence, Public Tenders, ClinicalTrials Biotech Leads, Competitor Ad Spend Spy, Multi-Store Review Churn Spy & Google News Real-URL RAG tools (`15` Agent Skills, `16` `n8n` Workflows, `8` `Make.com` Blueprints, `n8n` Community Node `18` Ops, Google Sheets Add-on `18` Ops, `100` AI `.md` Tasks, `16` Live Agensi Skills + `3` Bundles, Node STDIO MCP + Python SDK + Sample Datasets).
+> Zero-proxy B2B Hiring Intelligence, Public Tenders, ClinicalTrials Biotech Leads, Competitor Ad Spend Spy, Multi-Store Review Churn Spy & Google News Real-URL RAG tools (`15` Agent Skills, `16` `n8n` Workflows, `8` `Make.com` Blueprints, `4` Python AI Agent Examples, `n8n` Community Node `18` Ops, Google Sheets Add-on `18` Ops, `100` AI `.md` Tasks, `16` Live Agensi Skills + `3` Bundles, Node STDIO MCP + Python SDK + Sample Datasets).
 > Hosted serverless on Apify (`$5/month` free credit included) and distributed on Agensi.io (`https://mcp.agensi.io/mcp/auth`).
 > Full single-file spec: [llms-full.txt](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/llms-full.txt)
 
 ## Technical Guides, Storefront, Open-Source SDKs & Sample Datasets
 
 - [Direct B2B Data Storefront ($29 Lead Packs, Custom Scrapers $199–$350, Agensi Bundles & Free Samples)](https://truonggiang0111.github.io/mcp/b2b-leads-datasets-and-custom-scrapers/)
+- [Python, CrewAI, LangChain, OpenAI & Claude AI Agents B2B Leads Cookbook (4 Runnable Scripts)](https://truonggiang0111.github.io/mcp/python-crewai-langchain-b2b-leads/)
 - [Interactive Make.com B2B Lead & Zero-Key Automation Blueprints (8 .make.json Scenarios)](https://truonggiang0111.github.io/mcp/make-com-apify-b2b-lead-blueprints/)
 - [Interactive 1-Click n8n Workflow & MCP Gallery (16 Workflows)](https://truonggiang0111.github.io/mcp/n8n-b2b-lead-automation-workflows/)
 - [How to Connect n8n AI Agents to Streamable HTTP & STDIO MCP Servers for B2B Lead Generation (2026)](https://truonggiang0111.github.io/mcp/n8n-mcp-client-ai-agent-b2b-leads/)
@@ -121,6 +122,15 @@
 - [workflows/make/substack-creator-sponsor-leads.make.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/substack-creator-sponsor-leads.make.json)
 - [workflows/make/vscode-chrome-competitor-bug-spy.make.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/vscode-chrome-competitor-bug-spy.make.json)
 - [workflows/make/wordpress-atlassian-churn-leads.make.json](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/wordpress-atlassian-churn-leads.make.json)
+
+## `4` Python AI Agent Cookbook Examples (`examples/python-agents/`)
+
+- Interactive Guide & 4-Framework Switcher: https://truonggiang0111.github.io/mcp/python-crewai-langchain-b2b-leads/
+- Cookbook Index: [examples/python-agents/README.md](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/examples/python-agents/README.md)
+- OpenAI Tool-Calling (Google News Real-URL RAG): [examples/python-agents/google_news_rag_agent.py](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/examples/python-agents/google_news_rag_agent.py)
+- Anthropic Claude MCP (ClinicalTrials Biotech Leads): [examples/python-agents/clinical_trials_biotech_agent.py](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/examples/python-agents/clinical_trials_biotech_agent.py)
+- LangChain Tool (UK Gov Tenders Buyer Emails): [examples/python-agents/uk_tenders_procurement_agent.py](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/examples/python-agents/uk_tenders_procurement_agent.py)
+- CrewAI Agent (Shopify 1-Star Competitor Churn Spy): [examples/python-agents/shopify_competitor_churn_agent.py](https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/examples/python-agents/shopify_competitor_churn_agent.py)
 
 ## `100` Ready-to-Run Published Use-Case Tasks (Web + `.md`)
 

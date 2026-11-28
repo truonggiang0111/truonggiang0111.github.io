@@ -11,6 +11,7 @@
    `npx skills add truonggiang0111/b2b-ai-mcp-skills`
 3. **Standalone Open-Source SDKs, `n8n` Node, `Make.com` Blueprints, CLIs & Sample Datasets:**
    - Make.com Blueprints (`8` `.make.json` scenarios, Zero-Key + Apify `/run-sync-get-dataset-items`): `https://truonggiang0111.github.io/mcp/make-com-apify-b2b-lead-blueprints/` · `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/make/README.md`
+   - Python AI Agents Cookbook (`4` runnable Python 3.10+ scripts for OpenAI, Claude MCP, LangChain & CrewAI): `https://truonggiang0111.github.io/mcp/python-crewai-langchain-b2b-leads/` · `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/examples/python-agents/README.md`
    - n8n Community Node (`npm install github:truonggiang0111/n8n-nodes-b2b-market-intel`, `usableAsTool: true`, `18` ops): `https://github.com/truonggiang0111/n8n-nodes-b2b-market-intel` (`v1.0.0`)
    - `16` Ready-to-Import `n8n` Workflows (`workflows/n8n/README.md`): `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/README.md`
    - Node STDIO MCP Server (`npx -y github:truonggiang0111/b2b-market-intel-mcp`): `https://github.com/truonggiang0111/b2b-market-intel-mcp` (`v1.0.0`)
@@ -446,6 +447,14 @@
 ### Python 3.10+ Zero-Dep SDK & CLI (`b2b-market-intel-python`)
 - **Repo:** `https://github.com/truonggiang0111/b2b-market-intel-python` (`pip install git+https://github.com/truonggiang0111/b2b-market-intel-python` or `uvx --from git+https://github.com/truonggiang0111/b2b-market-intel-python b2b-intel --self-test`)
 - **Capabilities:** `decode_google_news_url`, `search_uk_gov_tenders`, `search_clinical_trials`, `get_tool_schemas(format="openai"|"anthropic"|"langchain")`, `dispatch_tool_call`, and `ApifyB2BClient` across all 15 Actors.
+
+### Python AI Agents Cookbook (`examples/python-agents/` — `4` Runnable Scripts)
+- **Web Guide & 4-Framework Switcher:** `https://truonggiang0111.github.io/mcp/python-crewai-langchain-b2b-leads/`
+- **Index:** `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/examples/python-agents/README.md`
+- **OpenAI Tool-Calling (Google News Real-URL RAG):** `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/examples/python-agents/google_news_rag_agent.py`
+- **Anthropic Claude MCP (ClinicalTrials Biotech Leads):** `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/examples/python-agents/clinical_trials_biotech_agent.py`
+- **LangChain Tool (UK Gov Tenders Buyer Emails):** `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/examples/python-agents/uk_tenders_procurement_agent.py`
+- **CrewAI Agent (Shopify 1-Star Churn Spy):** `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/examples/python-agents/shopify_competitor_churn_agent.py`
 
 ### `16` Ready-to-Import `n8n` Workflows (`workflows/n8n/README.md`)
 - Index: `https://raw.githubusercontent.com/truonggiang0111/b2b-ai-mcp-skills/main/workflows/n8n/README.md`
